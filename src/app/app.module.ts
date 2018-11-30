@@ -13,6 +13,7 @@ import { ComputerDetailsComponent } from './computers/computer-details/computer-
 import { ComputerListComponent } from './computers/computer-list/computer-list.component';
 import { appRoutes } from './routes';
 import { HomeComponent } from './home/home.component';
+import { PavillionDetailComponent } from './pavillions/pavillion-detail/pavillion-detail.component';
 
 @NgModule({
    declarations: [
@@ -20,7 +21,8 @@ import { HomeComponent } from './home/home.component';
       NavBarComponent,
       ComputerDetailsComponent,
       ComputerListComponent,
-      HomeComponent
+      HomeComponent,
+      PavillionDetailComponent
    ],
    imports: [
       BrowserModule,
