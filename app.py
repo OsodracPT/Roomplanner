@@ -32,7 +32,9 @@ def connectToDB():
 
 def queryDB(query, args=()):
     conn = connectToDB()
+    #print(conn)
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    #print(cur)
     try:
         cur.execute(query, args)
         r = [dict((cur.description[i][0], value) \
@@ -58,6 +60,16 @@ def get_computers():
     if my_query is None:
         abort(404)
     return jsonify(my_query);
+
+@app.route('/computers/pavC')
+@auth.login_required
+def get_computers_pav_c():
+    my_query = queryDB("SELECT * FROM testing_schema_pedro.computers_pavc")
+    #print(my_query)
+    if my_query is None:
+        abort(404)
+    return jsonify(my_query);
+
 
 @app.route('/film/<int:film_id>', methods=['PUT'])
 @auth.login_required
