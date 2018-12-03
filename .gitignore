@@ -41,3 +41,4 @@ Thumbs.db
 # Secrets
 global.ts
 SQL.cnf
+.env

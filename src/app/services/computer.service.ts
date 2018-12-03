@@ -20,4 +20,8 @@ export class ComputerService {
     return this.http.get(this.baseApiUrl + 'computers', {headers: headers});
 }
 
+getComputersPavC() {
+  return this.http.get(this.baseApiUrl + 'computers/pavC', {headers: headers});
+}
+
 }

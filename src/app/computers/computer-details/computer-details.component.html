@@ -9,7 +9,7 @@
             {{computer.name | lowercase}}
           </h6>
           <p class="card-text text-muted text-center">
-            {{computer.os}} {{computer.osVersion}}, {{computer.roomName}}
+            {{computer.os}} {{computer.osVersion}}
           </p>
 
           <ul class="list-inline member-icons animate text-center">
@@ -19,12 +19,20 @@
               </button>
             </li>
 
+
+
             <li class="list-inline-item" *ngIf="computer.os !== 'Unknown'">
               <button class="btn btn-primary">
                 <i *ngIf="computer.os=='Windows'" class="fa fa-windows fa"></i>
                 <i *ngIf="computer.os=='Linux'" class="fa fa-linux fa"></i>
               </button>
             </li>
+
+            <li class="list-inline-item mt-1">
+                <button class="btn btn-primary">
+                  {{computer.roomName}}
+                </button>
+              </li>
           </ul>
         </div>
       </div>
