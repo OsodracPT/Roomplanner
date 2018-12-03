@@ -15,7 +15,7 @@ export class PavillionDetailComponent implements OnInit {
 
   ngOnInit() {
 
-    this.computerService.getComputers()
+    this.computerService.getComputersPavC()
     .subscribe((computers: Computer[]) => {
       this.computers = computers;
       console.log(computers);

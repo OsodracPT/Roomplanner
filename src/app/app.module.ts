@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { CollapseModule, BsDropdownModule } from 'ngx-bootstrap';
+import { CollapseModule, BsDropdownModule, TabsModule } from 'ngx-bootstrap';
 
 
 
@@ -29,6 +29,7 @@ import { PavillionDetailComponent } from './pavillions/pavillion-detail/pavillio
       HttpClientModule,
       CollapseModule.forRoot(),
       BsDropdownModule.forRoot(),
+      TabsModule.forRoot(),
       RouterModule.forRoot(appRoutes)
    ],
    providers: [
