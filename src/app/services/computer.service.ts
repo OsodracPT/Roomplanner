@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { GlobalVariable } from '../global';
+import { Observable } from 'rxjs';
+import { Computer } from '../_models/computer';
 
 const secret = GlobalVariable.SECRET;
 
@@ -18,6 +20,10 @@ export class ComputerService {
 
   getComputers() {
     return this.http.get(this.baseApiUrl + 'computers', {headers: headers});
+}
+
+getComputer(id): Observable<Computer> {
+  return this.http.get<Computer>(this.baseApiUrl + 'computers/' + id, {headers: headers});
 }
 
 getComputersPavC() {

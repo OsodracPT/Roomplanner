@@ -3,6 +3,8 @@ import { ComputerListComponent } from './computers/computer-list/computer-list.c
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { PavillionDetailComponent } from './pavillions/pavillion-detail/pavillion-detail.component';
+import { ComputerEditComponent } from './computers/computer-edit/computer-edit.component';
+import { ComputerDetailResolver } from './_resolvers/computer-detail.resolver';
 
 
 // export const appRoutes: Routes = [
@@ -23,6 +25,8 @@ export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
     { path: 'computer-list', component: ComputerListComponent },
     { path: 'pavillions', component: PavillionDetailComponent },
+    { path: 'computers/:id', component: ComputerEditComponent,
+      resolve: {computer: ComputerDetailResolver} },
     { path: '**', redirectTo: '', pathMatch: 'full'},
   ];
 

@@ -14,6 +14,9 @@ import { ComputerListComponent } from './computers/computer-list/computer-list.c
 import { appRoutes } from './routes';
 import { HomeComponent } from './home/home.component';
 import { PavillionDetailComponent } from './pavillions/pavillion-detail/pavillion-detail.component';
+import { ComputerEditComponent } from './computers/computer-edit/computer-edit.component';
+import { AlertifyService } from './services/alertify.service';
+import { ComputerDetailResolver } from './_resolvers/computer-detail.resolver';
 
 @NgModule({
    declarations: [
@@ -22,7 +25,8 @@ import { PavillionDetailComponent } from './pavillions/pavillion-detail/pavillio
       ComputerDetailsComponent,
       ComputerListComponent,
       HomeComponent,
-      PavillionDetailComponent
+      PavillionDetailComponent,
+      ComputerEditComponent
    ],
    imports: [
       BrowserModule,
@@ -33,7 +37,9 @@ import { PavillionDetailComponent } from './pavillions/pavillion-detail/pavillio
       RouterModule.forRoot(appRoutes)
    ],
    providers: [
-      ComputerService
+      ComputerService,
+      AlertifyService,
+      ComputerDetailResolver
    ],
    bootstrap: [
       AppComponent
