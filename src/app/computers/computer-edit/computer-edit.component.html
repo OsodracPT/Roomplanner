@@ -1,0 +1,52 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-sm-4">
+      <h1>{{computer.name}}</h1>
+    </div>
+    <div class="col-sm-8">
+      <div class="alert alert-info">
+        <strong>Information: </strong>You have made changes. Any unsaved changes will be lost!
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <i class="fa fa-desktop fa-5x text-center pt-3"></i>
+        <div class="card-body">
+          <div>
+            <strong>Location: {{computer.roomName}}</strong>
+            <p></p>
+          </div>
+          <div>
+            <strong>Operating System: {{computer.os}} {{computer.osVersion}}</strong>
+            <p></p>
+          </div>
+          <div>
+            <strong>Last Active:</strong>
+            <p></p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button form="editForm" class="btn btn-success btn-block">Save Changes</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <div class="tab-panel">
+        <tabset class="member-tabset">
+          <tab heading="Edit Profile">
+            <form id="editForm">
+              <h4>Description</h4>
+              <textarea name="description" rows="6" class="form-control"></textarea>
+              <h4>Location</h4>
+              <textarea name="location" rows="6" class="form-control">
+              </textarea>
+
+            </form>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</div>
