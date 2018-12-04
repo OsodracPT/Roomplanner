@@ -41,8 +41,9 @@ def queryDB(query, args=()):
                for i, value in enumerate(row)) for row in cur.fetchall()]
         #return (r[0] if r else None) if one else r
         return r
-    except:
+    except psycopg2.OperationalError as e:
         print("Error executing Statement")
+        print('Error message:\n{0}').format(e)
         return None
 
 
@@ -66,6 +67,15 @@ def get_computers():
 def get_computers_pav_c():
     my_query = queryDB("SELECT * FROM testing_schema_pedro.computers_pavc")
     #print(my_query)
+    if my_query is None:
+        abort(404)
+    return jsonify(my_query);
+
+@app.route('/computers/<int:computer_id>')
+@auth.login_required
+def get_computer(computer_id):
+    my_query = queryDB("SELECT * FROM testing_schema_pedro.computers WHERE id=%s", (computer_id,))
+
     if my_query is None:
         abort(404)
     return jsonify(my_query);
