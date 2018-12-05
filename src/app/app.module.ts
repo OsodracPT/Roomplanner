@@ -17,6 +17,8 @@ import { PavillionDetailComponent } from './pavillions/pavillion-detail/pavillio
 import { ComputerEditComponent } from './computers/computer-edit/computer-edit.component';
 import { AlertifyService } from './services/alertify.service';
 import { ComputerDetailResolver } from './_resolvers/computer-detail.resolver';
+import { NgForm, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
    declarations: [
@@ -31,6 +33,9 @@ import { ComputerDetailResolver } from './_resolvers/computer-detail.resolver';
    imports: [
       BrowserModule,
       HttpClientModule,
+      FormsModule,
+      ReactiveFormsModule,
+      NgSelectModule,
       CollapseModule.forRoot(),
       BsDropdownModule.forRoot(),
       TabsModule.forRoot(),

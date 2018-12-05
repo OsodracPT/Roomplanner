@@ -1,7 +1,8 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-sm-4">
-      <h1>{{computer.name}}</h1>
+      <h1 class="mb-4">{{computer.name | lowercase}} </h1>
+      {{form.value | json}}
     </div>
     <div class="col-sm-8">
       <div class="alert alert-info">
@@ -15,12 +16,12 @@
         <i class="fa fa-desktop fa-5x text-center pt-3"></i>
         <div class="card-body">
           <div>
-            <strong>Location: {{computer.roomName}}</strong>
-            <p></p>
+            <strong>Location: </strong>
+            <p>{{computer.roomName}}</p>
           </div>
           <div>
-            <strong>Operating System: {{computer.os}} {{computer.osVersion}}</strong>
-            <p></p>
+            <strong>Operating System: </strong>
+            <p>{{computer.os}} {{computer.osVersion}}</p>
           </div>
           <div>
             <strong>Last Active:</strong>
@@ -28,18 +29,40 @@
           </div>
         </div>
         <div class="card-footer">
-          <button form="editForm" class="btn btn-success btn-block">Save Changes</button>
+          <button class="btn btn-success btn-block" [disabled]="form.pristine" type="submit" (click)="updateComputer()">Save Changes</button>
         </div>
       </div>
     </div>
+
     <div class="col-sm-8">
       <div class="tab-panel">
         <tabset class="member-tabset">
-          <tab heading="Edit Profile">
-            <form id="editForm">
-              <h4>Description</h4>
-              <textarea name="description" rows="6" class="form-control"></textarea>
-              <h4>Location</h4>
+          <tab heading="Edit Computer">
+
+            <form [formGroup]="form" id="editForm" (ngSubmit)="updateComputer()" novalidate>
+
+              <h4 class="p-2">Description</h4>
+              <textarea name="description" rows="6" class="form-control" formControlName="description"></textarea>
+              
+              <h4 class="p-2">Update location:</h4>
+              <!-- <div class="form-group">
+                  <label for="location">Select Pavillion:</label>
+                  <select class="form-control" id="location" formControlName="location">
+                    <option value=""></option>
+                    <option *ngFor="let pavillion of pavillionList">{{pavillion}}</option>
+                  </select>
+                </div> -->
+
+                <div class="form-group">
+                    <label for="location">Select Pavillion:</label>
+                    <ng-select id="location" formControlName="location" [items]="this.rooms"
+                    [virtualScroll]="true"
+                    bindLabel="name"
+                    bindValue="id"
+                    placeholder="Select city">
+                    </ng-select>
+                  </div>
+                  
               <textarea name="location" rows="6" class="form-control">
               </textarea>
 
