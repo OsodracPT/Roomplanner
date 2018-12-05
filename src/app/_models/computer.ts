@@ -5,4 +5,5 @@ export interface Computer {
     osVersion: string;
     roomId: number;
     roomName: string;
+    description: string;
 }
