@@ -41,9 +41,8 @@ def queryDB(query, args=()):
                for i, value in enumerate(row)) for row in cur.fetchall()]
         #return (r[0] if r else None) if one else r
         return r
-    except psycopg2.OperationalError as e:
+    except:
         print("Error executing Statement")
-        print('Error message:\n{0}').format(e)
         return None
 
 
@@ -74,40 +73,35 @@ def get_computers_pav_c():
 @app.route('/computers/<int:computer_id>')
 @auth.login_required
 def get_computer(computer_id):
-    my_query = queryDB("SELECT * FROM testing_schema_pedro.computers WHERE id=%s", (computer_id,))
+    #my_query = queryDB("SELECT * FROM testing_schema_pedro.computers WHERE id=%s", (computer_id))
+    print(computer_id)
+    conn = connectToDB()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    try:
+        cur.execute("""SELECT * FROM testing_schema_pedro.computers WHERE id=%s""", (computer_id))
+        print(cur)
+    except:
+        print("ERROR Retrieving computer")
+        conn.rollback()
 
-    if my_query is None:
-        abort(404)
-    return jsonify(my_query);
+    #if my_query is None:
+    #    abort(404)
+    return jsonify(cur.fetchall());
 
-@app.route('/locations')
+
+@app.route('/film/<int:film_id>', methods=['PUT'])
 @auth.login_required
-def get_locations():
-    my_query = queryDB("SELECT * FROM testing_schema_pedro.locations")
-    #print(my_query)
-    if my_query is None:
-        abort(404)
-    return jsonify(my_query);
-
-
-@app.route('/computers/<int:hardware_id>', methods=['PUT'])
-@auth.login_required
-def update_computer(hardware_id):
+def update_film(film_id):
     conn = connectToDB()
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
-    room_id = request.json.get('roomId',"")
-    comments = request.json.get('description',"")
-    #print(room_id)
+    film_title = request.json.get('title',"")
+    print(film_title)
     try:
-        #print(comments)
-        cur.execute("""UPDATE hardwares SET room_id=%s, comments=%s WHERE id=%s""", (room_id, comments, hardware_id))
-
-    except psycopg2.OperationalError as e:
-        print("ERROR Updating computer")
-        print('Error message:\n{0}').format(e)
+        cur.execute("""UPDATE testing_schema_pedro.computers SET room_name=%s WHERE id=%s""", (film_title, film_id))
+    except:
+        print("ERROR Updating film")
         conn.rollback()
-        abort(400)
 
     conn.commit()
     return jsonify(success=True)
