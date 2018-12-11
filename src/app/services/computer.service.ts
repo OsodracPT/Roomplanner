@@ -8,7 +8,7 @@ const secret = GlobalVariable.SECRET;
 
 let headers = new HttpHeaders();
 headers = headers.append('Authorization', 'Basic ' + btoa(secret));
-headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
+headers = headers.append('Content-Type', 'application/json');
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +32,10 @@ getComputersPavC() {
 
 getRooms() {
   return this.http.get(this.baseApiUrl + 'locations', {headers: headers});
+}
+
+updateComputer(id: number, computer: Computer) {
+  return this.http.put(this.baseApiUrl + 'computers/' + id, computer, {headers: headers});
 }
 
 }

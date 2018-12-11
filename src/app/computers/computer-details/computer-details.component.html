@@ -10,6 +10,8 @@
           </h6>
           <p class="card-text text-muted text-center">
             {{computer.os}} {{computer.osVersion}}
+            <i *ngIf="computer.os=='Windows'" class="fa fa-windows fa"></i>
+            <i *ngIf="computer.os=='Linux'" class="fa fa-linux fa"></i>
           </p>
 
           <ul class="list-inline member-icons animate text-center">
@@ -20,13 +22,13 @@
             </li>
 
 
-
+<!-- 
             <li class="list-inline-item" *ngIf="computer.os !== 'Unknown'">
               <button class="btn btn-primary">
                 <i *ngIf="computer.os=='Windows'" class="fa fa-windows fa"></i>
                 <i *ngIf="computer.os=='Linux'" class="fa fa-linux fa"></i>
               </button>
-            </li>
+            </li> -->
 
             <li class="list-inline-item mt-1">
                 <button class="btn btn-primary">

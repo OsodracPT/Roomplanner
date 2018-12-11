@@ -54,10 +54,22 @@ export class ComputerEditComponent implements OnInit {
 
 
 updateComputer() {
-console.log(this.form.value);
-console.log('HI');
-this.alertify.success('Changes saved succesfully!');
-}
+console.log(this.computer.id);
+this.computer.description = this.form.value.description;
+this.computer.roomId = this.form.value.location;
+const roomValues = this.rooms.find( i => i.id === this.form.value.location);
+this.computer.roomName = roomValues.name;
 
+console.log(this.computer);
+
+
+this.computerService.updateComputer(this.computer.id, this.computer)
+    .subscribe(next => {
+      this.alertify.success('Computer updated successfully.');
+      this.form.reset(this.computer);
+    }, error => {
+      this.alertify.error(error);
+      });
+}
 
 }
