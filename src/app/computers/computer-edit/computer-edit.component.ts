@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Computer } from 'src/app/_models/computer';
 import { ActivatedRoute } from '@angular/router';
-import { NgForm, FormBuilder, FormGroup, FormsModule, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { GlobalVariable } from 'src/app/global';
-import { NgSelectModule } from '@ng-select/ng-select';
 import { ComputerService } from 'src/app/services/computer.service';
 import { Room } from 'src/app/_models/room';
 import { AlertifyService } from 'src/app/services/alertify.service';
@@ -16,29 +15,34 @@ import { AlertifyService } from 'src/app/services/alertify.service';
 })
 export class ComputerEditComponent implements OnInit {
 
-  @ViewChild('editForm') editForm: NgForm;
-
   form: FormGroup;
   computer: Computer;
 
   rooms: Room[];
   public pavillionList = GlobalVariable.PAVILLIONS;
 
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any) {
+    if (this.form.dirty) {
+      $event.returnValue = true;
+    }
+  }
 
-  constructor(private route: ActivatedRoute, private fb: FormBuilder,
+
+  constructor(private route: ActivatedRoute,
     private computerService: ComputerService, private alertify: AlertifyService) {
-    this.form = fb.group({
-      description: new FormControl(),
-      location: new FormControl()
-    });
   }
 
   ngOnInit() {
+
+    this.CreateForm();
+
     // Get the computer data from the route resolver
     this.route.data.subscribe(data => {
       this.computer = data.computer[0];
 
       this.form.patchValue(this.computer);
+
     });
 
     // Get the list of rooms
@@ -49,8 +53,16 @@ export class ComputerEditComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     });
+
+
 }
 
+private CreateForm() {
+  this.form = new FormGroup({
+    description: new FormControl(''),
+    location: new FormControl('', Validators.required)
+  });
+}
 
 
 updateComputer() {

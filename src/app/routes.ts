@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { PavillionDetailComponent } from './pavillions/pavillion-detail/pavillion-detail.component';
 import { ComputerEditComponent } from './computers/computer-edit/computer-edit.component';
 import { ComputerDetailResolver } from './_resolvers/computer-detail.resolver';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 
 
 // export const appRoutes: Routes = [
@@ -26,7 +27,8 @@ export const appRoutes: Routes = [
     { path: 'computer-list', component: ComputerListComponent },
     { path: 'pavillions', component: PavillionDetailComponent },
     { path: 'computers/:id', component: ComputerEditComponent,
-      resolve: {computer: ComputerDetailResolver} },
+      resolve: {computer: ComputerDetailResolver},
+    canDeactivate: [PreventUnsavedChanges] },
     { path: '**', redirectTo: '', pathMatch: 'full'},
   ];
 
