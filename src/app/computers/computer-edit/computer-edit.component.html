@@ -3,9 +3,10 @@
     <div class="col-sm-4">
       <h1 class="mb-4">{{computer.name | lowercase}} </h1>
       {{form.value | json}}
+      {{form.status | json}}
     </div>
     <div class="col-sm-8">
-      <div class="alert alert-info">
+      <div class="alert alert-info" *ngIf="form.dirty">
         <strong>Information: </strong>You have made changes. Any unsaved changes will be lost!
       </div>
     </div>
@@ -29,7 +30,8 @@
           </div>
         </div>
         <div class="card-footer">
-          <button class="btn btn-success btn-block" [disabled]="form.pristine" type="submit" (click)="updateComputer()">Save Changes</button>
+          <button class="btn btn-success btn-block" [disabled]="form.pristine || form.invalid" type="submit" (click)="updateComputer()">Save
+            Changes</button>
         </div>
       </div>
     </div>
@@ -43,29 +45,22 @@
 
               <h4 class="p-2">Description</h4>
               <textarea name="description" rows="6" class="form-control" formControlName="description"></textarea>
-              
+
               <h4 class="p-2">Update location:</h4>
-              <!-- <div class="form-group">
-                  <label for="location">Select Pavillion:</label>
-                  <select class="form-control" id="location" formControlName="location">
-                    <option value=""></option>
-                    <option *ngFor="let pavillion of pavillionList">{{pavillion}}</option>
-                  </select>
-                </div> -->
 
-                <div class="form-group">
-                    <label for="location">Select Pavillion:</label>
-                    <ng-select id="location" formControlName="location" [items]="this.rooms"
-                    [virtualScroll]="true"
-                    bindLabel="name"
-                    bindValue="id"
-                    placeholder="Select city">
-                    </ng-select>
+              <div class="form-group">
+                <label for="location"></label>
+                <ng-select id="location" formControlName="location" [items]="this.rooms" [virtualScroll]="true"
+                  bindLabel="name" bindValue="id" placeholder="Select room">
+                </ng-select>
+
+                <div *ngIf="form.controls['location'].errors && !form.controls['location'].pristine" class="error-msg">
+                  <div class="alert alert-danger" role="alert" [hidden]="!form.controls['location'].errors.required">Please
+                    select a location.
                   </div>
-                  
-              <textarea name="location" rows="6" class="form-control">
-              </textarea>
+                </div>
 
+              </div>
             </form>
           </tab>
         </tabset>

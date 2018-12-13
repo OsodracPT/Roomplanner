@@ -19,6 +19,7 @@ import { AlertifyService } from './services/alertify.service';
 import { ComputerDetailResolver } from './_resolvers/computer-detail.resolver';
 import { NgForm, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 
 @NgModule({
    declarations: [
@@ -44,7 +45,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
    providers: [
       ComputerService,
       AlertifyService,
-      ComputerDetailResolver
+      ComputerDetailResolver,
+      PreventUnsavedChanges
    ],
    bootstrap: [
       AppComponent
