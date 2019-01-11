@@ -24,6 +24,9 @@ import { PavCComponent } from './pavillions/pav-c/pav-c.component';
 import { RoomDetailsComponent } from './rooms/room-details/room-details.component';
 import { RoomEditComponent } from './rooms/room-edit/room-edit.component';
 import { RoomDetailResolver } from './_resolvers/room-detail.resolver';
+import { ComputersInRoomResolver } from './_resolvers/computersInRoom.resolver';
+import { PersonsInRoomResolver } from './_resolvers/personsInRoom.resolver';
+import { PersonDetailsComponent } from './persons/person-details/person-details.component';
 
 @NgModule({
    declarations: [
@@ -36,7 +39,8 @@ import { RoomDetailResolver } from './_resolvers/room-detail.resolver';
       ComputerEditComponent,
       PavCComponent,
       RoomDetailsComponent,
-      RoomEditComponent
+      RoomEditComponent,
+      PersonDetailsComponent
    ],
    imports: [
       BrowserModule,
@@ -54,6 +58,8 @@ import { RoomDetailResolver } from './_resolvers/room-detail.resolver';
       AlertifyService,
       ComputerDetailResolver,
       RoomDetailResolver,
+      ComputersInRoomResolver,
+      PersonsInRoomResolver,
       PreventUnsavedChanges
    ],
    bootstrap: [

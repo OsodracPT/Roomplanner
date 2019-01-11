@@ -9,6 +9,8 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PavCComponent } from './pavillions/pav-c/pav-c.component';
 import { RoomEditComponent } from './rooms/room-edit/room-edit.component';
 import { RoomDetailResolver } from './_resolvers/room-detail.resolver';
+import { ComputersInRoomResolver } from './_resolvers/computersInRoom.resolver';
+import { PersonsInRoomResolver } from './_resolvers/personsInRoom.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -21,8 +23,8 @@ export const appRoutes: Routes = [
     { path: 'rooms/:id', component: RoomEditComponent,
     resolve: {
       room: RoomDetailResolver,
-    computer: ComputerDetailResolver},
-  canDeactivate: [PreventUnsavedChanges] },
+    computers: ComputersInRoomResolver,
+    persons: PersonsInRoomResolver}},
     { path: '**', redirectTo: '', pathMatch: 'full'},
   ];
 
