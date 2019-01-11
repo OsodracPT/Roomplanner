@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { GlobalVariable } from '../global';
 import { Observable } from 'rxjs';
 import { Computer } from '../_models/computer';
+import { Room } from '../_models/room';
 
 const secret = GlobalVariable.SECRET;
 
@@ -31,11 +32,25 @@ getComputersPavC() {
 }
 
 getRooms() {
+  return this.http.get(this.baseApiUrl + 'rooms', {headers: headers});
+}
+
+getRoom(id): Observable<Room> {
+  return this.http.get<Room>(this.baseApiUrl + 'rooms/' + id, {headers: headers});
+}
+
+getLocations() {
   return this.http.get(this.baseApiUrl + 'locations', {headers: headers});
 }
 
 updateComputer(id: number, computer: Computer) {
   return this.http.put(this.baseApiUrl + 'computers/' + id, computer, {headers: headers});
 }
+
+getPavC() {
+  return this.http.get(this.baseApiUrl + 'rooms/pavC', {headers: headers});
+}
+
+
 
 }

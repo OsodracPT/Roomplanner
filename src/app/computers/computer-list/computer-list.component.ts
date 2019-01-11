@@ -12,10 +12,6 @@ export class ComputerListComponent implements OnInit {
 
   computers: Computer[];
 
-
-  /**
-   *
-   */
   constructor(private computerService: ComputerService, private alertify: AlertifyService) {
 
   }

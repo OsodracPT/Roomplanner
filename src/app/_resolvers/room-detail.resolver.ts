@@ -5,16 +5,17 @@ import { Resolve, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { ComputerService } from '../services/computer.service';
 import { Computer } from '../_models/computer';
 import { AlertifyService } from '../services/alertify.service';
+import { Room } from '../_models/room';
 
 @Injectable()
 
-export class ComputerDetailResolver implements Resolve<Computer> {
+export class RoomDetailResolver implements Resolve<Room> {
     constructor(private computerService: ComputerService,
         private router: Router,
         private alertify: AlertifyService) {}
 
-        resolve(route: ActivatedRouteSnapshot): Observable<Computer> {
-            return this.computerService.getComputer(route.params['id']).pipe(
+        resolve(route: ActivatedRouteSnapshot): Observable<Room> {
+            return this.computerService.getRoom(route.params['id']).pipe(
                 catchError(error => {
                     this.alertify.error('Problem retrieving data.' + error.message);
                     this.router.navigate(['/']);
