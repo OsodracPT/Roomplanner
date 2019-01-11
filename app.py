@@ -87,6 +87,15 @@ def get_room_computers(room_id):
         abort(404)
     return jsonify(my_query);
 
+@app.route('/rooms/<int:room_id>/persons')
+@auth.login_required
+def get_room_persons(room_id):
+    my_query = queryDB("""SELECT * FROM testing_schema_pedro.persons WHERE "roomId"=%s""", (room_id,))
+
+    if my_query is None:
+        abort(404)
+    return jsonify(my_query);
+
 @app.route('/computers')
 @auth.login_required
 def get_computers():
