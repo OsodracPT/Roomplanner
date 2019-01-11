@@ -51,7 +51,41 @@ def queryDB(query, args=()):
 def hello():
     return "Hello World!"
 
+@app.route('/rooms')
+@auth.login_required
+def get_rooms():
+    my_query = queryDB("SELECT * FROM testing_schema_pedro.rooms")
+    #print(my_query)
+    if my_query is None:
+        abort(404)
+    return jsonify(my_query);
 
+@app.route('/rooms/pavC')
+@auth.login_required
+def get_rooms_pav_c():
+    my_query = queryDB("""SELECT * FROM testing_schema_pedro.rooms WHERE "floorId" IN (430,431,432,433)""")
+    #print(my_query)
+    if my_query is None:
+        abort(404)
+    return jsonify(my_query);
+
+@app.route('/rooms/<int:room_id>')
+@auth.login_required
+def get_room(room_id):
+    my_query = queryDB("SELECT * FROM testing_schema_pedro.rooms WHERE id=%s", (room_id,))
+
+    if my_query is None:
+        abort(404)
+    return jsonify(my_query);
+
+@app.route('/rooms/<int:room_id>/computers')
+@auth.login_required
+def get_room_computers(room_id):
+    my_query = queryDB("""SELECT * FROM testing_schema_pedro.computers WHERE "roomId"=%s""", (room_id,))
+
+    if my_query is None:
+        abort(404)
+    return jsonify(my_query);
 
 @app.route('/computers')
 @auth.login_required
