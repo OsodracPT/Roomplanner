@@ -20,6 +20,10 @@ import { ComputerDetailResolver } from './_resolvers/computer-detail.resolver';
 import { NgForm, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { PavCComponent } from './pavillions/pav-c/pav-c.component';
+import { RoomDetailsComponent } from './rooms/room-details/room-details.component';
+import { RoomEditComponent } from './rooms/room-edit/room-edit.component';
+import { RoomDetailResolver } from './_resolvers/room-detail.resolver';
 
 @NgModule({
    declarations: [
@@ -29,7 +33,10 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
       ComputerListComponent,
       HomeComponent,
       PavillionDetailComponent,
-      ComputerEditComponent
+      ComputerEditComponent,
+      PavCComponent,
+      RoomDetailsComponent,
+      RoomEditComponent
    ],
    imports: [
       BrowserModule,
@@ -46,6 +53,7 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
       ComputerService,
       AlertifyService,
       ComputerDetailResolver,
+      RoomDetailResolver,
       PreventUnsavedChanges
    ],
    bootstrap: [

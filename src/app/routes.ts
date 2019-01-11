@@ -6,29 +6,23 @@ import { PavillionDetailComponent } from './pavillions/pavillion-detail/pavillio
 import { ComputerEditComponent } from './computers/computer-edit/computer-edit.component';
 import { ComputerDetailResolver } from './_resolvers/computer-detail.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
-
-
-// export const appRoutes: Routes = [
-
-//     { path: '', component: AppComponent},
-// {
-// path: '',
-// runGuardsAndResolvers: 'always',
-// children: [
-//     { path:   'computer-list', component: ComputerListComponent}
-// ]
-// },
-
-//     { path: '**', redirectTo: '', pathMatch: 'full'},
-// ];
+import { PavCComponent } from './pavillions/pav-c/pav-c.component';
+import { RoomEditComponent } from './rooms/room-edit/room-edit.component';
+import { RoomDetailResolver } from './_resolvers/room-detail.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
     { path: 'computer-list', component: ComputerListComponent },
     { path: 'pavillions', component: PavillionDetailComponent },
+    { path: 'pavc', component: PavCComponent },
     { path: 'computers/:id', component: ComputerEditComponent,
       resolve: {computer: ComputerDetailResolver},
     canDeactivate: [PreventUnsavedChanges] },
+    { path: 'rooms/:id', component: RoomEditComponent,
+    resolve: {
+      room: RoomDetailResolver,
+    computer: ComputerDetailResolver},
+  canDeactivate: [PreventUnsavedChanges] },
     { path: '**', redirectTo: '', pathMatch: 'full'},
   ];
 

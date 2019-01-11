@@ -46,7 +46,7 @@ export class ComputerEditComponent implements OnInit {
     });
 
     // Get the list of rooms
-    this.computerService.getRooms()
+    this.computerService.getLocations()
     .subscribe((rooms: Room[]) => {
       this.rooms = rooms;
       console.log(rooms);

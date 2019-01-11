@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Computer } from './_models/computer';
-import { ComputerService } from './services/computer.service';
 
 @Component({
   selector: 'app-root',
@@ -16,17 +15,11 @@ computers: Computer[];
   /**
    *
    */
-  constructor(private computerService: ComputerService) {
+  constructor() {
 
   }
 
   ngOnInit() {
-
-    this.computerService.getComputers()
-    .subscribe((computers: Computer[]) => {
-      this.computers = computers;
-      console.log(computers);
-    });
 
   }
 }

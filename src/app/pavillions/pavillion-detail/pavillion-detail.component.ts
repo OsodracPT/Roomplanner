@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ComputerService } from 'src/app/services/computer.service';
 import { Computer } from 'src/app/_models/computer';
+import { Room } from 'src/app/_models/room';
 
 @Component({
   selector: 'app-pavillion-detail',
@@ -10,6 +11,7 @@ import { Computer } from 'src/app/_models/computer';
 export class PavillionDetailComponent implements OnInit {
 
   computers: Computer[];
+  rooms: Room[];
 
   constructor(private computerService: ComputerService) { }
 
@@ -19,6 +21,12 @@ export class PavillionDetailComponent implements OnInit {
     .subscribe((computers: Computer[]) => {
       this.computers = computers;
       console.log(computers);
+    });
+
+    this.computerService.getPavC()
+    .subscribe((rooms: Room[]) => {
+      this.rooms = rooms;
+      console.log(rooms);
     });
   }
 
