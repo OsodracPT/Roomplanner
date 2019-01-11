@@ -4,6 +4,7 @@ import { GlobalVariable } from '../global';
 import { Observable } from 'rxjs';
 import { Computer } from '../_models/computer';
 import { Room } from '../_models/room';
+import { Person } from '../_models/person';
 
 const secret = GlobalVariable.SECRET;
 
@@ -37,6 +38,14 @@ getRooms() {
 
 getRoom(id): Observable<Room> {
   return this.http.get<Room>(this.baseApiUrl + 'rooms/' + id, {headers: headers});
+}
+
+getComputersInRoom(id): Observable<Room> {
+  return this.http.get<Room>(this.baseApiUrl + 'rooms/' + id + '/computers', {headers: headers});
+}
+
+getPersonsInRoom(id): Observable<Person> {
+  return this.http.get<Person>(this.baseApiUrl + 'rooms/' + id + '/persons', {headers: headers});
 }
 
 getLocations() {
