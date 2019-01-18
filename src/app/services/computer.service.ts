@@ -28,6 +28,14 @@ getComputer(id): Observable<Computer> {
   return this.http.get<Computer>(this.baseApiUrl + 'computers/' + id, {headers: headers});
 }
 
+getPersons() {
+  return this.http.get(this.baseApiUrl + 'persons', {headers: headers});
+}
+
+getPerson(id): Observable<Person> {
+return this.http.get<Person>(this.baseApiUrl + 'persons/' + id, {headers: headers});
+}
+
 getComputersPavC() {
   return this.http.get(this.baseApiUrl + 'computers/pavC', {headers: headers});
 }

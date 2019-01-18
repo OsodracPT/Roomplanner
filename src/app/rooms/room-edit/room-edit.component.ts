@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ComputerService } from 'src/app/services/computer.service';
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { Person } from 'src/app/_models/person';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-room-edit',
@@ -14,6 +15,7 @@ import { Person } from 'src/app/_models/person';
 export class RoomEditComponent implements OnInit {
 
   room: Room;
+  form: FormGroup;
 
   computers: Computer[];
   persons: Person[];
@@ -23,6 +25,8 @@ export class RoomEditComponent implements OnInit {
     private computerService: ComputerService, private alertify: AlertifyService) { }
 
   ngOnInit() {
+    this.CreateForm();
+
         // Get the computer data from the route resolver
         this.route.data.subscribe(data => {
           this.room = this.route.snapshot.data['room'][0];
@@ -31,7 +35,20 @@ export class RoomEditComponent implements OnInit {
           console.log(this.route.snapshot.data['computers']);
           this.computers = this.route.snapshot.data['computers'];
           this.persons = this.route.snapshot.data['persons'];
+
+          this.form.patchValue(this.room);
         });
+  }
+
+  private CreateForm() {
+    this.form = new FormGroup({
+      notes: new FormControl(''),
+      maxCapacity: new FormControl('', Validators.required)
+    });
+  }
+
+  updateRoom() {
+
   }
 
 }
