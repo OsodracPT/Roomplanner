@@ -56,6 +56,10 @@ getPersonsInRoom(id): Observable<Person> {
   return this.http.get<Person>(this.baseApiUrl + 'rooms/' + id + '/persons', {headers: headers});
 }
 
+updateRoom(id: number, room: Room) {
+  return this.http.put(this.baseApiUrl + 'rooms/' + id, room, {headers: headers});
+}
+
 getLocations() {
   return this.http.get(this.baseApiUrl + 'locations', {headers: headers});
 }

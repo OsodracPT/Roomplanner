@@ -48,7 +48,21 @@ export class RoomEditComponent implements OnInit {
   }
 
   updateRoom() {
+    console.log(this.room.id);
+    this.room.notes = this.form.value.notes;
+    this.room.maxCapacity = this.form.value.maxCapacity;
 
-  }
+    console.log(this.room);
+
+
+    this.computerService.updateRoom(this.room.id, this.room)
+        .subscribe(next => {
+          this.alertify.success('Room updated successfully.');
+          this.form.reset(this.room);
+        }, error => {
+          this.alertify.error(error);
+          });
+
+    }
 
 }
