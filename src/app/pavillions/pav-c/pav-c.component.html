@@ -9,7 +9,7 @@
           <tabset class="member-tabset">
             <tab heading="Lower Ground Floor">
               <div class="row">
-                <div *ngFor="let room of rooms" >
+                <div *ngFor="let room of rooms">
                   <div></div>
                   <app-room-details *ngIf="room.floorId == 433" class="col-lg-2 col-md-3 col-sm-6" [room]="room"></app-room-details>
                 </div>

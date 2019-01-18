@@ -11,6 +11,8 @@ import { RoomEditComponent } from './rooms/room-edit/room-edit.component';
 import { RoomDetailResolver } from './_resolvers/room-detail.resolver';
 import { ComputersInRoomResolver } from './_resolvers/computersInRoom.resolver';
 import { PersonsInRoomResolver } from './_resolvers/personsInRoom.resolver';
+import { PersonEditComponent } from './persons/person-edit/person-edit.component';
+import { PersonDetailResolver } from './_resolvers/person-detail.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -20,6 +22,8 @@ export const appRoutes: Routes = [
     { path: 'computers/:id', component: ComputerEditComponent,
       resolve: {computer: ComputerDetailResolver},
     canDeactivate: [PreventUnsavedChanges] },
+    { path: 'persons/:id', component: PersonEditComponent,
+    resolve: {person: PersonDetailResolver}},
     { path: 'rooms/:id', component: RoomEditComponent,
     resolve: {
       room: RoomDetailResolver,

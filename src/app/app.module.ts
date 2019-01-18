@@ -27,6 +27,8 @@ import { RoomDetailResolver } from './_resolvers/room-detail.resolver';
 import { ComputersInRoomResolver } from './_resolvers/computersInRoom.resolver';
 import { PersonsInRoomResolver } from './_resolvers/personsInRoom.resolver';
 import { PersonDetailsComponent } from './persons/person-details/person-details.component';
+import { PersonEditComponent } from './persons/person-edit/person-edit.component';
+import { PersonDetailResolver } from './_resolvers/person-detail.resolver';
 
 @NgModule({
    declarations: [
@@ -40,7 +42,8 @@ import { PersonDetailsComponent } from './persons/person-details/person-details.
       PavCComponent,
       RoomDetailsComponent,
       RoomEditComponent,
-      PersonDetailsComponent
+      PersonDetailsComponent,
+      PersonEditComponent
    ],
    imports: [
       BrowserModule,
@@ -60,6 +63,7 @@ import { PersonDetailsComponent } from './persons/person-details/person-details.
       RoomDetailResolver,
       ComputersInRoomResolver,
       PersonsInRoomResolver,
+      PersonDetailResolver,
       PreventUnsavedChanges
    ],
    bootstrap: [
