@@ -2,11 +2,11 @@
   <div class="row">
     <div class="col-sm-4">
       <h1 class="mb-4">{{person.forenames}} {{person.surname}}</h1>
-      {{form.value | json}}
-      {{form.status | json}}
+      <!-- {{form.value | json}}
+      {{form.status | json}} -->
     </div>
     <div class="col-sm-8">
-      <div class="alert alert-info" *ngIf="">
+      <div class="alert alert-info" *ngIf="form.dirty">
         <strong>Information: </strong>You have made changes. Any unsaved changes will be lost!
       </div>
     </div>
@@ -46,8 +46,8 @@
         </div>
 
         <div class="card-footer">
-          <!-- <button class="btn btn-success btn-block" [disabled]="form.pristine || form.invalid" type="submit" (click)="">Save
-            Changes</button> -->
+          <button class="btn btn-success btn-block" [disabled]="form.pristine || form.invalid" type="submit">Save
+            Changes</button>
         </div>
       </div>
     </div>
@@ -57,27 +57,27 @@
         <tabset class="member-tabset">
           <tab heading="Edit Person">
 
-            <!-- <form [formGroup]="form" id="editForm" (ngSubmit)="" novalidate>
+            <form [formGroup]="form" id="editForm" novalidate>
 
-              <h4 class="p-2">Description</h4>
-              <textarea name="description" rows="6" class="form-control" formControlName="description"></textarea>
+              <h4 class="p-2">Notes</h4>
+              <textarea name="notes" rows="6" class="form-control" formControlName="notes"></textarea>
 
               <h4 class="p-2">Update location:</h4>
 
               <div class="form-group">
                 <label for="location"></label>
-                <ng-select id="location" formControlName="location" [items]="this.rooms" [virtualScroll]="true"
+                <ng-select id="location" formControlName="roomName" [items]="this.rooms" [virtualScroll]="true"
                   bindLabel="name" bindValue="id" placeholder="Select room">
                 </ng-select>
 
-                <div *ngIf="form.controls['location'].errors && !form.controls['location'].pristine" class="error-msg">
-                  <div class="alert alert-danger" role="alert" [hidden]="!form.controls['location'].errors.required">Please
+                <div *ngIf="form.controls['roomName'].errors && !form.controls['roomName'].pristine" class="error-msg">
+                  <div class="alert alert-danger" role="alert" [hidden]="!form.controls['roomName'].errors.required">Please
                     select a location.
                   </div>
                 </div>
 
               </div>
-            </form> -->
+            </form>
 
           </tab>
         </tabset>

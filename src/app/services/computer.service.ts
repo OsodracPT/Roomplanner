@@ -21,7 +21,8 @@ export class ComputerService {
   constructor(private http: HttpClient) { }
 
   getComputers() {
-    return this.http.get(this.baseApiUrl + 'computers', {headers: headers});
+    return this.http
+    .get(this.baseApiUrl + 'computers', {headers: headers});
 }
 
 getComputer(id): Observable<Computer> {
