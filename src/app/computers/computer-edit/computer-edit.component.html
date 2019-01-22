@@ -2,8 +2,8 @@
   <div class="row">
     <div class="col-sm-4">
       <h1 class="mb-4">{{computer.name | lowercase}} </h1>
-      {{form.value | json}}
-      {{form.status | json}}
+      <!-- {{form.value | json}}
+      {{form.status | json}} -->
     </div>
     <div class="col-sm-8">
       <div class="alert alert-info" *ngIf="form.dirty">
@@ -50,12 +50,12 @@
 
               <div class="form-group">
                 <label for="location"></label>
-                <ng-select id="location" formControlName="location" [items]="this.rooms" [virtualScroll]="true"
+                <ng-select id="location" formControlName="roomName" [items]="this.rooms" [virtualScroll]="true"
                   bindLabel="name" bindValue="id" placeholder="Select room">
                 </ng-select>
 
-                <div *ngIf="form.controls['location'].errors && !form.controls['location'].pristine" class="error-msg">
-                  <div class="alert alert-danger" role="alert" [hidden]="!form.controls['location'].errors.required">Please
+                <div *ngIf="form.controls['roomName'].errors && !form.controls['roomName'].pristine" class="error-msg">
+                  <div class="alert alert-danger" role="alert" [hidden]="!form.controls['roomName'].errors.required">Please
                     select a location.
                   </div>
                 </div>

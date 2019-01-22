@@ -29,7 +29,6 @@ export class PersonEditComponent implements OnInit {
     }
   }
 
-
   constructor(private route: ActivatedRoute,
     private computerService: ComputerService, private alertify: AlertifyService) {
   }
@@ -44,6 +43,7 @@ export class PersonEditComponent implements OnInit {
           console.log(this.person);
 
           this.form.patchValue(this.person);
+          this.form.get('roomName').setValue(this.person.roomId);
         });
 
     // Get the list of rooms
@@ -60,8 +60,8 @@ export class PersonEditComponent implements OnInit {
 
 private CreateForm() {
   this.form = new FormGroup({
-    description: new FormControl(''),
-    location: new FormControl('', Validators.required)
+    notes: new FormControl(''),
+    roomName: new FormControl('', Validators.required)
   });
 }
 
