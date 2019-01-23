@@ -13,11 +13,13 @@ import { ComputersInRoomResolver } from './_resolvers/computersInRoom.resolver';
 import { PersonsInRoomResolver } from './_resolvers/personsInRoom.resolver';
 import { PersonEditComponent } from './persons/person-edit/person-edit.component';
 import { PersonDetailResolver } from './_resolvers/person-detail.resolver';
+import { PersonListComponent } from './persons/person-list/person-list.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
     { path: 'computer-list', component: ComputerListComponent },
-    { path: 'pavillions', component: PavillionDetailComponent },
+    { path: 'person-list', component: PersonListComponent },
+    { path: 'pavc-computers', component: PavillionDetailComponent },
     { path: 'pavc', component: PavCComponent },
     { path: 'computers/:id', component: ComputerEditComponent,
       resolve: {computer: ComputerDetailResolver},

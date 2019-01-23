@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CollapseModule, BsDropdownModule, TabsModule } from 'ngx-bootstrap';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 import { AppComponent } from './app.component';
@@ -29,6 +29,7 @@ import { PersonsInRoomResolver } from './_resolvers/personsInRoom.resolver';
 import { PersonDetailsComponent } from './persons/person-details/person-details.component';
 import { PersonEditComponent } from './persons/person-edit/person-edit.component';
 import { PersonDetailResolver } from './_resolvers/person-detail.resolver';
+import { PersonListComponent } from './persons/person-list/person-list.component';
 
 @NgModule({
    declarations: [
@@ -43,7 +44,8 @@ import { PersonDetailResolver } from './_resolvers/person-detail.resolver';
       RoomDetailsComponent,
       RoomEditComponent,
       PersonDetailsComponent,
-      PersonEditComponent
+      PersonEditComponent,
+      PersonListComponent
    ],
    imports: [
       BrowserModule,
@@ -51,6 +53,7 @@ import { PersonDetailResolver } from './_resolvers/person-detail.resolver';
       FormsModule,
       ReactiveFormsModule,
       NgSelectModule,
+      NgxSpinnerModule,
       CollapseModule.forRoot(),
       BsDropdownModule.forRoot(),
       TabsModule.forRoot(),
