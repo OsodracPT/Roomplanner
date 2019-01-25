@@ -41,6 +41,10 @@ getComputersPavC() {
   return this.http.get(this.baseApiUrl + 'computers/pavC', {headers: headers});
 }
 
+getComputersPavH() {
+  return this.http.get(this.baseApiUrl + 'computers/pavH', {headers: headers});
+}
+
 getRooms() {
   return this.http.get(this.baseApiUrl + 'rooms', {headers: headers});
 }
@@ -73,6 +77,9 @@ getPavC() {
   return this.http.get(this.baseApiUrl + 'rooms/pavC', {headers: headers});
 }
 
+getPavH() {
+  return this.http.get(this.baseApiUrl + 'rooms/pavH', {headers: headers});
+}
 
 
 }

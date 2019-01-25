@@ -8,6 +8,7 @@ import { GlobalVariable } from '../global';
 })
 export class NavBarComponent implements OnInit {
 
+  public pavUrl = GlobalVariable.PAVSHORT;
   public pavillionList = GlobalVariable.PAVILLIONS;
 
   navbarOpen = false;

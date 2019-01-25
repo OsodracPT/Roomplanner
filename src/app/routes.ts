@@ -14,6 +14,7 @@ import { PersonsInRoomResolver } from './_resolvers/personsInRoom.resolver';
 import { PersonEditComponent } from './persons/person-edit/person-edit.component';
 import { PersonDetailResolver } from './_resolvers/person-detail.resolver';
 import { PersonListComponent } from './persons/person-list/person-list.component';
+import { PavHComponent } from './pavillions/pav-h/pav-h.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -21,6 +22,7 @@ export const appRoutes: Routes = [
     { path: 'person-list', component: PersonListComponent },
     { path: 'pavc-computers', component: PavillionDetailComponent },
     { path: 'pavc', component: PavCComponent },
+    { path: 'pavh', component: PavHComponent },
     { path: 'computers/:id', component: ComputerEditComponent,
       resolve: {computer: ComputerDetailResolver},
     canDeactivate: [PreventUnsavedChanges] },

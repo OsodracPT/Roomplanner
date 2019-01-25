@@ -19,4 +19,5 @@ export interface Person {
     managerSurname: string;
     groupId: number;
     groupNames: string[];
+    visitId: number;
 }
