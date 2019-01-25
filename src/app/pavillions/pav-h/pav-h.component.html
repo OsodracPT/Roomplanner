@@ -1,0 +1,45 @@
+<div class="container mt-4">
+    <div class="row">
+      <h1>Pavillion H</h1>
+    </div>
+    <div class="row">
+  
+      <div class="">
+        <div class="tab-panel">
+          <tabset class="member-tabset">
+            <tab heading="Lower Ground Floor">
+              <div class="row">
+                <div *ngFor="let room of rooms">
+                  <div></div>
+                  <app-room-details *ngIf="room.floorId == 425" class="col-lg-2 col-md-3 col-sm-6" [room]="room"></app-room-details>
+                </div>
+              </div>
+            </tab>
+            <tab heading="Ground Floor">
+              <div class="row">
+                <div *ngFor="let room of rooms" class="col-lg-2 col-md-3 col-sm-6">
+                    <app-room-details *ngIf="room.floorId == 424" [room]="room"></app-room-details>
+                  </div>
+              </div>
+              <p></p>
+            </tab>
+  
+            <tab heading="First Floor">
+              <div class="row">
+                  <div *ngFor="let room of rooms" class="col-lg-2 col-md-3 col-sm-6">
+                      <app-room-details *ngIf="room.floorId == 423" [room]="room"></app-room-details>
+                    </div>
+              </div>
+            </tab>
+            <tab heading="Second Floor">
+                <div class="row">
+                    <div *ngFor="let room of rooms">
+                      <app-room-details *ngIf="room.floorId == 422" class="col-lg-2 col-md-3 col-sm-6" [room]="room"></app-room-details>
+                    </div>
+                  </div>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -53,9 +53,11 @@
             Pavillions <span class="caret"></span>
           </button>
           <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-            <li role="menuitem"><a class="dropdown-item" *ngFor="let pavillion of pavillionList" [routerLink]="['/pavc']">
+            <li role="menuitem">
+              <a class="dropdown-item" *ngFor="let pavillion of pavillionList; index as i" [routerLink]="['/', pavUrl[i]]">
                 {{pavillion}}
-              </a></li>
+              </a>
+            </li>
           </ul>
         </div>
       </li>
