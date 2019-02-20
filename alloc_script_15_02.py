@@ -2,7 +2,6 @@ import os
 import sys
 import datetime
 import pprint
-import copy
 from config import app_config
 import json
 import psycopg2
@@ -10,6 +9,7 @@ import psycopg2.extras
 
 
 pav = 'E'
+dates = ['2018-06-01', '2018-12-31']
 start_date ='2018-02-01'
 end_date ='2018-12-31'
 
@@ -27,23 +27,6 @@ room_segments = {}
 
 #Define our connection string
 conn_string=os.getenv('CONN_STRING')
-
-def find_segments(segments, start_days, end_days):
-    #print(start_days, end_days)
-    end_segment=None
-    start_segment=None
-
-    for index, segment in enumerate(segments):
-        if segment['start'] <= start_days and start_days < segment['end']:
-            start_segment = index
-        if segment['start'] < end_days and end_days <= segment['end']:
-            end_segment = index
-        else:
-            ("BUG: something is not right")
-
-    #print(segments[0])
-    return_values = [start_segment, end_segment, segments]
-    return return_values
 
 def alloc():
     try:
@@ -116,16 +99,14 @@ def alloc():
             room_number=room[0]
             room_segments[room_number][0]['start']=0
             room_segments[room_number][0]['end']=number_of_days
-
-            segments = [{'start':0,'end':number_of_days, 'occupants':[]}]
-
+            
             #remove all the rooms that dont have visits from the array
             room_visits_rem = {k: v for k, v in room_visits.items() if v}
 
             if room_number in room_visits_rem:
                 visits = room_visits_rem[room_number]
                 #print(visits)
-                
+
 
                 #loop through each visit in a room
                 for index_visit, visit in enumerate(visits):
@@ -134,40 +115,57 @@ def alloc():
                     start_days = visit['start_days']
                     #print(start_days)
                     end_days = visit['end_days']
-                    #print(segments)
-                    visit_segments = find_segments(segments, start_days, end_days)
                     #print(visit)
-                    first_segment = visit_segments[2][0]
-                    #print(first_segment)
-                    last_segment = visit_segments[2][-1]
-                    #print(last_segment)
-                    first_index=visit_segments[0] 
-                    last_index=visit_segments[1]
 
-                    #print(visit_segments[2])
-                   
-                    if first_segment['start'] < start_days:
-                        #Clone last segment
-                        new_segment = {'start': copy.deepcopy(first_segment['start']), 'end':start_days, 'occupants': copy.deepcopy(first_segment['occupants'])}
-                        first_segment['start'] = start_days
-                        segments.append(new_segment)
-                        last_index = last_index + 1
+                    #I have created a monster. 
+                    # if we are in the first iteration of the loop and the start days of the visit is not zero
+                    # then we need to add a segment in the begining to state [0,start_days]
+                    if index_visit == 0 and start_days!= 0:
+                        room_segments[room_number][0]['start'] = 0
+                        room_segments[room_number].append({'start':start_days,'end':end_days, 'occupants':[visit]})
+                        room_segments[room_number][0]['end'] = start_days
+                        #print(visit)
+                    #if we are in the first iteration of the loop and the start is zero
+                    # then we simply append the visit to the dictionary
+                    elif index_visit == 0:
+                        room_segments[room_number][0]['start'] = start_days
+                        room_segments[room_number][0]['end'] = end_days
+                        room_segments[room_number][0]['occupants'].append(visit)
+                    else:
+                        for index_seg, value in enumerate(room_segments[room_number]):
+                            if value['start'] == start_days and value['end']== end_days:
+                                value['occupants'].append(visit)
+                                #print(value['occupants'])
+                            elif value['start'] == start_days and value['end'] >= end_days:
+                                # print(room_segments[room_number])
+                                # print(room_segments[room_number][0])
+                                # print("visit is:")
+                                # print(visit)
+                                room_segments[room_number][index_seg]['start'] = end_days
+                                room_segments[room_number].append({'start':start_days,'end':end_days, 'occupants':[visit,room_segments[room_number][index_seg]]})
+                            elif value['start'] != start_days and value['end'] <= end_days:
+                                # print(room_segments[room_number])
+                                # print(room_segments[room_number][index_seg])
+                                # print(" \n visit is:")
+                                # print(visit)
+                                # print("\n")
+                                room_segments[room_number][index_seg]['end'] = start_days
+                                room_segments[room_number].append({'start':start_days,'end':end_days, 'occupants':[room_segments[room_number][index_seg]['occupants']]})
 
-                    if last_segment['end'] > end_days:
-                        #Clone last segment
-                        new_segment = {'start': end_days, 'end': copy.deepcopy(last_segment['end']), 'occupants': copy.deepcopy(last_segment['occupants'])}
-                        last_segment['end'] = end_days
-                        segments.append(new_segment)
+                            elif room_segments[room_number][0]['occupants'] is None:
+                                print('')
+                            else:
+                                print('')
+                #     #if the the start days of the current visit is different from the visit already present
+                #     # then we need to append a whole new segment to the room    
+                #     elif start_days != room_segments[room_number][0][0]:
+                #         room_segments[room_number].append([start_days, end_days, visit])
+                #     else:
+                #         room_segments[room_number][0][2].append(visit)
+                        #print(visit)
 
-                        
 
-                    #print("Adding visit", visit['crsid'], visit['room_number'])
-                    print(visit_segments[2][0])
 
-                    #visit_segments[2][0]['occupants']=[visit]
-                    #print(visit_segments[2])
-                    visit_segments[2][0]['occupants'].append(visit)
-            room_segments[room_number]=segments
         
     except psycopg2.OperationalError as e:
         print("Can't connect to database")
@@ -180,7 +178,7 @@ def alloc():
                 cur.close()
                 conn.close()
                 print("PostgreSQL connection is closed")
-                pprint.pprint(room_segments, width=1)
+                pprint.pprint(room_segments['E1.06'], width=1)
                 return(room_segments)
 
 alloc()
