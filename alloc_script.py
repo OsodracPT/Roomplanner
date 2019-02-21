@@ -22,8 +22,7 @@ number_of_days=0
 room_visits = {}
 
 #dictionary
-room_segments = {}
-
+room_segments = []
 
 #Define our connection string
 conn_string=os.getenv('CONN_STRING')
@@ -73,10 +72,14 @@ def alloc():
         #get all the room numbers from the pavillion provided
         #populate the keys in the dictionary room_visits accord
         rooms = get_rooms_cur.fetchall()
+
         for row in rooms:
             #print(row)
             room_visits[row[0]] = []
-            room_segments[row[0]] = [{'start':'','end':'', 'occupants':[]}]
+            temp = {'room_name': row[0], 'segments': ''}
+            temp['segments'] = [{'start':'','end':'', 'occupants':[]}]
+            room_segments.append(copy.deepcopy(temp))
+
         #return number of days in time interval provided
         number_of_days = get_days_cur.fetchone()
         number_of_days = number_of_days[0] + 1 #dont know yet why I am adding one
@@ -114,8 +117,11 @@ def alloc():
 
             # naming the key in the dictionary to increase readability
             room_number=room[0]
-            room_segments[room_number][0]['start']=0
-            room_segments[room_number][0]['end']=number_of_days
+            
+            room_segments[index]['segments'][0]['start']=0
+            #print(room_segment[i]['segments'])
+            room_segments[index]['segments'][0]['end']=number_of_days
+            #print(room_segment[i]['segments'])
 
             segments = [{'start':0,'end':number_of_days, 'occupants':[]}]
 
@@ -162,13 +168,14 @@ def alloc():
                         
 
                     #print("Adding visit", visit['crsid'], visit['room_number'])
-                    print(visit_segments[2][0])
+                    #print(visit_segments[2][0])
 
                     #visit_segments[2][0]['occupants']=[visit]
                     #print(visit_segments[2])
                     visit_segments[2][0]['occupants'].append(visit)
-            room_segments[room_number]=segments
-        
+            #print(segments)
+            room_segments[index]['segments']=copy.deepcopy(segments)
+
     except psycopg2.OperationalError as e:
         print("Can't connect to database")
         print('Error message:\n{0}').format(e)
