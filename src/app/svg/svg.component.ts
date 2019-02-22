@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ComputerService } from '../services/computer.service';
+import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { DatePipe } from '@angular/common';
+
 
 
 export interface Occupant {
@@ -33,23 +36,32 @@ segments: Segment[];
 })
 export class SvgComponent implements OnInit {
   alertify: any;
+  public bsConfig: Partial<BsDatepickerConfig> = new BsDatepickerConfig();
+
   room_numbers: string[];
   number_of_days: number;
   data: RoomAlloc[];
   occupant: Occupant;
   segment: Segment;
+  time_interval: Date[];
+  interval_start: string;
+  interval_end: string;
 
-  constructor(private computerService: ComputerService) { }
+  constructor(private computerService: ComputerService, private datePipe: DatePipe) { }
 
   ngOnInit() {
 
-    this.computerService.getDays()
+
+  }
+
+  getAlloc(pav: string, start_date: string, end_date: string) {
+    this.computerService.getDays(pav, start_date, end_date)
     .subscribe((data: number) => {
       this.number_of_days = data;
       console.log(this.number_of_days);
     });
 
-    this.computerService.getSegments()
+    this.computerService.getSegments(pav, start_date, end_date)
     .subscribe((data: RoomAlloc[]) => {
       this.room_numbers = [];
       this.data = data;
@@ -61,32 +73,10 @@ export class SvgComponent implements OnInit {
           console.log(segment); // 1, "string", false
       }
     }
-
-    //   for (const key in this.data) {
-    //     // do something with "key" and "value" variables
-    //     if (this.data.hasOwnProperty(key)) {
-
-    //       // key would be the room number ex:'E0.01'
-    //       const segments = this.data[key];
-    //       this.room_numbers.push(key);
-    //       console.log(segments.room_name);
-    //       console.log(key);
-    //       // tslint:disable-next-line:forin
-    //       for (const segment_key in segments) {
-    //         this.segment = segments[segment_key];
-    //         console.log(this.segment);
-    //         // tslint:disable-next-line:forin
-    //         for (let i = 0; i < this.segment.occupants.length; i++) {
-    //           this.occupant = this.segment.occupants[i];
-    //           console.log(this.occupant); // use i instead of 0
-    //       }
-    //   }
-
-    // }
-    //   }
     }, error => {
       this.alertify.error(error);
     });
+
   }
 
   getClass(value: Segment) {
@@ -98,6 +88,16 @@ export class SvgComponent implements OnInit {
       case 4: return 'progress-bar bg-danger';
       case 5: return 'class-b';
     }
+  }
+
+  onValueChange(value: Date[]): void {
+    this.interval_start = this.datePipe.transform(value[0], 'yyyy-MM-dd');
+    this.interval_end = this.datePipe.transform(value[1], 'yyyy-MM-dd');
+
+    console.log(this.interval_start);
+    console.log(this.interval_end);
+
+    this.getAlloc('E', this.interval_start, this.interval_end);
   }
 }
 

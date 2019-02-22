@@ -1,12 +1,15 @@
-#centre { stroke: black; stroke-width: 1; fill: none; }
-/* circle:hover { stroke: white; } */
-
-#building_outline { stroke: black; stroke-width: 2; fill: none; }
-.room { stroke: black; stroke-width: 1; fill: none; }
-
-.roomnumber * { font-size: 7px; font-family: sans; text-anchor: middle; pointer-events: none; }
-
-.clickable * { stroke-width: 1; stroke: none; fill: black; opacity: 0; cursor: pointer}
-.clickable *:hover { opacity: 0.5; }
 
 .progress-bar {font-size:15px;}
+
+/* Turning the date time picker blue (bootstrap primary colour) */
+.theme-green .bs-datepicker-head {
+  background-color: #007bff;
+}
+
+.theme-green .bs-datepicker-body table td.week span {
+  color: #007bff;
+}
+
+.theme-green .bs-datepicker-body table td span.selected, .theme-green .bs-datepicker-body table td.selected span, .theme-green .bs-datepicker-body table td span[class*="select-"]:after, .theme-green .bs-datepicker-body table td[class*="select-"] span:after {
+  background-color: #007bff;
+}

@@ -3,4 +3,4 @@
 /* @import "~bootswatch/dist/flatly/bootstrap.css"; */
 @import "~font-awesome/css/font-awesome.css";
 @import "~@ng-select/ng-select/themes/default.theme.css";
-
+@import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
