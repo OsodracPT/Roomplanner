@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { CollapseModule, BsDropdownModule, TabsModule } from 'ngx-bootstrap';
+import { CollapseModule, BsDropdownModule, TabsModule, TooltipModule } from 'ngx-bootstrap';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 
@@ -31,6 +31,7 @@ import { PersonEditComponent } from './persons/person-edit/person-edit.component
 import { PersonDetailResolver } from './_resolvers/person-detail.resolver';
 import { PersonListComponent } from './persons/person-list/person-list.component';
 import { PavHComponent } from './pavillions/pav-h/pav-h.component';
+import { SvgComponent } from './svg/svg.component';
 
 @NgModule({
    declarations: [
@@ -47,7 +48,8 @@ import { PavHComponent } from './pavillions/pav-h/pav-h.component';
       PersonDetailsComponent,
       PersonEditComponent,
       PersonListComponent,
-      PavHComponent
+      PavHComponent,
+      SvgComponent
    ],
    imports: [
       BrowserModule,
@@ -59,6 +61,7 @@ import { PavHComponent } from './pavillions/pav-h/pav-h.component';
       CollapseModule.forRoot(),
       BsDropdownModule.forRoot(),
       TabsModule.forRoot(),
+      TooltipModule.forRoot(),
       RouterModule.forRoot(appRoutes)
    ],
    providers: [

@@ -81,5 +81,10 @@ getPavH() {
   return this.http.get(this.baseApiUrl + 'rooms/pavH', {headers: headers});
 }
 
-
+getSegments() {
+  return this.http.get(this.baseApiUrl + 'alloc', {headers: headers});
+}
+getDays() {
+  return this.http.get(this.baseApiUrl + 'get_days', {headers: headers});
+}
 }
