@@ -3,6 +3,7 @@ import sys
 import datetime
 import pprint
 import copy
+from operator import itemgetter
 from config import app_config
 import json
 import psycopg2
@@ -22,10 +23,27 @@ number_of_days=0
 room_visits = {}
 
 #dictionary
-room_segments = []
+room_segments = {}
+room_segment = []
 
 #Define our connection string
 conn_string=os.getenv('CONN_STRING')
+
+def get_days():
+    try:
+        conn = psycopg2.connect(conn_string)
+        get_days_cur = conn.cursor()
+        get_days_query = """SELECT %s::DATE - %s::DATE"""
+        get_days_cur.execute(get_days_query, (end_date, start_date))
+        #return number of days in time interval provided
+        number_of_days = get_days_cur.fetchone()
+        number_of_days = number_of_days[0] + 1 #dont know yet why I am adding one
+        print(number_of_days)
+    except psycopg2.OperationalError as e:
+        print("Can't connect to database")
+        print('Error message:\n{0}').format(e)
+
+    return number_of_days 
 
 def find_segments(segments, start_days, end_days):
     #print(start_days, end_days)
@@ -73,13 +91,16 @@ def alloc():
         #populate the keys in the dictionary room_visits accord
         rooms = get_rooms_cur.fetchall()
 
+        #clear the array 
+        room_segment = []
+
         for row in rooms:
             #print(row)
             room_visits[row[0]] = []
-            temp = {'room_name': row[0], 'segments': ''}
+            room_segments[row[0]] = [{'start':'','end':'', 'occupants':[]}]
+            temp = {'room_number': row[0], 'segments': ''}
             temp['segments'] = [{'start':'','end':'', 'occupants':[]}]
-            room_segments.append(copy.deepcopy(temp))
-
+            room_segment.append(copy.deepcopy(temp))
         #return number of days in time interval provided
         number_of_days = get_days_cur.fetchone()
         number_of_days = number_of_days[0] + 1 #dont know yet why I am adding one
@@ -117,10 +138,12 @@ def alloc():
 
             # naming the key in the dictionary to increase readability
             room_number=room[0]
+            room_segments[room_number][0]['start']=0
+            room_segments[room_number][0]['end']=number_of_days
             
-            room_segments[index]['segments'][0]['start']=0
+            room_segment[index]['segments'][0]['start']=0
             #print(room_segment[i]['segments'])
-            room_segments[index]['segments'][0]['end']=number_of_days
+            room_segment[index]['segments'][0]['end']=number_of_days
             #print(room_segment[i]['segments'])
 
             segments = [{'start':0,'end':number_of_days, 'occupants':[]}]
@@ -173,8 +196,11 @@ def alloc():
                     #visit_segments[2][0]['occupants']=[visit]
                     #print(visit_segments[2])
                     visit_segments[2][0]['occupants'].append(visit)
-            #print(segments)
-            room_segments[index]['segments']=copy.deepcopy(segments)
+            room_segments[room_number]=segments
+
+            #Sort the segments by lowest start value first. For the frontend
+            segments = sorted(segments, key=itemgetter('start'))
+            room_segment[index]['segments']=segments
 
     except psycopg2.OperationalError as e:
         print("Can't connect to database")
@@ -187,8 +213,9 @@ def alloc():
                 cur.close()
                 conn.close()
                 print("PostgreSQL connection is closed")
-                pprint.pprint(room_segments, width=1)
-                return(room_segments)
+
+                pprint.pprint(room_segment, width=1)
+                return(room_segment)
 
 alloc()
 
