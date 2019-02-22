@@ -15,9 +15,11 @@ import { PersonEditComponent } from './persons/person-edit/person-edit.component
 import { PersonDetailResolver } from './_resolvers/person-detail.resolver';
 import { PersonListComponent } from './persons/person-list/person-list.component';
 import { PavHComponent } from './pavillions/pav-h/pav-h.component';
+import { SvgComponent } from './svg/svg.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
+    { path: 'svg', component: SvgComponent},
     { path: 'computer-list', component: ComputerListComponent },
     { path: 'person-list', component: PersonListComponent },
     { path: 'pavc-computers', component: PavillionDetailComponent },
