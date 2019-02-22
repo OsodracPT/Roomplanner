@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { GlobalVariable } from '../global';
 import { Observable } from 'rxjs';
 import { Computer } from '../_models/computer';
@@ -81,10 +81,22 @@ getPavH() {
   return this.http.get(this.baseApiUrl + 'rooms/pavH', {headers: headers});
 }
 
-getSegments() {
-  return this.http.get(this.baseApiUrl + 'alloc', {headers: headers});
+// Allocation related
+
+getSegments(pav: string, start_date: string, end_date: string) {
+  let params = new HttpParams();
+  params = params.append('pav', pav);
+  params = params.append('start', start_date);
+  params = params.append('end', end_date);
+
+  return this.http.get(this.baseApiUrl + 'alloc', {headers: headers, params: params});
 }
-getDays() {
-  return this.http.get(this.baseApiUrl + 'get_days', {headers: headers});
+getDays(pav: string, start_date: string, end_date: string) {
+  let params = new HttpParams();
+  params = params.append('pav', pav);
+  params = params.append('start', start_date);
+  params = params.append('end', end_date);
+
+  return this.http.get(this.baseApiUrl + 'get_days', {headers: headers , params: params});
 }
 }

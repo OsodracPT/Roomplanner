@@ -1,8 +1,21 @@
-  <div class="container" *ngFor="let room of this.data; let i = index" [attr.data-index]="i">
+<div class="container mt-4" >
+  Pick a time interval in order to see the room allocations:
+  <div class="col-xs-12 col-12 col-md-4 mt-2 form-group">
+    <input type="text"
+           placeholder="DateTime Picker"
+           class="form-control"
+           bsDaterangepicker
+           [bsConfig]="{ rangeInputFormat: 'DD-MM-YYYY' }"
+           (bsValueChange)="onValueChange($event)"
+           >
+  </div>
+</div>
+
+ <div class="container" *ngFor="let room of this.data; let i = index" [attr.data-index]="i">
     <p>
         {{room.room_number}}:
     </p>
-      <div class="progress" style="height: 30px;">
+      <div class="progress mb-2" style="height: 30px;">
           <div *ngFor="let segment of room.segments; let i = index" [attr.data-index]="i" [ngClass]="getClass(segment)" tooltip="Room empty." role="progressbar" [ngStyle]="{'width': (segment.end * 100)/ number_of_days + '%'}"> {{segment.occupants.length}} occupants</div>
       </div>
 </div>

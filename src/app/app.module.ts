@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { CollapseModule, BsDropdownModule, TabsModule, TooltipModule } from 'ngx-bootstrap';
+import { CollapseModule, BsDropdownModule, TabsModule, TooltipModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 
@@ -18,6 +18,7 @@ import { ComputerEditComponent } from './computers/computer-edit/computer-edit.c
 import { AlertifyService } from './services/alertify.service';
 import { ComputerDetailResolver } from './_resolvers/computer-detail.resolver';
 import { NgForm, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {DatePipe} from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PavCComponent } from './pavillions/pav-c/pav-c.component';
@@ -61,6 +62,7 @@ import { SvgComponent } from './svg/svg.component';
       CollapseModule.forRoot(),
       BsDropdownModule.forRoot(),
       TabsModule.forRoot(),
+      BsDatepickerModule.forRoot(),
       TooltipModule.forRoot(),
       RouterModule.forRoot(appRoutes)
    ],
@@ -72,7 +74,8 @@ import { SvgComponent } from './svg/svg.component';
       ComputersInRoomResolver,
       PersonsInRoomResolver,
       PersonDetailResolver,
-      PreventUnsavedChanges
+      PreventUnsavedChanges,
+      DatePipe
    ],
    bootstrap: [
       AppComponent
