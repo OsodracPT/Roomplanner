@@ -54,6 +54,9 @@ def queryDB(query, args=()):
 def hello():
     return "Hello World!"
 
+@app.route('/get_days')
+def get_days():
+    return jsonify(alloc_script.get_days())
 
 @app.route('/alloc')
 def alloc():
