@@ -56,11 +56,19 @@ def hello():
 
 @app.route('/get_days')
 def get_days():
-    return jsonify(alloc_script.get_days())
+    start_date = request.args.get('start',"")
+    end_date = request.args.get('end',"")
+    pavillion = request.args.get('pav',"")
+
+    return jsonify(alloc_script.get_days(pavillion, start_date, end_date))
 
 @app.route('/alloc')
 def alloc():
-    return jsonify(alloc_script.alloc())
+    start_date = request.args.get('start',"")
+    end_date = request.args.get('end',"")
+    pavillion = request.args.get('pav',"")
+
+    return jsonify(alloc_script.alloc(pavillion, start_date, end_date))
 
 @app.route('/rooms')
 @auth.login_required
