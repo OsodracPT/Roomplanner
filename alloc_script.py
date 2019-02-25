@@ -29,7 +29,7 @@ room_segment = []
 #Define our connection string
 conn_string=os.getenv('CONN_STRING')
 
-def get_days():
+def get_days(pav, start_date, end_date):
     try:
         conn = psycopg2.connect(conn_string)
         get_days_cur = conn.cursor()
@@ -38,7 +38,7 @@ def get_days():
         #return number of days in time interval provided
         number_of_days = get_days_cur.fetchone()
         number_of_days = number_of_days[0] + 1 #dont know yet why I am adding one
-        print(number_of_days)
+        #print(number_of_days)
     except psycopg2.OperationalError as e:
         print("Can't connect to database")
         print('Error message:\n{0}').format(e)
@@ -57,12 +57,18 @@ def find_segments(segments, start_days, end_days):
             end_segment = index
         else:
             ("BUG: something is not right")
+            
+    if start_segment == 0 and end_segment == 0:
+        return_values = [start_segment, end_segment, [segments[0]]]
+    else:
+        return_values = [start_segment, end_segment, segments]
 
-    #print(segments[0])
-    return_values = [start_segment, end_segment, segments]
+    # print(start_segment)
+    # print(end_segment)
+
     return return_values
 
-def alloc():
+def alloc(pav, start_date, end_date):
     try:
         conn = psycopg2.connect(conn_string)
         cur = conn.cursor()
@@ -165,16 +171,14 @@ def alloc():
                     end_days = visit['end_days']
                     #print(segments)
                     visit_segments = find_segments(segments, start_days, end_days)
-                    #print(visit)
+                    #print(visit_segments)
                     first_segment = visit_segments[2][0]
                     #print(first_segment)
                     last_segment = visit_segments[2][-1]
                     #print(last_segment)
-                    first_index=visit_segments[0] 
-                    last_index=visit_segments[1]
-
-                    #print(visit_segments[2])
-                   
+                    first_index = visit_segments[0]
+                    last_index = visit_segments[1]
+               
                     if first_segment['start'] < start_days:
                         #Clone last segment
                         new_segment = {'start': copy.deepcopy(first_segment['start']), 'end':start_days, 'occupants': copy.deepcopy(first_segment['occupants'])}
@@ -188,14 +192,12 @@ def alloc():
                         last_segment['end'] = end_days
                         segments.append(new_segment)
 
-                        
 
                     #print("Adding visit", visit['crsid'], visit['room_number'])
-                    #print(visit_segments[2][0])
-
-                    #visit_segments[2][0]['occupants']=[visit]
                     #print(visit_segments[2])
-                    visit_segments[2][0]['occupants'].append(visit)
+                    for seg_index, segment in enumerate(visit_segments[2]):
+                    # #visit_segments[2][0]['occupants']=[visit]
+                        visit_segments[2][seg_index]['occupants'].append(visit)
             room_segments[room_number]=segments
 
             #Sort the segments by lowest start value first. For the frontend
@@ -214,8 +216,7 @@ def alloc():
                 conn.close()
                 print("PostgreSQL connection is closed")
 
-                pprint.pprint(room_segment, width=1)
+                #pprint.pprint(room_segment, width=1)
                 return(room_segment)
 
-alloc()
-
+#alloc('C', '2019-02-07', '2019-09-30' )
