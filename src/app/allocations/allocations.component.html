@@ -16,10 +16,10 @@
      <div *ngFor="let room of this.data; let i = index" [attr.data-index]="i">
   
       <div class="d-inline">
-          {{room.room_number}}:     
           <button type="button" class="btn btn-outline-primary">
+              {{room.room_number}}:
+              <span class="badge badge-light ml-2 mr-1">{{number_of_computers[i]}}</span>
               <i class="fa fa-desktop fa"></i>
-              <span class="badge badge-light ml-2">5</span>
             </button>
   
       </div>

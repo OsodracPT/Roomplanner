@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-sm-4">
-      <h1 class="mb-4">{{room.name}} </h1>
+      <h1 class="mb-4">{{room.room_number}} </h1>
     </div>
     <div class="col-sm-8">
       <div class="alert alert-info" *ngIf="form.dirty">
@@ -21,15 +21,15 @@
           </div>
           <div>
             <strong>Max capacity: </strong>
-            <p>{{room.maxCapacity}}</p>
+            <p>{{room.max_capacity}}</p>
           </div>
           <div>
             <strong>Number of people:</strong>
-            <p>{{room.numberOfPeople}}</p>
+            <p>{{room.number_of_people}}</p>
           </div>
           <div>
             <strong>Number of computers:</strong>
-            <p>{{room.numberOfComputers}}</p>
+            <p>{{room.number_of_computers}}</p>
           </div>
         </div>
         <div class="card-footer">

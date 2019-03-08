@@ -5,32 +5,32 @@
 
   <div class="card-body p-1 mt-">
     <h6 class="card-title text-center mb-1">
-      {{room.name}}
+      {{room.room_number}}
     </h6>
     <p class="card-text text-muted text-center">
       Notes: {{room.notes}}
     </p>
     <p class="card-text text-muted text-center">
-        Max Capacity: {{room.maxCapacity}}
-        <i *ngIf="room.maxCapacity == null">null</i>
+        Max Capacity: {{room.max_capacity}}
+        <i *ngIf="room.max_capacity == null">null</i>
       </p>
 
     <ul class="list-inline member-icons animate text-center">
       <li class="list-inline-item mt-1">
         <button class="btn btn-primary">
           <i class="fa fa-user fa"></i>
-          {{room.numberOfPeople}}
+          {{room.number_of_people}}
         </button>
       </li>
       <li class="list-inline-item mt-1">
         <button class="btn btn-primary">
           <i class="fa fa-desktop fa"></i>
-          {{room.numberOfComputers}}
+          {{room.number_of_computers}}
         </button>
       </li>
 
       <li class="list-inline-item mt-1">
-        <button class="btn btn-primary" [routerLink]="['/rooms', room.id]">
+        <button class="btn btn-primary" [routerLink]="['/rooms', room.room_id]">
           Details
           <i class="fa fa-edit fa ml-1"></i>
         </button>

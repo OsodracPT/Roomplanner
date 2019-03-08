@@ -73,8 +73,8 @@ updateComputer(id: number, computer: Computer) {
   return this.http.put(this.baseApiUrl + 'computers/' + id, computer, {headers: headers});
 }
 
-getPavC() {
-  return this.http.get(this.baseApiUrl + 'rooms/pavC', {headers: headers});
+getPavRooms(pav_initial: string) {
+  return this.http.get(this.baseApiUrl + 'rooms/pav/' + pav_initial, {headers: headers});
 }
 
 getPavH() {
@@ -99,4 +99,9 @@ getDays(pav: string, start_date: string, end_date: string) {
 
   return this.http.get(this.baseApiUrl + 'get_days', {headers: headers , params: params});
 }
+
+getNumberOfComputers(room_number: string) {
+  return this.http.get(this.baseApiUrl + 'rooms/number_of_computers/' + room_number, {headers: headers});
+}
+
 }

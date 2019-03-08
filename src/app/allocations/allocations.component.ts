@@ -49,6 +49,7 @@ export class AllocationsComponent implements OnInit {
   interval_start: string;
   interval_end: string;
   tooltip_content: string[];
+  number_of_computers = [];
 
 
   constructor(private computerService: ComputerService, private datePipe: DatePipe, private router: Router) { }
@@ -115,7 +116,12 @@ export class AllocationsComponent implements OnInit {
       this.data = data;
 
       for (const entry of this.data) {
-        // console.log(entry.room_number); // 1, "string", false
+        // console.log(entry.room_number);
+
+        this.computerService.getNumberOfComputers(entry.room_number)
+        .subscribe((response: any) => {
+          this.number_of_computers.push(response);
+        });
 
         for (const segment of entry.segments) {
           // console.log(segment); // 1, "string", false
