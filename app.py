@@ -76,7 +76,7 @@ def get_rooms():
     my_query = queryDB("SELECT * FROM testing_schema_pedro.cms_room_content_v")
     return jsonify(my_query)
 
-@app.route('/rooms/<string:pav_initial>')
+@app.route('/rooms/pav/<string:pav_initial>')
 @auth.login_required
 def get_rooms_pav(pav_initial):
     my_query = queryDB("""SELECT * FROM testing_schema_pedro.cms_room_content_v WHERE pav_initial=%s""", (pav_initial,))
@@ -87,6 +87,16 @@ def get_rooms_pav(pav_initial):
 def get_room(room_id):
     my_query = queryDB("SELECT * FROM testing_schema_pedro.cms_room_content_v WHERE room_id=%s", (room_id,))
     return jsonify(my_query)
+
+@app.route('/rooms/number_of_computers/<string:room_number>')
+@auth.login_required
+def get_number_of_computers(room_number):
+    my_query = "SELECT number_of_computers FROM testing_schema_pedro.cms_room_content_v WHERE room_number=%s", (room_number,)
+    conn = connectToDB()
+    cur = conn.cursor()
+    cur.execute("SELECT number_of_computers FROM testing_schema_pedro.cms_room_content_v WHERE room_number=%s", (room_number,))
+    result = cur.fetchone()
+    return jsonify(result[0])
 
 @app.route('/rooms/<int:room_id>', methods=['PUT'])
 @auth.login_required
