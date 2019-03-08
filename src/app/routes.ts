@@ -16,6 +16,7 @@ import { PersonDetailResolver } from './_resolvers/person-detail.resolver';
 import { PersonListComponent } from './persons/person-list/person-list.component';
 import { PavHComponent } from './pavillions/pav-h/pav-h.component';
 import { SvgComponent } from './svg/svg.component';
+import { AllocationsComponent } from './allocations/allocations.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -24,7 +25,14 @@ export const appRoutes: Routes = [
     { path: 'person-list', component: PersonListComponent },
     { path: 'pavc-computers', component: PavillionDetailComponent },
     { path: 'pavc', component: PavCComponent },
+    { path: 'pavc/alloc', component: AllocationsComponent },
     { path: 'pavh', component: PavHComponent },
+    { path: 'pavb/alloc', component: AllocationsComponent },
+    { path: 'pavd/alloc', component: AllocationsComponent },
+    { path: 'pave/alloc', component: AllocationsComponent },
+    { path: 'pavf/alloc', component: AllocationsComponent },
+    { path: 'pavg/alloc', component: AllocationsComponent },
+    { path: 'pavh/alloc', component: AllocationsComponent },
     { path: 'computers/:id', component: ComputerEditComponent,
       resolve: {computer: ComputerDetailResolver},
     canDeactivate: [PreventUnsavedChanges] },

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ComputerService } from '../services/computer.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
 import { DatePipe } from '@angular/common';
+import {Router} from '@angular/router';
 
 
 
@@ -29,16 +30,17 @@ segments: Segment[];
 }
 
 @Component({
-  selector: 'app-svg',
-  templateUrl: './svg.component.html',
-  styleUrls: ['./svg.component.css'],
+  selector: 'app-allocations',
+  templateUrl: './allocations.component.html',
+  styleUrls: ['./allocations.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class SvgComponent implements OnInit {
+export class AllocationsComponent implements OnInit {
   alertify: any;
   public bsConfig: Partial<BsDatepickerConfig> = new BsDatepickerConfig();
 
   room_numbers: string[];
+  pav_letter: string;
   number_of_days: number;
   data: RoomAlloc[];
   occupant: Occupant;
@@ -49,12 +51,12 @@ export class SvgComponent implements OnInit {
   tooltip_content: string[];
 
 
-  constructor(private computerService: ComputerService, private datePipe: DatePipe) { }
+  constructor(private computerService: ComputerService, private datePipe: DatePipe, private router: Router) { }
 
   ngOnInit() {
 
-
-  }
+  this.pav_letter = this.router.url.substr(4, 1).toUpperCase();
+}
 
   onValueChange(value: Date[]): void {
     this.interval_start = this.datePipe.transform(value[0], 'yyyy-MM-dd');
@@ -63,7 +65,7 @@ export class SvgComponent implements OnInit {
     // console.log(this.interval_start);
     // console.log(this.interval_end);
 
-    this.getAlloc('C', this.interval_start, this.interval_end);
+    this.getAlloc(this.pav_letter, this.interval_start, this.interval_end);
   }
 
   getTooltipData(segment: Segment) {
@@ -105,7 +107,6 @@ export class SvgComponent implements OnInit {
     this.computerService.getDays(pav, start_date, end_date)
     .subscribe((data: number) => {
       this.number_of_days = data;
-      // console.log(this.number_of_days);
     });
 
     this.computerService.getSegments(pav, start_date, end_date)

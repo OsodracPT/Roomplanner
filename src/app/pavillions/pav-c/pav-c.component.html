@@ -16,12 +16,75 @@
               </div>
             </tab>
             <tab heading="Ground Floor">
-              <div class="row">
-                <div *ngFor="let room of rooms" class="col-lg-2 col-md-3 col-sm-6">
-                    <app-room-details *ngIf="room.floorId == 432" [room]="room"></app-room-details>
-                  </div>
-              </div>
-              <p></p>
+              <svg viewBox="-120 -120 240 340" width="8in" xmlns="http://www.w3.org/2000/svg">
+
+                <defs>
+              <g id="centre">
+              <path d="M -65,-65 L -65,65 L 65,65 L 65,-65 Z" style="fill: black"/>
+              <circle id="foo" cx="0" cy="0" r="55" style="fill:white"/>
+              
+              <path d="M -70,-70 L 70,70" style="stroke-width: 25; stroke: white"/>
+              <path d="M -70,70 L 70,-70" style="stroke-width: 25; stroke: white"/>
+              <path d="M 0,0 L 0,-70" style="stroke-width: 25; stroke: white"/>
+              <path d="M -70,0 L 70,0" style="stroke-width: 25; stroke: white"/>
+              
+              <path d="M -70,-70 l 35,0 l 0,35 l -40,0" style="stroke:none; fill:white"/>
+              <path d="M 70,-70 l -35,0 l 0,35 l 40,0" style="stroke:none; fill:white"/>
+              <path d="M -70,70 l 50,0 l 0,-30 l -50,0" style="stroke:none; fill:white"/>
+              <path d="M 70,70 l -50,0 l 0,-30 l 50,0" style="stroke:none; fill:white"/>
+              
+              <circle id="foo" cx="0" cy="0" r="35"/>
+              <circle id="foo" cx="0" cy="0" r="20"/>
+              <path d="M -14,-14 L 14,-14 L 14,14 L -14,14 Z"/>
+              
+              <path id="stair" d="M -35,0 l 15,0 m 40,0 l 15,0" style="stroke-width: 0.5"/>
+              <use xlink:href="#stair" style="transform: rotate(-10deg)"/>
+              <use xlink:href="#stair" style="transform: rotate(-20deg)"/>
+              <use xlink:href="#stair" style="transform: rotate(-30deg)"/>
+              <use xlink:href="#stair" style="transform: rotate(10deg)"/>
+              <use xlink:href="#stair" style="transform: rotate(20deg)"/>
+              <use xlink:href="#stair" style="transform: rotate(30deg)"/>
+              </g>
+              
+              <g id="room_outline" class="room">
+              <path d="M -15,-110 l 0,45 l -5,0"/>
+              <path d="M -45,-110 l 0,45 m -5,0 l 10,0"/>
+              
+              <path d="M -80,-80  l 15,15  m  5,0  l -5,0 l 0,5"/> 
+              <path d="M -110,-45 l 45,0 m 0,-5 l 0,10"/>
+              <path d="M -110,-20 l 45,0 m 0,-5 l 0,10"/>
+              <path d="M -110,20 l 45,0 m 0,-2 l 0,4"/>
+              <path d="M -110,55 l 45,0 m 0,-2 l 0,4"/>
+              <path d="M -80,80  l 15,-15  m  2,0  l -2,0 l 0,-2"/>
+                </g>
+              
+                </defs>
+              
+                <use xlink:href="#centre"/>
+              
+                <g id="building_outline">
+              <path d="M -15,-110  L -80,-110  L -80,-80  L -110,-80  L -110,80  L -80,80  L -80,110  L -45,110 M 45,110 L 80,110  L 80,80  L 110,80  L 110,-80  L 80,-80  L 80,-110  L 15,-110"/>
+                </g>
+              
+              
+                <use xlink:href="#room_outline"/>
+                <use xlink:href="#room_outline" style="transform:scale(-1,1)"/>
+              
+                <path class="room" d="M -50,65 l 5,0 l 0,65 l 10,0 m 10,0 l 50,0  m 10,0 l 10,0 l 0,-65 l -10,0 m -10,0 l -50,0 m -10,0 l -10,0 M 50,65 l -5,0"/>
+              
+              
+              
+                <g class="clickable">
+              <path d="M -80,-110 l 0,30 l 15,15 l 20,0 l 0,-45 Z" onclick="document.location='D0.11'"/>
+                </g>
+              
+                <g class="roomnumber">
+              <text x="-62.5" y="-95">D0.11
+              <tspan class="occupant" data-room="D0.11" x="-62.5" dy="10">Test</tspan></text>
+                </g>
+              
+              </svg> 
+
             </tab>
   
             <tab heading="First Floor">
