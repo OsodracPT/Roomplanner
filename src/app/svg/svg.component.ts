@@ -105,7 +105,6 @@ export class SvgComponent implements OnInit {
     this.computerService.getDays(pav, start_date, end_date)
     .subscribe((data: number) => {
       this.number_of_days = data;
-      // console.log(this.number_of_days);
     });
 
     this.computerService.getSegments(pav, start_date, end_date)

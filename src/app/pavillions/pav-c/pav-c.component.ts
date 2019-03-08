@@ -19,7 +19,7 @@ export class PavCComponent implements OnInit {
 
   ngOnInit() {
 
-    this.computerService.getPavC()
+    this.computerService.getPavRooms('C')
     .subscribe((rooms: Room[]) => {
       this.rooms = rooms;
       console.log(rooms);
