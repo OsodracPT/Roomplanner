@@ -33,6 +33,7 @@ import { PersonDetailResolver } from './_resolvers/person-detail.resolver';
 import { PersonListComponent } from './persons/person-list/person-list.component';
 import { PavHComponent } from './pavillions/pav-h/pav-h.component';
 import { SvgComponent } from './svg/svg.component';
+import { AllocationsComponent } from './allocations/allocations.component';
 
 @NgModule({
    declarations: [
@@ -50,7 +51,8 @@ import { SvgComponent } from './svg/svg.component';
       PersonEditComponent,
       PersonListComponent,
       PavHComponent,
-      SvgComponent
+      SvgComponent,
+      AllocationsComponent
    ],
    imports: [
       BrowserModule,

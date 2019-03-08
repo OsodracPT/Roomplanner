@@ -3,7 +3,6 @@ import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Resolve, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { ComputerService } from '../services/computer.service';
-import { Computer } from '../_models/computer';
 import { AlertifyService } from '../services/alertify.service';
 import { Room } from '../_models/room';
 

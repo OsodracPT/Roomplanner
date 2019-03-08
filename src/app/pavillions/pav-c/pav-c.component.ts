@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Computer } from 'src/app/_models/computer';
 import { Room } from 'src/app/_models/room';
 import { ComputerService } from 'src/app/services/computer.service';
@@ -6,7 +6,9 @@ import { ComputerService } from 'src/app/services/computer.service';
 @Component({
   selector: 'app-pav-c',
   templateUrl: './pav-c.component.html',
-  styleUrls: ['./pav-c.component.css']
+  styleUrls: ['./pav-c.component.css'],
+  encapsulation: ViewEncapsulation.None
+
 })
 export class PavCComponent implements OnInit {
 

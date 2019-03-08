@@ -1,0 +1,11 @@
+#centre { stroke: black; stroke-width: 1; fill: none; }
+circle:hover { stroke: white; }
+
+#building_outline { stroke: black; stroke-width: 2; fill: none; }
+.room { stroke: black; stroke-width: 1; fill: none; }
+
+.roomnumber * { font-size: 7px; font-family: sans; text-anchor: middle; pointer-events: none; }
+
+.clickable * { stroke-width: 1; stroke: none; fill: black; opacity: 0; cursor: pointer}
+.clickable *:hover { opacity: 0.5; }
+
