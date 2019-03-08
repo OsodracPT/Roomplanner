@@ -73,33 +73,26 @@ def alloc():
 @app.route('/rooms')
 @auth.login_required
 def get_rooms():
-    my_query = queryDB("SELECT * FROM testing_schema_pedro.rooms")
+    my_query = queryDB("SELECT * FROM testing_schema_pedro.cms_room_content_v")
     return jsonify(my_query)
 
-@app.route('/rooms/pavC')
+@app.route('/rooms/<string:pav_initial>')
 @auth.login_required
-def get_rooms_pav_c():
-    my_query = queryDB("""SELECT * FROM testing_schema_pedro.rooms WHERE "floorId" IN (430,431,432,433)""")
-    return jsonify(my_query);
-
-@app.route('/rooms/pavH')
-@auth.login_required
-def get_rooms_pav_h():
-    my_query = queryDB("""SELECT * FROM testing_schema_pedro.rooms WHERE "floorId" IN (422,423,424,425)""")
-    return jsonify(my_query);
+def get_rooms_pav(pav_initial):
+    my_query = queryDB("""SELECT * FROM testing_schema_pedro.cms_room_content_v WHERE pav_initial=%s""", (pav_initial,))
+    return jsonify(my_query)
 
 @app.route('/rooms/<int:room_id>')
 @auth.login_required
 def get_room(room_id):
-    my_query = queryDB("SELECT * FROM testing_schema_pedro.rooms WHERE id=%s", (room_id,))
-    return jsonify(my_query);
+    my_query = queryDB("SELECT * FROM testing_schema_pedro.cms_room_content_v WHERE room_id=%s", (room_id,))
+    return jsonify(my_query)
 
 @app.route('/rooms/<int:room_id>', methods=['PUT'])
 @auth.login_required
 def update_room(room_id):
     conn = connectToDB()
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-
     max_capacity = request.json.get('maxCapacity',"")
     notes = request.json.get('notes',"")
     try:
@@ -148,6 +141,7 @@ def get_computers():
 
 @app.route('/computers/pavC')
 @auth.login_required
+
 def get_computers_pav_c():
     my_query = queryDB("SELECT * FROM testing_schema_pedro.computers_pavc")
     return jsonify(my_query)

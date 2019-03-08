@@ -61,7 +61,7 @@ def find_segments(segments, start_days, end_days):
     if start_segment == 0 and end_segment == 0:
         return_values = [start_segment, end_segment, [segments[0]]]
     else:
-        return_values = [start_segment, end_segment, segments]
+        return_values = [start_segment, end_segment, segments[0:end_segment + 1]]
 
     # print(start_segment)
     # print(end_segment)
@@ -82,10 +82,10 @@ def alloc(pav, start_date, end_date):
         record = cur.fetchone()
         print("You are connected to - ", record,"\n")
         
-        get_rooms_query = """SELECT room_number FROM testing_schema_pedro.cms_room_v WHERE pav_initial=%s ORDER BY room_number"""
+        get_rooms_query = """SELECT room_number FROM testing_schema_pedro.cms_office_v WHERE pav_initial=%s ORDER BY room_number"""
         get_occupancy_query = """SELECT title, forenames, surname, room_number,crsid,start_date,end_date, 
         GREATEST(start_date, %s::DATE)-%s AS start_days, LEAST(end_date, %s::DATE)-%s::DATE + 1 AS end_days FROM testing_schema_pedro.occupant_v 
-        JOIN testing_schema_pedro.cms_room_v USING (room_id) WHERE pav_initial=%s AND (start_date, end_date) OVERLAPS (%s,%s) ORDER BY room_number,start_date"""
+        JOIN testing_schema_pedro.cms_office_v USING (room_id) WHERE pav_initial=%s AND (start_date, end_date) OVERLAPS (%s,%s) ORDER BY room_number,start_date"""
         get_days_query = """SELECT %s::DATE - %s::DATE"""
         get_occupancy_cur.execute(get_occupancy_query,(start_date, start_date, end_date, start_date, pav, start_date, end_date))
         get_rooms_cur.execute(get_rooms_query, pav)
@@ -110,7 +110,7 @@ def alloc(pav, start_date, end_date):
         #return number of days in time interval provided
         number_of_days = get_days_cur.fetchone()
         number_of_days = number_of_days[0] + 1 #dont know yet why I am adding one
-        print(number_of_days)
+        #print(number_of_days)
         
         # print(room_visits)
 
@@ -144,9 +144,7 @@ def alloc(pav, start_date, end_date):
 
             # naming the key in the dictionary to increase readability
             room_number=room[0]
-            room_segments[room_number][0]['start']=0
-            room_segments[room_number][0]['end']=number_of_days
-            
+
             room_segment[index]['segments'][0]['start']=0
             #print(room_segment[i]['segments'])
             room_segment[index]['segments'][0]['end']=number_of_days
@@ -165,11 +163,12 @@ def alloc(pav, start_date, end_date):
                 #loop through each visit in a room
                 for index_visit, visit in enumerate(visits):
                     #print(visit)
+
                     # providing better names to my variables 
                     start_days = visit['start_days']
                     #print(start_days)
                     end_days = visit['end_days']
-                    #print(segments)
+
                     visit_segments = find_segments(segments, start_days, end_days)
                     #print(visit_segments)
                     first_segment = visit_segments[2][0]
@@ -192,14 +191,13 @@ def alloc(pav, start_date, end_date):
                         last_segment['end'] = end_days
                         segments.append(new_segment)
 
-
                     #print("Adding visit", visit['crsid'], visit['room_number'])
                     #print(visit_segments[2])
-                    for seg_index, segment in enumerate(visit_segments[2]):
-                    # #visit_segments[2][0]['occupants']=[visit]
-                        visit_segments[2][seg_index]['occupants'].append(visit)
-            room_segments[room_number]=segments
 
+                    for seg_index, segment in enumerate(visit_segments[2]):
+                        visit_segments[2][seg_index]['occupants'].append(visit)
+
+            
             #Sort the segments by lowest start value first. For the frontend
             segments = sorted(segments, key=itemgetter('start'))
             room_segment[index]['segments']=segments
@@ -215,8 +213,11 @@ def alloc(pav, start_date, end_date):
                 cur.close()
                 conn.close()
                 print("PostgreSQL connection is closed")
-
+                
+                #outputs the end result
                 #pprint.pprint(room_segment, width=1)
                 return(room_segment)
 
+#Debug purposes
+#Uncomment the following line to be able to execute the script
 #alloc('C', '2019-02-07', '2019-09-30' )
