@@ -22,6 +22,24 @@ def get_password(username):
         return os.getenv('SECRET')
     return None
 
+# Error Handling
+
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'Page Not Found. Resource requested does not exist.'}), 404)
+
+@auth.error_handler
+def unauthorized():
+    # return 403 instead of 401 to prevent browsers from displaying the default
+    # auth dialog
+    return make_response(jsonify({'error': 'Unauthorized access.'}), 403)
+
+@app.errorhandler(400)
+def bad_request(error):
+    return make_response(jsonify({'error': 'Bad request. Your request has missing arguments or is malformed.'}), 400)
+
+
+
 def connectToDB():
     #Define our connection string
     conn_string=os.getenv('CONN_STRING')
@@ -41,8 +59,12 @@ def queryDB(query, args=()):
         cur.execute(query, args)
         r = [dict((cur.description[i][0], value) \
                for i, value in enumerate(row)) for row in cur.fetchall()]
+
         if r is None:
             abort(404)
+        if(conn):
+            cur.close()
+            conn.close()
         return r
     except psycopg2.OperationalError as e:
         print("Error executing Statement")
@@ -60,6 +82,8 @@ def get_days():
     end_date = request.args.get('end',"")
     pavillion = request.args.get('pav',"")
 
+    if not start_date or not end_date or not pavillion:
+        abort(400)
     return jsonify(alloc_script.get_days(pavillion, start_date, end_date))
 
 @app.route('/alloc')
@@ -68,6 +92,8 @@ def alloc():
     end_date = request.args.get('end',"")
     pavillion = request.args.get('pav',"")
 
+    if not start_date or not end_date or not pavillion:
+        abort(400)
     return jsonify(alloc_script.alloc(pavillion, start_date, end_date))
 
 @app.route('/rooms')
@@ -79,24 +105,30 @@ def get_rooms():
 @app.route('/rooms/pav/<string:pav_initial>')
 @auth.login_required
 def get_rooms_pav(pav_initial):
+    if not pav_initial:
+        abort(400)
     my_query = queryDB("""SELECT * FROM testing_schema_pedro.cms_room_content_v WHERE pav_initial=%s""", (pav_initial,))
     return jsonify(my_query)
 
 @app.route('/rooms/<int:room_id>')
 @auth.login_required
 def get_room(room_id):
+    if not room_id:
+        abort(400)
+
     my_query = queryDB("SELECT * FROM testing_schema_pedro.cms_room_content_v WHERE room_id=%s", (room_id,))
     return jsonify(my_query)
 
 @app.route('/rooms/number_of_computers/<string:room_number>')
 @auth.login_required
 def get_number_of_computers(room_number):
-    my_query = "SELECT number_of_computers FROM testing_schema_pedro.cms_room_content_v WHERE room_number=%s", (room_number,)
-    conn = connectToDB()
-    cur = conn.cursor()
-    cur.execute("SELECT number_of_computers FROM testing_schema_pedro.cms_room_content_v WHERE room_number=%s", (room_number,))
-    result = cur.fetchone()
-    return jsonify(result[0])
+    
+    if not room_number:
+        abort(400)
+
+    my_query = queryDB("SELECT number_of_computers FROM testing_schema_pedro.cms_room_content_v WHERE room_number=%s", (room_number,))
+
+    return jsonify(my_query)
 
 @app.route('/rooms/<int:room_id>', methods=['PUT'])
 @auth.login_required
@@ -122,50 +154,45 @@ def update_room(room_id):
 @app.route('/rooms/<int:room_id>/computers')
 @auth.login_required
 def get_room_computers(room_id):
-    my_query = queryDB("""SELECT * FROM testing_schema_pedro.computers WHERE "roomId"=%s""", (room_id,))
+    my_query = queryDB("""SELECT * FROM testing_schema_pedro.computers_v WHERE room_id=%s""", (room_id,))
     return jsonify(my_query)
 
 @app.route('/rooms/<int:room_id>/persons')
 @auth.login_required
 def get_room_persons(room_id):
-    my_query = queryDB("""SELECT * FROM testing_schema_pedro.persons WHERE "roomId"=%s""", (room_id,))
+    my_query = queryDB("""SELECT * FROM testing_schema_pedro.persons_v WHERE room_id=%s""", (room_id,))
     return jsonify(my_query)
 
 @app.route('/persons')
 @auth.login_required
 def get_persons():
-    my_query = queryDB("SELECT * FROM testing_schema_pedro.persons")
+    my_query = queryDB("SELECT * FROM testing_schema_pedro.persons_v")
     return jsonify(my_query)
 
 @app.route('/persons/<int:person_id>')
 @auth.login_required
 def get_person(person_id):
-    my_query = queryDB("SELECT * FROM testing_schema_pedro.persons WHERE id=%s", (person_id,))
+    my_query = queryDB("SELECT * FROM testing_schema_pedro.persons_v WHERE id=%s", (person_id,))
     return jsonify(my_query)
 
 @app.route('/computers')
 @auth.login_required
 def get_computers():
-    my_query = queryDB("SELECT * FROM testing_schema_pedro.computers")
+    my_query = queryDB("SELECT * FROM testing_schema_pedro.computers_v")
     return jsonify(my_query)
 
-@app.route('/computers/pavC')
+@app.route('/computers/pav/<string:pav_initial>')
 @auth.login_required
-
-def get_computers_pav_c():
-    my_query = queryDB("SELECT * FROM testing_schema_pedro.computers_pavc")
-    return jsonify(my_query)
-
-@app.route('/computers/pavH')
-@auth.login_required
-def get_computers_pav_h():
-    my_query = queryDB("SELECT * FROM testing_schema_pedro.computers_pavh")
+def get_computers_pav(pav_initial):
+    if not pav_initial:
+        abort(400)
+    my_query = queryDB("""SELECT * FROM testing_schema_pedro.computers_v WHERE room_number LIKE  '%%' || %s || '%%'""", (pav_initial,))
     return jsonify(my_query)
 
 @app.route('/computers/<int:computer_id>')
 @auth.login_required
 def get_computer(computer_id):
-    my_query = queryDB("SELECT * FROM testing_schema_pedro.computers WHERE id=%s", (computer_id,))
+    my_query = queryDB("SELECT * FROM testing_schema_pedro.computers_v WHERE id=%s", (computer_id,))
     return jsonify(my_query)
 
 @app.route('/locations')
@@ -196,14 +223,6 @@ def update_computer(hardware_id):
 
     conn.commit()
     return jsonify(success=True)
-
-@app.errorhandler(404)
-def not_found(error):
-    return make_response(jsonify({'api': 'Resource requested does not exist.'}), 404)
-
-@auth.error_handler
-def unauthorized():
-    return make_response(jsonify({'api': 'Unauthorized access.'}), 401)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
