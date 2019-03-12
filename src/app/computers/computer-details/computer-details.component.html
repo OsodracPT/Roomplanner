@@ -9,7 +9,7 @@
             {{computer.name | lowercase}}
           </h6>
           <p class="card-text text-muted text-center">
-            {{computer.os}} {{computer.osVersion}}
+            {{computer.os}} {{computer.os_version}}
             <i *ngIf="computer.os=='Windows'" class="fa fa-windows fa"></i>
             <i *ngIf="computer.os=='Linux'" class="fa fa-linux fa"></i>
           </p>
@@ -31,7 +31,7 @@
 
             <li class="list-inline-item mt-1">
                 <button class="btn btn-light">
-                  {{computer.roomName}}
+                  {{computer.room_number}}
                 </button>
               </li>
           </ul>

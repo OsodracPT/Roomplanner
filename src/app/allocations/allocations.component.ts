@@ -119,7 +119,7 @@ export class AllocationsComponent implements OnInit {
         // console.log(entry.room_number);
         this.computerService.getNumberOfComputers(entry.room_number)
         .subscribe((response: any) => {
-          this.number_of_computers[entry.room_number] = response;
+          this.number_of_computers[entry.room_number] = response[0].number_of_computers;
         });
 
         for (const segment of entry.segments) {

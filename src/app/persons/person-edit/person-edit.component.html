@@ -18,32 +18,32 @@
         <div class="card-body">
           <div>
             <strong>Location: </strong>
-            <p>{{person.roomName}}</p>
+            <p>{{person.room_name}}</p>
           </div>
           <div>
               <strong>Phone Number: </strong>
-              <p>01223 7{{person.phoneNumber}}</p>
+              <p>01223 7{{person.phone_number}}</p>
             </div>
           <div>
             <strong>Start and end date: </strong>
-            <p>{{person.startDate | date: 'dd/MM/yyyy'}}</p>
-            <p>{{person.endDate | date: 'dd/MM/yyyy'}}</p>
+            <p>{{person.start_date | date: 'dd/MM/yyyy'}}</p>
+            <p>{{person.end_date | date: 'dd/MM/yyyy'}}</p>
           </div>
           <div>
             <strong>Status:</strong>
-            <p>{{person.statusName}}</p>
+            <p>{{person.status_name}}</p>
           </div>
-          <div *ngIf="person.supervisorId">
+          <div *ngIf="person.supervisor_id">
             <strong>Supervisor:</strong>
-            <p>{{person.supervisorForenames}} {{person.supervisorSurname}}</p>
+            <p>{{person.supervisor_forenames}} {{person.supervisor_surname}}</p>
           </div>
-          <div *ngIf="person.managerId">
+          <div *ngIf="person.manager_id">
             <strong>Manager:</strong>
-            <p>{{person.managerForenames}} {{person.managerSurname}}</p>
+            <p>{{person.manager_forenames}} {{person.manager_surname}}</p>
           </div>
-          <div *ngIf="person.groupId">
+          <div *ngIf="person.group_id">
             <strong>Area:</strong>
-            <p>{{person.groupNames}}</p>
+            <p>{{person.group_names}}</p>
           </div>
 
 
