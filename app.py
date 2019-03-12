@@ -74,7 +74,7 @@ def queryDB(query, args=()):
 
 @app.route('/')
 def hello():
-    return "Hello World!"
+    return "Hello, World!"
 
 @app.route('/get_days')
 def get_days():
@@ -107,7 +107,7 @@ def get_rooms():
 def get_rooms_pav(pav_initial):
     if not pav_initial:
         abort(400)
-    my_query = queryDB("""SELECT * FROM testing_schema_pedro.cms_room_content_v WHERE pav_initial=%s""", (pav_initial,))
+    my_query = queryDB("""SELECT * FROM testing_schema_pedro.cms_room_content_v WHERE pav_initial=%s ORDER BY room_number""", (pav_initial,))
     return jsonify(my_query)
 
 @app.route('/rooms/<int:room_id>')
@@ -186,7 +186,7 @@ def get_computers():
 def get_computers_pav(pav_initial):
     if not pav_initial:
         abort(400)
-    my_query = queryDB("""SELECT * FROM testing_schema_pedro.computers_v WHERE room_number LIKE  '%%' || %s || '%%'""", (pav_initial,))
+    my_query = queryDB("""SELECT * FROM testing_schema_pedro.computers_v WHERE room_number LIKE  '%%' || %s || '%%' ORDER BY room_number""", (pav_initial,))
     return jsonify(my_query)
 
 @app.route('/computers/<int:computer_id>')
