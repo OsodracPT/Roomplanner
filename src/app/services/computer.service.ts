@@ -37,12 +37,8 @@ getPerson(id): Observable<Person> {
 return this.http.get<Person>(this.baseApiUrl + 'persons/' + id, {headers: headers});
 }
 
-getComputersPavC() {
-  return this.http.get(this.baseApiUrl + 'computers/pavC', {headers: headers});
-}
-
-getComputersPavH() {
-  return this.http.get(this.baseApiUrl + 'computers/pavH', {headers: headers});
+getPavComputers(pav_initial: string) {
+  return this.http.get(this.baseApiUrl + 'computers/pav/'  + pav_initial, {headers: headers});
 }
 
 getRooms() {

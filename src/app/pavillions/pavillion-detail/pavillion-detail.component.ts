@@ -17,13 +17,13 @@ export class PavillionDetailComponent implements OnInit {
 
   ngOnInit() {
 
-    this.computerService.getComputersPavC()
+    this.computerService.getPavComputers('C')
     .subscribe((computers: Computer[]) => {
       this.computers = computers;
       console.log(computers);
     });
 
-    this.computerService.getPavC()
+    this.computerService.getPavRooms('C')
     .subscribe((rooms: Room[]) => {
       this.rooms = rooms;
       console.log(rooms);
