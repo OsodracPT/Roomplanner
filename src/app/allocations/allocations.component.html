@@ -16,12 +16,11 @@
      <div *ngFor="let room of this.data; let i = index" [attr.data-index]="i">
   
       <div class="d-inline">
-          <button type="button" class="btn btn-outline-primary">
+          <button type="button" class="btn btn-outline-primary" [routerLink]="['/rooms', room.room_number]">
               {{room.room_number}}:
               <span class="badge badge-light ml-2 mr-1">{{number_of_computers[room.room_number]}}</span>
               <i class="fa fa-desktop fa"></i>
             </button>
-  
       </div>
   
       <ul class="list-inline member-icons animate text-center mt-2">

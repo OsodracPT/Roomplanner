@@ -6,6 +6,8 @@ import { ComputerService } from 'src/app/services/computer.service';
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { Person } from 'src/app/_models/person';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-room-edit',
@@ -22,21 +24,31 @@ export class RoomEditComponent implements OnInit {
 
 
   constructor(private route: ActivatedRoute,
-    private computerService: ComputerService, private alertify: AlertifyService) { }
+    private computerService: ComputerService, private alertify: AlertifyService,
+    private router: Router
+    ) { }
 
   ngOnInit() {
     this.CreateForm();
-
         // Get the computer data from the route resolver
         this.route.data.subscribe(data => {
-          this.room = this.route.snapshot.data['room'][0];
-          console.log(this.room);
-          console.log(this.route.snapshot.data['room']);
-          console.log(this.route.snapshot.data['computers']);
-          this.computers = this.route.snapshot.data['computers'];
-          this.persons = this.route.snapshot.data['persons'];
 
-          this.form.patchValue(this.room);
+          if (data['room'][0]) {
+            this.room = data['room'][0];
+            console.log(data);
+            console.log(data['room']);
+            // console.log(data['computers']);
+            this.computers = data['computers'];
+            this.persons = data['persons'];
+            this.form.patchValue(this.room);
+
+          } else {
+            this.alertify.error('Problem retrieving data. Room was not found');
+            this.router.navigate(['/']);
+          }
+        },
+        error => {
+console.log(error);
         });
   }
 

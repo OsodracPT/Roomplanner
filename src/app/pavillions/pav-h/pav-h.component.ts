@@ -17,7 +17,7 @@ export class PavHComponent implements OnInit {
 
   ngOnInit() {
 
-    this.computerService.getPavH()
+    this.computerService.getPavRooms('H')
     .subscribe((rooms: Room[]) => {
       this.rooms = rooms;
       console.log(rooms);

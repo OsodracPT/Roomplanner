@@ -49,12 +49,24 @@ getRoom(id): Observable<Room> {
   return this.http.get<Room>(this.baseApiUrl + 'rooms/' + id, {headers: headers});
 }
 
+getRoomNumber(room_number): Observable<Room> {
+  return this.http.get<Room>(this.baseApiUrl + 'rooms/room_number/' + room_number, {headers: headers});
+}
+
 getComputersInRoom(id): Observable<Room> {
   return this.http.get<Room>(this.baseApiUrl + 'rooms/' + id + '/computers', {headers: headers});
 }
 
 getPersonsInRoom(id): Observable<Person> {
   return this.http.get<Person>(this.baseApiUrl + 'rooms/' + id + '/persons', {headers: headers});
+}
+
+getComputersInRoomNumber(room_number): Observable<Room> {
+  return this.http.get<Room>(this.baseApiUrl + 'rooms/room_number/' + room_number + '/computers', {headers: headers});
+}
+
+getPersonsInRoomNumber(room_number): Observable<Person> {
+  return this.http.get<Person>(this.baseApiUrl + 'rooms/room_number/' + room_number + '/persons', {headers: headers});
 }
 
 updateRoom(id: number, room: Room) {

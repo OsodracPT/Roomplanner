@@ -42,7 +42,7 @@ export class ComputerEditComponent implements OnInit {
       this.computer = data.computer[0];
 
       this.form.patchValue(this.computer);
-      this.form.get('roomName').setValue(this.computer.roomId);
+      this.form.get('roomName').setValue(this.computer.room_id);
     });
 
     // Get the list of rooms
@@ -68,9 +68,9 @@ private CreateForm() {
 updateComputer() {
 console.log(this.computer.id);
 this.computer.description = this.form.value.description;
-this.computer.roomId = this.form.value.roomName;
-const roomValues = this.rooms.find( i => i.id === this.form.value.roomName);
-this.computer.roomName = roomValues.name;
+this.computer.room_id = this.form.value.roomName;
+const roomValues = this.rooms.find( i => i.room_id === this.form.value.roomName);
+this.computer.room_number = roomValues.room_number;
 
 console.log(this.computer);
 

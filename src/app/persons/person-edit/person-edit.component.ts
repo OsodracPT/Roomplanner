@@ -39,11 +39,11 @@ export class PersonEditComponent implements OnInit {
 
         // Get the computer data from the route resolver
         this.route.data.subscribe(data => {
-          this.person = this.route.snapshot.data['person'][0];
+          this.person = data.person[0];
           console.log(this.person);
 
           this.form.patchValue(this.person);
-          this.form.get('roomName').setValue(this.person.roomId);
+          this.form.get('roomName').setValue(this.person.room_id);
         });
 
     // Get the list of rooms
