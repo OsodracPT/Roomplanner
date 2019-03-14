@@ -27,6 +27,11 @@ class BasicTestCase(unittest.TestCase):
     def test_rooms_cant_be_retrieved_when_incorrect_credentials_are_entered(self):
         response = self.app.get('/rooms', headers={'Authorization': 'Basic ' + self.invalid_credentials})
         self.assertEqual(response.status, '403 FORBIDDEN')
+    
+    def test_rooms_cannt_be_retrieved_when_sql_injection_is_entered(self):
+        response = self.app.get('/rooms/pav/0 OR 1=1', headers={'Authorization': 'Basic ' + self.valid_credentials})
+        self.assertEqual(response.status, '200 OK')
+        self.assertEqual(response.data, b'[]\n')
 
 if __name__ == '__main__':
     unittest.main()
