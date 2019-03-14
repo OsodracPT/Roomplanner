@@ -57,6 +57,7 @@ def queryDB(query, args=()):
     #print(cur)
     try:
         cur.execute(query, args)
+        #print(query)
         r = [dict((cur.description[i][0], value) \
                for i, value in enumerate(row)) for row in cur.fetchall()]
 
@@ -119,6 +120,15 @@ def get_room(room_id):
     my_query = queryDB("SELECT * FROM testing_schema_pedro.cms_room_content_v WHERE room_id=%s", (room_id,))
     return jsonify(my_query)
 
+@app.route('/rooms/room_number/<string:room_number>')
+@auth.login_required
+def get_room_with_number(room_number):
+    if not room_number:
+        abort(400)
+
+    my_query = queryDB("SELECT * FROM testing_schema_pedro.cms_room_content_v WHERE room_number=%s", (room_number,))
+    return jsonify(my_query)
+
 @app.route('/rooms/number_of_computers/<string:room_number>')
 @auth.login_required
 def get_number_of_computers(room_number):
@@ -161,6 +171,24 @@ def get_room_computers(room_id):
 @auth.login_required
 def get_room_persons(room_id):
     my_query = queryDB("""SELECT * FROM testing_schema_pedro.persons_v WHERE room_id=%s""", (room_id,))
+    return jsonify(my_query)
+
+@app.route('/rooms/room_number/<string:room_number>/computers')
+@auth.login_required
+def get_room_computers_with_number(room_number):
+    if not room_number:
+        abort(400)
+
+    my_query = queryDB("""SELECT * FROM testing_schema_pedro.computers_v WHERE room_number=%s""", (room_number,))
+    return jsonify(my_query)
+
+@app.route('/rooms/room_number/<string:room_number>/persons')
+@auth.login_required
+def get_room_persons_with_number(room_number):
+    if not room_number:
+        abort(400)
+
+    my_query = queryDB("""SELECT * FROM testing_schema_pedro.persons_v WHERE room_name=%s""", (room_number,))
     return jsonify(my_query)
 
 @app.route('/persons')
