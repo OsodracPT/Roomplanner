@@ -11,14 +11,14 @@
               <div class="row">
                 <div *ngFor="let room of rooms">
                   <div></div>
-                  <app-room-details *ngIf="room.floorId == 425" class="col-lg-2 col-md-3 col-sm-6" [room]="room"></app-room-details>
+                  <app-room-details *ngIf="room.floor_id == 425" class="col-lg-2 col-md-3 col-sm-6" [room]="room"></app-room-details>
                 </div>
               </div>
             </tab>
             <tab heading="Ground Floor">
               <div class="row">
                 <div *ngFor="let room of rooms" class="col-lg-2 col-md-3 col-sm-6">
-                    <app-room-details *ngIf="room.floorId == 424" [room]="room"></app-room-details>
+                    <app-room-details *ngIf="room.floor_id == 424" [room]="room"></app-room-details>
                   </div>
               </div>
               <p></p>
@@ -27,14 +27,14 @@
             <tab heading="First Floor">
               <div class="row">
                   <div *ngFor="let room of rooms" class="col-lg-2 col-md-3 col-sm-6">
-                      <app-room-details *ngIf="room.floorId == 423" [room]="room"></app-room-details>
+                      <app-room-details *ngIf="room.floor_id == 423" [room]="room"></app-room-details>
                     </div>
               </div>
             </tab>
             <tab heading="Second Floor">
                 <div class="row">
                     <div *ngFor="let room of rooms">
-                      <app-room-details *ngIf="room.floorId == 422" class="col-lg-2 col-md-3 col-sm-6" [room]="room"></app-room-details>
+                      <app-room-details *ngIf="room.floor_id == 422" class="col-lg-2 col-md-3 col-sm-6" [room]="room"></app-room-details>
                     </div>
                   </div>
             </tab>
