@@ -1,0 +1,36 @@
+import os
+from flask import Flask, jsonify
+import psycopg2
+import psycopg2.extras
+
+app = Flask(__name__)
+app.config.from_object(os.environ['APP_SETTINGS'])
+
+def connectToDB():
+    #Define our connection string
+    print(conn_string)
+    try:
+        return psycopg2.connect(conn_string)
+    except:
+        print("Can't connect to database")
+
+@app.route('/')
+def hello():
+    return "Hello World!"
+
+
+
+@app.route('/buildings')
+def get_buildings():
+    conn = connectToDB()
+    print(conn)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    try:
+        cur.execute("""SELECT * FROM hotwire.\"10_Pavilions/10_Pavilion_B/Computers\" """")
+    except:
+        print("Error executing select")
+    results = cur.fetchall()
+    return jsonify({'buldings': results});
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)
