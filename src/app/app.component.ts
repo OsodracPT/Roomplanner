@@ -7,10 +7,9 @@ import { Computer } from './_models/computer';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'my-app';
+  title = 'Room Planner';
 
 computers: Computer[];
-
 
   /**
    *
