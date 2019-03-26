@@ -13,7 +13,7 @@ auth = HTTPBasicAuth()
 app = Flask(__name__)
 CORS(app)
 config_name = os.getenv('APP_SETTINGS') # config_name = "development"
-app.config.from_object(app_config[config_name])
+#app.config.from_object(app_config[config_name])
 
 
 @auth.get_password
