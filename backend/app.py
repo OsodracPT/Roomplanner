@@ -78,6 +78,7 @@ def hello():
     return "Hello, World!"
 
 @app.route('/get_days')
+@auth.login_required
 def get_days():
     start_date = request.args.get('start',"")
     end_date = request.args.get('end',"")
@@ -88,6 +89,7 @@ def get_days():
     return jsonify(alloc_script.get_days(pavillion, start_date, end_date))
 
 @app.route('/alloc')
+@auth.login_required
 def alloc():
     start_date = request.args.get('start',"")
     end_date = request.args.get('end',"")
