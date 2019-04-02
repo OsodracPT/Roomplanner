@@ -18,7 +18,7 @@ config_name = os.getenv('APP_SETTINGS') # config_name = "development"
 
 @auth.get_password
 def get_password(username):
-    if username == 'pedro':
+    if username == 'roomplanneruser':
         return os.getenv('SECRET')
     return None
 
