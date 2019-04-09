@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CollapseModule, BsDropdownModule, TabsModule, TooltipModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -69,6 +69,7 @@ import { AllocationsComponent } from './allocations/allocations.component';
       RouterModule.forRoot(appRoutes)
    ],
    providers: [
+      Title,
       ComputerService,
       AlertifyService,
       ComputerDetailResolver,
