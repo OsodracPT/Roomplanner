@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Computer } from './_models/computer';
+import { Title }     from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -14,11 +15,11 @@ computers: Computer[];
   /**
    *
    */
-  constructor() {
+  constructor(private titleService: Title) {
 
   }
 
   ngOnInit() {
-
+    this.titleService.setTitle( this.title );
   }
 }
