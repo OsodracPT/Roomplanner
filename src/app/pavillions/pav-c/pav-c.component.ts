@@ -14,16 +14,24 @@ export class PavCComponent implements OnInit {
 
   computers: Computer[];
   rooms: Room[];
-
   constructor(private computerService: ComputerService) { }
 
   ngOnInit() {
-
     this.computerService.getPavRooms('C')
     .subscribe((rooms: Room[]) => {
       this.rooms = rooms;
       console.log(rooms);
     });
+  }
+
+  getNumberOfComputer(roomNumber: string){
+    //Preventing the method from executing before ngOnInit
+    if(this.rooms)
+    {
+      var numberOfComputers = this.rooms.find(x => x.room_number == roomNumber);
+      // console.log(numberOfComputers.number_of_computers);
+      return numberOfComputers.number_of_computers;
+    }
   }
   }
 

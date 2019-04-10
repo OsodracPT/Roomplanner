@@ -15,16 +15,28 @@ circle:hover { stroke: white; }
 .fl1_0{fill:none;stroke:#000000;}
 .fl1_1{fill:none;stroke:#000000;stroke-width:0.5;}
 .fl1_2{fill:none;stroke:#000000;stroke-width:2;}
-.fl1_3{font-family:'TimesNewRomanPSMT';}
+.fl1_3{font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"}
 .fl1_04{font-size:19.2048px;}
 
-.st0{fill:none;stroke:#000000;stroke-width:2;}
+/* .st0{fill:none;stroke:#000000;stroke-width:2;}
 .st1{fill:none;stroke:#000000;}
-.st2{font-family:'TimesNewRomanPSMT';}
+.st2{font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"}
 .st3{font-size:19.2048px;}
 .st4{enable-background:new    ;}
 .st5{fill:#FFFFFF;stroke:#000000;}
 .st6{fill:#FFFFFF;}
 .st7{display:none;}
 .st8{display:inline;fill:#231F20;}
-.st9{fill:none;stroke:#000000;stroke-width:0.5;}
+.st9{fill:none;stroke:#000000;stroke-width:0.5;} */
+
+
+/* .gf0{fill:#FFFFFF;}
+.gf1{fill:none;stroke:#FFFFFF;stroke-width:25;}
+.gf2{fill:none;stroke:#000000;}
+.gf3{fill:none;stroke:#000000;stroke-width:0.5;}
+.gf4{fill:none;stroke:#000000;stroke-width:2;}
+.gf7{display:none;}
+.gf8{display:inline;stroke:#000000;stroke-miterlimit:10;} */
+
+
+
