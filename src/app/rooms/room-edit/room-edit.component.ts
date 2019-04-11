@@ -41,7 +41,6 @@ export class RoomEditComponent implements OnInit {
             this.computers = data['computers'];
             this.persons = data['persons'];
             this.form.patchValue(this.room);
-
           } else {
             this.alertify.error('Problem retrieving data. Room was not found');
             this.router.navigate(['/']);
@@ -49,25 +48,26 @@ export class RoomEditComponent implements OnInit {
         },
         error => {
 console.log(error);
+this.alertify.error('Problem retrieving data. Room was not found');
         });
   }
 
   private CreateForm() {
     this.form = new FormGroup({
       notes: new FormControl(''),
-      maxCapacity: new FormControl('', Validators.required)
+      max_capacity: new FormControl('')
     });
   }
 
   updateRoom() {
-    console.log(this.room.room_id);
+    console.log(this.room);
     this.room.notes = this.form.value.notes;
-    this.room.max_capacity = this.form.value.maxCapacity;
+    this.room.max_capacity = this.form.value.max_capacity;
 
     console.log(this.room);
 
 
-    this.computerService.updateRoom(this.room.room_id, this.room)
+    this.computerService.updateRoom(this.room.id, this.room)
         .subscribe(next => {
           this.alertify.success('Room updated successfully.');
           this.form.reset(this.room);

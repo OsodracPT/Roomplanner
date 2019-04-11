@@ -119,7 +119,7 @@ def get_room(room_id):
     if not room_id:
         abort(400)
 
-    my_query = queryDB("SELECT * FROM testing_schema_pedro.cms_room_content_v WHERE room_id=%s", (room_id,))
+    my_query = queryDB("SELECT * FROM testing_schema_pedro.cms_room_content_v WHERE id=%s", (room_id,))
     return jsonify(my_query)
 
 @app.route('/rooms/room_number/<string:room_number>')
@@ -147,7 +147,7 @@ def get_number_of_computers(room_number):
 def update_room(room_id):
     conn = connectToDB()
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    max_capacity = request.json.get('maxCapacity',"")
+    max_capacity = request.json.get('max_capacity',"")
     notes = request.json.get('notes',"")
     try:
         #print(comments)
@@ -238,7 +238,7 @@ def update_computer(hardware_id):
     conn = connectToDB()
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
-    room_id = request.json.get('roomId',"")
+    room_id = request.json.get('room_id',"")
     comments = request.json.get('description',"")
     #print(room_id)
     try:
