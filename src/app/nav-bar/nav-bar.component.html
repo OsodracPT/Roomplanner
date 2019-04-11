@@ -13,33 +13,34 @@
 
       <li class="nav-item dropdown">
         <div class="btn-group" dropdown>
-          <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic"><i
-              class="fa fa-user mr-1"></i>
+          <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+            aria-controls="dropdown-basic"><i class="fa fa-user mr-1"></i>
             Persons <span class="caret"></span>
           </button>
           <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
             <li role="menuitem"><a class="dropdown-item" [routerLink]="['/person-list']">All</a>
             <li class="divider dropdown-divider"></li>
-            <li role="menuitem">
+            <!-- <li role="menuitem">
               <a class="dropdown-item" *ngFor="let pavillion of pavillionList" [routerLink]="['/pavc']">
                 {{pavillion}}
               </a>
-            </li>
+            </li> -->
           </ul>
         </div>
       </li>
 
       <li class="nav-item dropdown">
         <div class="btn-group" dropdown>
-          <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic"><i
-              class="fa fa-desktop mr-1"></i>
+          <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+            aria-controls="dropdown-basic"><i class="fa fa-desktop mr-1"></i>
             Computers <span class="caret"></span>
           </button>
           <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
             <li role="menuitem">
               <a class="dropdown-item" [routerLink]="['/computer-list']">All</a>
             <li class="divider dropdown-divider"></li>
-            <li role="menuitem"><a class="dropdown-item" *ngFor="let pavillion of pavillionList" [routerLink]="['/pavc-computers']">
+            <li role="menuitem"><a class="dropdown-item" *ngFor="let pavillion of tempPavList"
+                [routerLink]="['/pavc-computers']">
                 {{pavillion}}
               </a></li>
           </ul>
@@ -48,13 +49,14 @@
 
       <li class="nav-item dropdown">
         <div class="btn-group" dropdown>
-          <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic"><i
-              class="fa fa-building mr-1"></i>
+          <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+            aria-controls="dropdown-basic"><i class="fa fa-building mr-1"></i>
             Pavillions <span class="caret"></span>
           </button>
           <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
             <li role="menuitem">
-              <a class="dropdown-item" *ngFor="let pavillion of pavillionList; index as i" [routerLink]="['/', pavUrl[i]]">
+              <a class="dropdown-item" *ngFor="let pavillion of tempPavList; index as i"
+                [routerLink]="['/', pavUrl[i]]">
                 {{pavillion}}
               </a>
             </li>
@@ -63,20 +65,21 @@
       </li>
 
       <li class="nav-item dropdown">
-          <div class="btn-group" dropdown>
-            <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic"><i
-                class="fa fa-building mr-1"></i>
-              Allocation <span class="caret"></span>
-            </button>
-            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-              <li role="menuitem">
-                <a class="dropdown-item" *ngFor="let pavillion of pavillionList; index as i" [routerLink]="['/', pavUrl[i], 'alloc']">
-                  {{pavillion}}
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
+        <div class="btn-group" dropdown>
+          <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+            aria-controls="dropdown-basic"><i class="fa fa-building mr-1"></i>
+            Allocation <span class="caret"></span>
+          </button>
+          <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+            <li role="menuitem">
+              <a class="dropdown-item" *ngFor="let pavillion of pavillionList; index as i"
+                [routerLink]="['/', pavUrl[i], 'alloc']">
+                {{pavillion}}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
 
     </ul>
   </div>
