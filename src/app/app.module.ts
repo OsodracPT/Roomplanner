@@ -22,6 +22,10 @@ import {DatePipe} from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PavCComponent } from './pavillions/pav-c/pav-c.component';
+import { GroundfloorComponent } from './pavillions/pav-c/groundfloor/groundfloor.component';
+import { FirstfloorComponent } from './pavillions/pav-c/firstfloor/firstfloor.component';
+import { SecondfloorComponent } from './pavillions/pav-c/secondfloor/secondfloor.component';
+
 import { RoomDetailsComponent } from './rooms/room-details/room-details.component';
 import { RoomEditComponent } from './rooms/room-edit/room-edit.component';
 import { RoomDetailResolver } from './_resolvers/room-detail.resolver';
@@ -45,6 +49,9 @@ import { AllocationsComponent } from './allocations/allocations.component';
       PavillionDetailComponent,
       ComputerEditComponent,
       PavCComponent,
+      FirstfloorComponent,
+      SecondfloorComponent,
+      GroundfloorComponent,
       RoomDetailsComponent,
       RoomEditComponent,
       PersonDetailsComponent,
