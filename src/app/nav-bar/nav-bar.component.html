@@ -56,7 +56,7 @@
           <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
             <li role="menuitem">
               <a class="dropdown-item" *ngFor="let pavillion of tempPavList; index as i"
-                [routerLink]="['/', pavUrl[i]]">
+                [routerLink]="['/', tempPavShort[i]]">
                 {{pavillion}}
               </a>
             </li>

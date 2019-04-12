@@ -1,6 +1,6 @@
 <div class="container mt-4">
 	<div class="row">
-		<h1>Pavillion C</h1>
+		<h1>Pavillion {{this.pav_letter}}</h1>
 	</div>
 	<div class="row">
 
@@ -11,7 +11,7 @@
 						<div class="row">
 							<div *ngFor="let room of rooms">
 								<div></div>
-								<app-room-details *ngIf="room.floor_id == 433" class="col-lg-2 col-md-3 col-sm-6"
+								<app-room-details *ngIf="room.room_number.includes('L')" class="col-lg-2 col-md-3 col-sm-6"
 									[room]="room">
 								</app-room-details>
 							</div>
@@ -19,18 +19,18 @@
 					</tab>
 					<tab heading="Ground Floor">
 						<!-- Ground Floor -->
-						<app-groundfloor *ngIf="rooms" [rooms]="rooms"></app-groundfloor>
+						<app-groundfloor *ngIf="rooms" [rooms]="rooms" [pav_letter]="pav_letter"></app-groundfloor>
 
 					</tab>
 
 					<tab heading="First Floor">
 						<!-- First Floor -->
-						<app-firstfloor *ngIf="rooms" [rooms]="rooms"></app-firstfloor>
+						<app-firstfloor *ngIf="rooms" [rooms]="rooms" [pav_letter]="pav_letter"></app-firstfloor>
 					</tab>
 
 					<tab heading="Second Floor">
 						<!-- Second Floor -->
-						<app-secondfloor *ngIf="rooms" [rooms]="rooms"></app-secondfloor>
+						<app-secondfloor *ngIf="rooms" [rooms]="rooms" [pav_letter]="pav_letter"></app-secondfloor>
 
 					</tab>
 				</tabset>

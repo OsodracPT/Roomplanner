@@ -10,7 +10,9 @@ export class NavBarComponent implements OnInit {
 
   public pavUrl = GlobalVariable.PAVSHORT;
   public pavillionList = GlobalVariable.PAVILLIONS;
-  public tempPavList = ['Pavillion C', 'Pavillion H'];
+  public tempPavList = ['Pavillion C', 'Pavillion D', 'Pavillion E', 'Pavillion H'];
+  public tempPavShort = ['pavc','pavd','pave', 'pavh'];
+
 
   navbarOpen = false;
 
