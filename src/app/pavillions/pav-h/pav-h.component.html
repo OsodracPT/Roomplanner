@@ -16,12 +16,8 @@
               </div>
             </tab>
             <tab heading="Ground Floor">
-              <div class="row">
-                <div *ngFor="let room of rooms" class="col-lg-2 col-md-3 col-sm-6">
-                    <app-room-details *ngIf="room.floor_id == 424" [room]="room"></app-room-details>
-                  </div>
-              </div>
-              <p></p>
+						<!-- Ground Floor -->
+						<app-groundfloor *ngIf="rooms" [rooms]="rooms" [pav_letter]="pav_letter"></app-groundfloor>
             </tab>
   
             <tab heading="First Floor">

@@ -2,6 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Computer } from 'src/app/_models/computer';
 import { Room } from 'src/app/_models/room';
 import { ComputerService } from 'src/app/services/computer.service';
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-pav-c',
@@ -14,10 +16,14 @@ export class PavCComponent implements OnInit {
 
   computers: Computer[];
   rooms: Room[];
-  constructor(private computerService: ComputerService) { }
+  pav_letter: string;
+  constructor(private computerService: ComputerService,  private router: Router) { }
 
   ngOnInit() {
-    this.computerService.getPavRooms('C')
+
+    this.pav_letter = this.router.url.substr(4, 1).toUpperCase();
+
+    this.computerService.getPavRooms(this.pav_letter)
     .subscribe((rooms: Room[]) => {
       this.rooms = rooms;
       console.log(rooms);
