@@ -38,6 +38,9 @@ import { PersonListComponent } from './persons/person-list/person-list.component
 import { PavHComponent } from './pavillions/pav-h/pav-h.component';
 import { SvgComponent } from './svg/svg.component';
 import { AllocationsComponent } from './allocations/allocations.component';
+import { PavGeneralComponent } from './pavillions/pav-general/pav-general.component';
+import { PavDGroundfloorComponent } from './pavillions/pav-d-groundfloor/pav-d-groundfloor.component';
+import { PavDFirstfloorComponent } from './pavillions/pav-d-firstfloor/pav-d-firstfloor.component';
 
 @NgModule({
    declarations: [
@@ -59,7 +62,10 @@ import { AllocationsComponent } from './allocations/allocations.component';
       PersonListComponent,
       PavHComponent,
       SvgComponent,
-      AllocationsComponent
+      AllocationsComponent,
+      PavGeneralComponent,
+      PavDGroundfloorComponent,
+      PavDFirstfloorComponent
    ],
    imports: [
       BrowserModule,

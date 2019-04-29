@@ -11,21 +11,33 @@
 						<div class="row">
 							<div *ngFor="let room of rooms">
 								<div></div>
-								<app-room-details *ngIf="room.room_number.includes('L')" class="col-lg-2 col-md-3 col-sm-6"
-									[room]="room">
+								<app-room-details *ngIf="room.room_number.includes('L')"
+									class="col-lg-2 col-md-3 col-sm-6" [room]="room">
 								</app-room-details>
 							</div>
 						</div>
 					</tab>
 					<tab heading="Ground Floor">
 						<!-- Ground Floor -->
-						<app-groundfloor *ngIf="rooms" [rooms]="rooms" [pav_letter]="pav_letter"></app-groundfloor>
+						<div *ngIf="pav_letter==='D'; else pavC">
+							<app-pav-d-groundfloor *ngIf="rooms" [rooms]="rooms" [pav_letter]="pav_letter">
+							</app-pav-d-groundfloor>
+						</div>
 
+						<ng-template #pavC>
+							<app-groundfloor *ngIf="rooms" [rooms]="rooms" [pav_letter]="pav_letter"></app-groundfloor>
+						</ng-template>
 					</tab>
 
 					<tab heading="First Floor">
 						<!-- First Floor -->
-						<app-firstfloor *ngIf="rooms" [rooms]="rooms" [pav_letter]="pav_letter"></app-firstfloor>
+						<div *ngIf="pav_letter==='D' || pav_letter==='H'; else pavCFirst">
+							<app-pav-d-firstfloor *ngIf="rooms" [rooms]="rooms" [pav_letter]="pav_letter">
+							</app-pav-d-firstfloor>
+						</div>
+						<ng-template #pavCFirst>
+							<app-firstfloor *ngIf="rooms" [rooms]="rooms" [pav_letter]="pav_letter"></app-firstfloor>
+						</ng-template>
 					</tab>
 
 					<tab heading="Second Floor">
