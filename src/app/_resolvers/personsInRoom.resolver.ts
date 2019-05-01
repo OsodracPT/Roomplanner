@@ -21,7 +21,8 @@ export class PersonsInRoomResolver implements Resolve<Person[]> {
             if (!isnum) {
                 return this.computerService.getPersonsInRoomNumber(route.params['id']).pipe(
                     catchError(error => {
-                        this.alertify.error('Problem retrieving data.' + error.message);
+                        this.alertify.error('Problem retrieving data from the API. ' + error.message);
+                        this.alertify.error('Sending you back to the main page.');
                         this.router.navigate(['/']);
                         console.log(error);
                         return of(null);
@@ -30,7 +31,8 @@ export class PersonsInRoomResolver implements Resolve<Person[]> {
             }
             return this.computerService.getPersonsInRoom(route.params['id']).pipe(
                 catchError(error => {
-                    this.alertify.error('Problem retrieving data.' + error.message);
+                    this.alertify.error('Problem retrieving data from the API. ' + error.message);
+                    this.alertify.error('Sending you back to the main page.');
                     this.router.navigate(['/']);
                     console.log(error);
                     return of(null);

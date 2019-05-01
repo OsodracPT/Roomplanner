@@ -22,6 +22,7 @@ export class ComputersInRoomResolver implements Resolve<Computer[]> {
                 return this.computerService.getComputersInRoomNumber(route.params['id']).pipe(
                     catchError(error => {
                         this.alertify.error('Problem retrieving data.' + error.message);
+                        this.alertify.error('Sending you back to the main page.');
                         this.router.navigate(['/']);
                         console.log(error);
                         return of(null);

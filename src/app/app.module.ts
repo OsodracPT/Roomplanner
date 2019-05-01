@@ -41,6 +41,7 @@ import { AllocationsComponent } from './allocations/allocations.component';
 import { PavGeneralComponent } from './pavillions/pav-general/pav-general.component';
 import { PavDGroundfloorComponent } from './pavillions/pav-d-groundfloor/pav-d-groundfloor.component';
 import { PavDFirstfloorComponent } from './pavillions/pav-d-firstfloor/pav-d-firstfloor.component';
+import { NotFoundComponentComponent } from './not-found-component/not-found-component.component';
 
 @NgModule({
    declarations: [
@@ -65,7 +66,8 @@ import { PavDFirstfloorComponent } from './pavillions/pav-d-firstfloor/pav-d-fir
       AllocationsComponent,
       PavGeneralComponent,
       PavDGroundfloorComponent,
-      PavDFirstfloorComponent
+      PavDFirstfloorComponent,
+      NotFoundComponentComponent
    ],
    imports: [
       BrowserModule,

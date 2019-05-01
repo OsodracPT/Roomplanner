@@ -26,7 +26,8 @@ export class PersonListComponent implements OnInit {
       console.log(persons);
       this.spinner.hide();
     }, error => {
-      this.alertify.error(error);
+      this.spinner.hide();
+      this.alertify.error("Error retrieving data from the API: " + error.message );
     });
   }
 
