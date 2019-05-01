@@ -3,6 +3,8 @@ import { Computer } from 'src/app/_models/computer';
 import { Room } from 'src/app/_models/room';
 import { ComputerService } from 'src/app/services/computer.service';
 import {Router} from '@angular/router';
+import { AlertifyService } from 'src/app/services/alertify.service';
+
 
 
 @Component({
@@ -17,7 +19,7 @@ export class PavCComponent implements OnInit {
   computers: Computer[];
   rooms: Room[];
   pav_letter: string;
-  constructor(private computerService: ComputerService,  private router: Router) { }
+  constructor(private computerService: ComputerService,  private router: Router, private alertify: AlertifyService) { }
 
   ngOnInit() {
 
@@ -27,6 +29,8 @@ export class PavCComponent implements OnInit {
     .subscribe((rooms: Room[]) => {
       this.rooms = rooms;
       console.log(rooms);
+    }, error => {
+      this.alertify.error("Error retrieving data from the API: " + error.message );
     });
   }
 

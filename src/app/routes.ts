@@ -17,6 +17,8 @@ import { PersonListComponent } from './persons/person-list/person-list.component
 import { PavHComponent } from './pavillions/pav-h/pav-h.component';
 import { SvgComponent } from './svg/svg.component';
 import { AllocationsComponent } from './allocations/allocations.component';
+import { NotFoundComponentComponent } from './not-found-component/not-found-component.component';
+
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -45,6 +47,7 @@ export const appRoutes: Routes = [
       room: RoomDetailResolver,
     computers: ComputersInRoomResolver,
     persons: PersonsInRoomResolver}},
-    { path: '**', redirectTo: '', pathMatch: 'full'},
+    {path: '404', component: NotFoundComponentComponent},
+    { path: '**', component: NotFoundComponentComponent, pathMatch: 'full'},
   ];
 

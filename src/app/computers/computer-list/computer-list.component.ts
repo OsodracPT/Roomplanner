@@ -30,7 +30,8 @@ export class ComputerListComponent implements OnInit {
 
       console.log(computers);
     }, error => {
-      this.alertify.error(error);
+      this.spinner.hide();
+      this.alertify.error("Error retrieving data from the API: " + error.message );
     });
 
 }

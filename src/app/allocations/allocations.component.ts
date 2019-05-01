@@ -3,6 +3,8 @@ import { ComputerService } from '../services/computer.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
 import { DatePipe } from '@angular/common';
 import {Router} from '@angular/router';
+import { AlertifyService } from 'src/app/services/alertify.service';
+
 
 
 
@@ -36,7 +38,7 @@ segments: Segment[];
   encapsulation: ViewEncapsulation.None
 })
 export class AllocationsComponent implements OnInit {
-  alertify: any;
+  //alertify: any;
   public bsConfig: Partial<BsDatepickerConfig> = new BsDatepickerConfig();
 
   room_numbers: string[];
@@ -52,7 +54,7 @@ export class AllocationsComponent implements OnInit {
   number_of_computers: { [key: string]: number; } = {};
 
 
-  constructor(private computerService: ComputerService, private datePipe: DatePipe, private router: Router) { }
+  constructor(private computerService: ComputerService, private datePipe: DatePipe, private router: Router, private alertify: AlertifyService) { }
 
   ngOnInit() {
 
@@ -108,6 +110,8 @@ export class AllocationsComponent implements OnInit {
     this.computerService.getDays(pav, start_date, end_date)
     .subscribe((data: number) => {
       this.number_of_days = data;
+    }, error => {
+      this.alertify.error("Error retrieving data from the API. ");
     });
 
     this.computerService.getSegments(pav, start_date, end_date)
@@ -120,7 +124,10 @@ export class AllocationsComponent implements OnInit {
         this.computerService.getNumberOfComputers(entry.room_number)
         .subscribe((response: any) => {
           this.number_of_computers[entry.room_number] = response[0].number_of_computers;
-        });
+        }, error => {
+          this.alertify.error("Error retrieving data from the API.");
+        }
+        );
 
         for (const segment of entry.segments) {
           // console.log(segment); // 1, "string", false
@@ -130,7 +137,7 @@ export class AllocationsComponent implements OnInit {
       }
     }
     }, error => {
-      this.alertify.error(error);
+      this.alertify.error("Error retrieving data from the API.");
     });
 
   }

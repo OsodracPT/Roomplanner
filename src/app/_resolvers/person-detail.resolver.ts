@@ -16,7 +16,8 @@ export class PersonDetailResolver implements Resolve<Person> {
         resolve(route: ActivatedRouteSnapshot): Observable<Person> {
             return this.computerService.getPerson(route.params['id']).pipe(
                 catchError(error => {
-                    this.alertify.error('Problem retrieving data.' + error.error.api);
+                    this.alertify.error('Problem retrieving data from the API.' + error.error.api);
+                    this.alertify.error('Sending you back to the main page.');
                     this.router.navigate(['/']);
                     console.log(error);
                     return of(null);
