@@ -18,7 +18,6 @@ sys.path.insert(0,"/var/www/html/roomplanner/backend/")
 def application(environ, start_response):
     for key in ['CONN_STRING', 'SECRET', 'APP_SETTINGS', ]: 
         os.environ[key] = environ.get(key, '')
-        print(os.environ[key])
     from app import app as _application
 
     return _application(environ, start_response)
