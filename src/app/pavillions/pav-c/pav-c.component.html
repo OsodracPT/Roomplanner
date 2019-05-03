@@ -6,8 +6,8 @@
 
 		<div class="">
 			<div class="tab-panel">
-				<tabset class="member-tabset">
-					<tab heading="Lower Ground Floor">
+				<tabset class="member-tabset" #pavillionTabs>
+					<tab heading="Lower Ground Floor" id="0" (select)="onSelect($event)">
 						<div class="row">
 							<div *ngFor="let room of rooms">
 								<div></div>
@@ -17,7 +17,7 @@
 							</div>
 						</div>
 					</tab>
-					<tab heading="Ground Floor">
+					<tab heading="Ground Floor" id="1" (select)="onSelect($event)">
 						<!-- Ground Floor -->
 						<div *ngIf="pav_letter==='D'; else pavC">
 							<app-pav-d-groundfloor *ngIf="rooms" [rooms]="rooms" [pav_letter]="pav_letter">
@@ -29,7 +29,7 @@
 						</ng-template>
 					</tab>
 
-					<tab heading="First Floor">
+					<tab heading="First Floor" id="2" (select)="onSelect($event)"> 
 						<!-- First Floor -->
 						<div *ngIf="pav_letter==='D' || pav_letter==='H'; else pavCFirst">
 							<app-pav-d-firstfloor *ngIf="rooms" [rooms]="rooms" [pav_letter]="pav_letter">
@@ -40,7 +40,7 @@
 						</ng-template>
 					</tab>
 
-					<tab heading="Second Floor">
+					<tab heading="Second Floor" id="3" (select)="onSelect($event)">
 						<!-- Second Floor -->
 						<app-secondfloor *ngIf="rooms" [rooms]="rooms" [pav_letter]="pav_letter"></app-secondfloor>
 
