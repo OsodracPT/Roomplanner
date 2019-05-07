@@ -205,6 +205,14 @@ def get_person(person_id):
     my_query = queryDB("SELECT * FROM testing_schema_pedro.persons_v WHERE id=%s", (person_id,))
     return jsonify(my_query)
 
+@app.route('/persons/pav/<string:pav_initial>')
+@auth.login_required
+def get_persons_pav(pav_initial):
+    if not pav_initial:
+        abort(400)
+    my_query = queryDB("""SELECT * FROM testing_schema_pedro.persons_v WHERE room_name LIKE  '%%' || %s || '%%' ORDER BY room_name""", (pav_initial,))
+    return jsonify(my_query)
+
 @app.route('/computers')
 @auth.login_required
 def get_computers():
