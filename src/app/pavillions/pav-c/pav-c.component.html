@@ -29,7 +29,7 @@
 						</ng-template>
 					</tab>
 
-					<tab heading="First Floor" id="2" (select)="onSelect($event)"> 
+					<tab heading="First Floor" id="2" (select)="onSelect($event)">
 						<!-- First Floor -->
 						<div *ngIf="pav_letter==='D' || pav_letter==='H'; else pavCFirst">
 							<app-pav-d-firstfloor *ngIf="rooms" [rooms]="rooms" [pav_letter]="pav_letter">
@@ -49,4 +49,9 @@
 			</div>
 		</div>
 	</div>
+	<app-persons-table></app-persons-table>
+
+	<br>
+	<br>
+	<br>
 </div>

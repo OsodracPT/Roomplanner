@@ -5,7 +5,8 @@ export interface Person {
     forenames: string;
     surname: string;
     room_id: number;
-    room_name: string;
+    room_name: string;    
+    room_number: string;
     start_date: Date;
     end_date: Date;
     status_name: string;
