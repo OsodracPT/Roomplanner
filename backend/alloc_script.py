@@ -83,9 +83,9 @@ def alloc(pav, start_date, end_date):
         print("You are connected to - ", record,"\n")
         
         get_rooms_query = """SELECT room_number FROM testing_schema_pedro.cms_office_v WHERE pav_initial=%s ORDER BY room_number"""
-        get_occupancy_query = """SELECT title, forenames, surname, room_number,crsid,start_date,end_date, 
+        get_occupancy_query = """SELECT title, forenames, surname, o.room_number,crsid,start_date,end_date, 
         GREATEST(start_date, %s::DATE)-%s AS start_days, LEAST(end_date, %s::DATE)-%s::DATE + 1 AS end_days FROM testing_schema_pedro.occupant_v 
-        JOIN testing_schema_pedro.cms_office_v USING (room_id) WHERE pav_initial=%s AND (start_date, end_date) OVERLAPS (%s,%s) ORDER BY room_number,start_date"""
+        JOIN testing_schema_pedro.cms_office_v o USING (room_id) WHERE pav_initial=%s AND (start_date, end_date) OVERLAPS (%s,%s) ORDER BY o.room_number,start_date"""
         get_days_query = """SELECT %s::DATE - %s::DATE"""
         get_occupancy_cur.execute(get_occupancy_query,(start_date, start_date, end_date, start_date, pav, start_date, end_date))
         get_rooms_cur.execute(get_rooms_query, pav)

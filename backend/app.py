@@ -210,7 +210,24 @@ def get_person(person_id):
 def get_persons_pav(pav_initial):
     if not pav_initial:
         abort(400)
-    my_query = queryDB("""SELECT * FROM testing_schema_pedro.persons_v WHERE room_name LIKE  '%%' || %s || '%%' ORDER BY room_name""", (pav_initial,))
+    my_query = queryDB("""SELECT 
+o.visit_id, 
+o.crsid, 
+o.person_id, 
+o.forenames, 
+o.surname,
+o.title, 
+to_char(o.start_date,'DD/MM/YYYY') as start_date,
+to_char(o.end_date,'DD/MM/YYYY') as end_date,
+o.status_code,
+o.status_description, 
+o.room_id, 
+o.room_number, 
+o.floor_id, 
+o.floor_name, 
+o.phone_number, 
+o.group_name
+FROM testing_schema_pedro.occupant_v o WHERE room_number LIKE  '%%' || %s || '%%' ORDER BY room_number""", (pav_initial,))
     return jsonify(my_query)
 
 @app.route('/computers')
