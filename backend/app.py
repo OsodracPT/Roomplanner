@@ -205,6 +205,18 @@ def get_person(person_id):
     my_query = queryDB("SELECT * FROM testing_schema_pedro.persons_v WHERE id=%s", (person_id,))
     return jsonify(my_query)
 
+@app.route('/persons/crsid/<string:crsid>')
+@auth.login_required
+def get_person_with_crsid(crsid):
+    if not crsid:
+        abort(400)
+
+    my_query = queryDB("SELECT * FROM testing_schema_pedro.persons_v WHERE crsid=%s", (crsid,))
+    return jsonify(my_query)
+
+
+    
+
 @app.route('/persons/pav/<string:pav_initial>')
 @auth.login_required
 def get_persons_pav(pav_initial):
