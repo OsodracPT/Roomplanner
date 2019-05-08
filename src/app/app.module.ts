@@ -1,8 +1,9 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CollapseModule, BsDropdownModule, TabsModule, TooltipModule, BsDatepickerModule } from 'ngx-bootstrap';
-import { NgxSpinnerModule } from 'ngx-spinner';
+import {TableModule} from 'primeng/table'
 
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
@@ -42,6 +43,7 @@ import { PavGeneralComponent } from './pavillions/pav-general/pav-general.compon
 import { PavDGroundfloorComponent } from './pavillions/pav-d-groundfloor/pav-d-groundfloor.component';
 import { PavDFirstfloorComponent } from './pavillions/pav-d-firstfloor/pav-d-firstfloor.component';
 import { NotFoundComponentComponent } from './not-found-component/not-found-component.component';
+import { PersonsTableComponent } from './persons/persons-table/persons-table.component';
 
 @NgModule({
    declarations: [
@@ -67,7 +69,8 @@ import { NotFoundComponentComponent } from './not-found-component/not-found-comp
       PavGeneralComponent,
       PavDGroundfloorComponent,
       PavDFirstfloorComponent,
-      NotFoundComponentComponent
+      NotFoundComponentComponent,
+      PersonsTableComponent
    ],
    imports: [
       BrowserModule,
@@ -81,6 +84,7 @@ import { NotFoundComponentComponent } from './not-found-component/not-found-comp
       TabsModule.forRoot(),
       BsDatepickerModule.forRoot(),
       TooltipModule.forRoot(),
+      TableModule,
       RouterModule.forRoot(appRoutes)
    ],
    providers: [
