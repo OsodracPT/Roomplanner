@@ -30,8 +30,6 @@ export class PersonsTableComponent implements OnInit, OnChanges {
 
   ngOnInit() {
 
-    this.loadTable();
-
     this.cols = [
       { field: 'forenames', header: 'Forenames' },
       { field: 'surname', header: 'Surname' },
@@ -39,6 +37,8 @@ export class PersonsTableComponent implements OnInit, OnChanges {
       { field: 'room_number', header: 'Room number' },
       { field: 'start_date', header: 'Start date' },
       { field: 'end_date', header: 'End date' }  ];
+
+      // this.loadTable();
 
   }
 
@@ -69,7 +69,7 @@ customSort(event) {
 
 // This method is responsible for converting the fragments number that comes from the tabs into the specific floor.
 processFloorId(floor_id: string) {
-  // console.log(floor_id);
+
 if(floor_id == "0" || floor_id =="L" || floor_id == "NaN")
 {
   this.floor_id = "L";
@@ -79,6 +79,7 @@ else
   let num = Number(floor_id) - 1;
   this.floor_id = num.toString();
 }
+// console.log(floor_id);
 }
 
 loadTable(){
@@ -88,7 +89,7 @@ loadTable(){
   this.computerService.getPavPersons(this.pav_letter)
   .subscribe((persons: any[]) => {
     for (const person of persons) {
-      //check if start date is null
+    //check if start date is null
     if(!person.start_date)
     {
       person.start_date = 'unknown date';
@@ -99,10 +100,9 @@ loadTable(){
     }
     }
     var temp_prefix = this.pav_letter + this.floor_id + ".";
-    //console.log(temp_prefix);
+    // console.log(temp_prefix);
     //console.log(persons);
     this.persons = persons.filter(person =>
-
       person.room_prefix === this.pav_letter + this.floor_id + ".");
     // this.persons = persons;
     this.rows = this.persons;
