@@ -1,9 +1,16 @@
 <p-table [columns]="cols" #dt [value]="persons" (sortFunction)="customSort($event)" [customSort]="true">
   <ng-template pTemplate="caption">
+    <div class="ui-helper-clearfix">
+      <button type="button" label="All Data" (click)="dt.exportCSV()" style="float:right; margin:4px 4px 10px 4px">
+        Download All
+        <i class="fa fa-file fa" style="margin:4px 4px 0 5px"></i>
+      </button>
+    </div>
     <div style="text-align: right">
-      <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
       <input type="text" pInputText size="50" placeholder="Search table"
         (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+      <i class="fa fa-search" style="margin:4px 4px 0 5px"></i>
+
     </div>
   </ng-template>
   <ng-template pTemplate="header" let-columns>
