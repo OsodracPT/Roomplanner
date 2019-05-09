@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ComputerService } from 'src/app/services/computer.service';
 import { Person } from 'src/app/_models/person';
 
@@ -9,7 +9,10 @@ import { Person } from 'src/app/_models/person';
   templateUrl: './persons-table.component.html',
   styleUrls: ['./persons-table.component.css']
 })
-export class PersonsTableComponent implements OnInit {
+export class PersonsTableComponent implements OnInit, OnChanges {
+
+  @Input() floor_id: string;
+  @Input() pav_letter: string;
 
   rows: any[];
   cols: any[];
@@ -18,7 +21,16 @@ export class PersonsTableComponent implements OnInit {
   
   constructor(private computerService: ComputerService) { }
 
+  // This method gets called whenever the parent component changes the values on the input properties
+  ngOnChanges(changes: SimpleChanges): void {
+    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    this.loadTable();
+    
+  }
+
   ngOnInit() {
+
+    this.loadTable();
 
     this.cols = [
       { field: 'forenames', header: 'Forenames' },
@@ -28,22 +40,6 @@ export class PersonsTableComponent implements OnInit {
       { field: 'start_date', header: 'Start date' },
       { field: 'end_date', header: 'End date' }  ];
 
-    this.computerService.getPavPersons('C')
-    .subscribe((persons: any[]) => {
-      for (const person of persons) {
-        //check if start date is null
-      if(!person.start_date)
-      {
-        person.start_date = 'unknown date';
-      }
-      if(!person.end_date)
-      {
-        person.end_date = 'indefinite end';
-      }
-      }
-      this.persons = persons;
-      this.rows = this.persons;
-    });
   }
 
 customSort(event) {
@@ -69,6 +65,48 @@ customSort(event) {
                       }  else { result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0; }
       return (event.order * result);
   });
+}
+
+// This method is responsible for converting the fragments number that comes from the tabs into the specific floor.
+processFloorId(floor_id: string) {
+if(floor_id == "0" || floor_id =="L")
+{
+  this.floor_id = "L";
+}
+else
+{
+  let num = Number(floor_id) - 1;
+  this.floor_id = num.toString();
+}
+}
+
+loadTable(){
+
+  this.processFloorId(this.floor_id);
+
+  this.computerService.getPavPersons(this.pav_letter)
+  .subscribe((persons: any[]) => {
+    for (const person of persons) {
+      //check if start date is null
+    if(!person.start_date)
+    {
+      person.start_date = 'unknown date';
+    }
+    if(!person.end_date)
+    {
+      person.end_date = 'indefinite end';
+    }
+    }
+    var temp_prefix = this.pav_letter + this.floor_id + ".";
+    //console.log(temp_prefix);
+    //console.log(persons);
+    this.persons = persons.filter(person =>
+
+      person.room_prefix === this.pav_letter + this.floor_id + ".");
+    // this.persons = persons;
+    this.rows = this.persons;
+  });
+
 }
 
 }

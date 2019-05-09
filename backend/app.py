@@ -190,7 +190,7 @@ def get_room_persons_with_number(room_number):
     if not room_number:
         abort(400)
 
-    my_query = queryDB("""SELECT * FROM testing_schema_pedro.persons_v WHERE room_name=%s""", (room_number,))
+    my_query = queryDB("""SELECT * FROM testing_schema_pedro.persons_v WHERE room_number=%s""", (room_number,))
     return jsonify(my_query)
 
 @app.route('/persons')

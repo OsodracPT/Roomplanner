@@ -21,16 +21,20 @@ export class PavCComponent implements OnInit {
   computers: Computer[];
   rooms: Room[];
   pav_letter: string;
+  floor_id: number;
+
   constructor(private computerService: ComputerService,  private router: Router, 
     private alertify: AlertifyService, private route: ActivatedRoute) { }
 
   ngOnInit() {
 
-    // Get fragment from the url and select the tab accordingly
+    //Get fragment from the url and select the tab accordingly
     this.route.fragment.subscribe(
-      (fragment) => { 
-        if(+fragment < 4 && +fragment > 0){
-          this.pavillionTabs.tabs[fragment].active = true;
+      (fragment) => {
+        var tempFragment = Number(fragment);
+        this.floor_id = tempFragment;
+        if(tempFragment < 4 && tempFragment > 0 && this.pavillionTabs.tabs){
+        this.pavillionTabs.tabs[tempFragment].active = true;
         }
       }
     );
@@ -59,7 +63,11 @@ export class PavCComponent implements OnInit {
 
   // Addding a fragment to the URL when the user changes tabs
   onSelect(data: TabDirective): void {
-  this.router.navigate( ['.'], { relativeTo: this.route, fragment: data.id});
+  //prevents the method from running if the tab are still loading
+  if(data.id)
+  {
+    this.router.navigate( ['.'], { relativeTo: this.route, fragment: data.id});
+  }
   }
   }
 
