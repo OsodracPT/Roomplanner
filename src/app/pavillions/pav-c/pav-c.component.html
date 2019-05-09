@@ -49,8 +49,7 @@
 			</div>
 		</div>
 	</div>
-	<app-persons-table></app-persons-table>
-
+	<app-persons-table *ngIf="pav_letter" [pav_letter]="pav_letter" [floor_id]="floor_id"></app-persons-table>
 	<br>
 	<br>
 	<br>
