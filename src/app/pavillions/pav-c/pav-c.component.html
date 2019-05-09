@@ -42,7 +42,7 @@
 
 					<tab heading="Second Floor" id="3" (select)="onSelect($event)">
 						<!-- Second Floor -->
-						<app-secondfloor *ngIf="rooms" [rooms]="rooms" [pav_letter]="pav_letter"></app-secondfloor>
+						<app-secondfloor *ngIf="rooms && floor_id"  [rooms]="rooms" [pav_letter]="pav_letter"></app-secondfloor>
 
 					</tab>
 				</tabset>
