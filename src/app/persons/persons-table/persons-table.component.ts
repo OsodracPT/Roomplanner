@@ -69,7 +69,8 @@ customSort(event) {
 
 // This method is responsible for converting the fragments number that comes from the tabs into the specific floor.
 processFloorId(floor_id: string) {
-if(floor_id == "0" || floor_id =="L")
+  // console.log(floor_id);
+if(floor_id == "0" || floor_id =="L" || floor_id == "NaN")
 {
   this.floor_id = "L";
 }
