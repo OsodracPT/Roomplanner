@@ -44,6 +44,7 @@ import { PavDGroundfloorComponent } from './pavillions/pav-d-groundfloor/pav-d-g
 import { PavDFirstfloorComponent } from './pavillions/pav-d-firstfloor/pav-d-firstfloor.component';
 import { NotFoundComponentComponent } from './not-found-component/not-found-component.component';
 import { PersonsTableComponent } from './persons/persons-table/persons-table.component';
+import { PavBGroundfloorComponent } from './pavillions/pav-b-groundfloor/pav-b-groundfloor.component';
 
 @NgModule({
    declarations: [
@@ -70,7 +71,8 @@ import { PersonsTableComponent } from './persons/persons-table/persons-table.com
       PavDGroundfloorComponent,
       PavDFirstfloorComponent,
       NotFoundComponentComponent,
-      PersonsTableComponent
+      PersonsTableComponent,
+      PavBGroundfloorComponent
    ],
    imports: [
       BrowserModule,

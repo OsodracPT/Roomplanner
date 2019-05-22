@@ -29,6 +29,7 @@ export const appRoutes: Routes = [
     { path: 'pavc', component: PavCComponent },
     { path: 'pavc/alloc', component: AllocationsComponent },
     { path: 'pavh', component: PavCComponent },
+    { path: 'pavb', component: PavCComponent },
     { path: 'pavd', component: PavCComponent },
     { path: 'pave', component: PavCComponent },
     { path: 'pavb/alloc', component: AllocationsComponent },
