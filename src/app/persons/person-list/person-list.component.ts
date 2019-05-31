@@ -12,6 +12,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class PersonListComponent implements OnInit {
 
   persons: Person[];
+  showSpinner: boolean = true;
+
 
 
   constructor(private computerService: ComputerService, private spinner: NgxSpinnerService,
@@ -25,8 +27,10 @@ export class PersonListComponent implements OnInit {
       this.persons = persons;
       console.log(persons);
       this.spinner.hide();
+      this.showSpinner = false
     }, error => {
       this.spinner.hide();
+      this.showSpinner = false
       this.alertify.error("Error retrieving data from the API: " + error.message );
     });
   }

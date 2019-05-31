@@ -45,20 +45,21 @@
 
 					<tab heading="First Floor" id="2" (select)="onSelect($event)">
 						<!-- First Floor -->
-						<div *ngIf="pav_letter==='D' || pav_letter==='H'; else pavCFirst">
+						<div *ngIf="pav_letter==='D' || pav_letter==='H'; else pavBFirst">
 							<app-pav-d-firstfloor *ngIf="rooms" [rooms]="rooms" [pav_letter]="pav_letter">
 							</app-pav-d-firstfloor>
 						</div>
 
-						<ng-template #pavCFirst *ngIf="pav_letter==='C'; else pavBFirst">
-							<app-firstfloor *ngIf="rooms" [rooms]="rooms" [pav_letter]="pav_letter"></app-firstfloor>
-						</ng-template>
-
 						<ng-template #pavBFirst>
-							<app-pav-b-firstfloor *ngIf="rooms && pav_letter==='B'" [rooms]="rooms"
+							<app-pav-b-firstfloor *ngIf="rooms && pav_letter==='B'; else pavCFirst" [rooms]="rooms"
 								[pav_letter]="pav_letter">
 							</app-pav-b-firstfloor>
 						</ng-template>
+
+						<ng-template #pavCFirst>
+							<app-firstfloor *ngIf="rooms" [rooms]="rooms" [pav_letter]="pav_letter"></app-firstfloor>
+						</ng-template>
+
 					</tab>
 
 					<tab heading="Second Floor" id="3" (select)="onSelect($event)">
