@@ -51,16 +51,6 @@ export class PavCComponent implements OnInit {
     });
   }
 
-  // getNumberOfComputer(roomNumber: string){
-  //   //Preventing the method from executing before ngOnInit
-  //   if(this.rooms)
-  //   {
-  //     var numberOfComputers = this.rooms.find(x => x.room_number == roomNumber);
-  //     // console.log(numberOfComputers.number_of_computers);
-  //     return numberOfComputers.number_of_computers;
-  //   }
-  // }
-
   // Addding a fragment to the URL when the user changes tabs
   onSelect(data: TabDirective): void {
   //prevents the method from running if the tab are still loading

@@ -48,6 +48,7 @@ import { PavBGroundfloorComponent } from './pavillions/pav-b-groundfloor/pav-b-g
 import { PavBFirstfloorComponent } from './pavillions/pav-b-firstfloor/pav-b-firstfloor.component';
 import { PavBSecondfloorComponent } from './pavillions/pav-b-secondfloor/pav-b-secondfloor.component';
 import { PavBLowerComponent } from './pavillions/pav-b-lower/pav-b-lower.component';
+import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
 
 @NgModule({
    declarations: [
@@ -78,7 +79,8 @@ import { PavBLowerComponent } from './pavillions/pav-b-lower/pav-b-lower.compone
       PavBGroundfloorComponent,
       PavBFirstfloorComponent,
       PavBSecondfloorComponent,
-      PavBLowerComponent
+      PavBLowerComponent,
+      LoadingSpinnerComponent
    ],
    imports: [
       BrowserModule,

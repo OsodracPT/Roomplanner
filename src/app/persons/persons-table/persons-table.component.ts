@@ -38,7 +38,7 @@ export class PersonsTableComponent implements OnInit, OnChanges {
       { field: 'start_date', header: 'Start date' },
       { field: 'end_date', header: 'End date' }  ];
 
-      // this.loadTable();
+      this.loadTable();
 
   }
 
