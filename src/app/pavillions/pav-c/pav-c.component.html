@@ -8,9 +8,44 @@
 			<div class="tab-panel">
 				<tabset class="member-tabset" #pavillionTabs>
 					<tab heading="Lower Ground Floor" id="0" (select)="onSelect($event)">
-						<app-pav-b-lower *ngIf="rooms && pav_letter==='B'; else pavLowerFloor" [rooms]="rooms"
+						<app-pav-b-lower *ngIf="rooms && pav_letter==='B'; else pavDLower" [rooms]="rooms"
 							[pav_letter]="pav_letter">
 						</app-pav-b-lower>
+
+						<ng-template #pavDLower>
+							<div *ngIf="pav_letter==='D'; else pavELower">
+								<app-pav-d-lower *ngIf="rooms" [rooms]="rooms" [pav_letter]="pav_letter">
+								</app-pav-d-lower>
+							</div>
+						</ng-template>
+
+						<ng-template #pavELower>
+							<div *ngIf="pav_letter==='E'; else pavFLower">
+								<app-pav-e-lower *ngIf="rooms" [rooms]="rooms" [pav_letter]="pav_letter">
+								</app-pav-e-lower>
+							</div>
+						</ng-template>
+
+						<ng-template #pavFLower>
+							<div *ngIf="pav_letter==='F'; else pavGLower">
+								<app-pav-f-lower *ngIf="rooms" [rooms]="rooms" [pav_letter]="pav_letter">
+								</app-pav-f-lower>
+							</div>
+						</ng-template>
+
+						<ng-template #pavGLower>
+							<div *ngIf="pav_letter==='G'; else pavHLower">
+								<app-pav-g-lower *ngIf="rooms" [rooms]="rooms" [pav_letter]="pav_letter">
+								</app-pav-g-lower>
+							</div>
+						</ng-template>
+
+						<ng-template #pavHLower>
+							<div *ngIf="pav_letter==='H'; else pavLowerFloor">
+								<app-pav-h-lower *ngIf="rooms" [rooms]="rooms" [pav_letter]="pav_letter">
+								</app-pav-h-lower>
+							</div>
+						</ng-template>
 
 						<ng-template #pavLowerFloor>
 							<div class="row">
