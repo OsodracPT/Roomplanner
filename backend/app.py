@@ -237,13 +237,13 @@ def get_computers():
 def get_computers_pav(pav_initial):
     if not pav_initial:
         abort(400)
-    my_query = queryDB("""SELECT * FROM public.computers_v WHERE room_number LIKE  '%%' || %s || '%%' ORDER BY room_number""", (pav_initial,))
+    my_query = queryDB("""SELECT * FROM public.computer WHERE room_number LIKE  '%%' || %s || '%%' ORDER BY room_number""", (pav_initial,))
     return jsonify(my_query)
 
 @app.route('/computers/<int:computer_id>')
 @auth.login_required
 def get_computer(computer_id):
-    my_query = queryDB("SELECT * FROM public.computers_v WHERE id=%s", (computer_id,))
+    my_query = queryDB("SELECT * FROM public.computer WHERE id=%s", (computer_id,))
     return jsonify(my_query)
 
 @app.route('/locations')
