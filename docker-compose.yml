@@ -1,0 +1,39 @@
+version: "3.5"
+
+services:
+  backend:
+    container_name: roomplanner_api
+    build:
+      context: .
+      dockerfile: docker/flask/Dockerfile
+    env_file: docker/database.conf
+    ports:
+      - 6000:6000
+    depends_on:
+      - database
+
+  database:
+    container_name: roomplanner_db
+    image: postgres:latest
+    env_file: docker/database.conf
+    ports:
+      - 5432:5432
+    volumes:
+      - db_volume:/var/lib/postgresql
+      - "./docker/dbdump.sql:/docker-entrypoint-initdb.d/init.sql"
+      #psql -U _roomplanner -d roomplanner -f docker-entrypoint-initdb.d/init.sql
+
+  angular-service: # The name of the service
+    container_name: roomplanner_angular # Container name
+    build:
+      context: .
+      dockerfile: docker/frontend/Dockerfile # Location of our Dockerfile
+    volumes: # Volume binding
+      - "./frontend:/usr/src/frontend"
+    ports:
+      - "4200:4200" # Port mapping
+    command: >
+      bash -c "npm install && ng serve --host 0.0.0.0 --port 4200"
+
+volumes:
+  db_volume:

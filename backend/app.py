@@ -75,7 +75,7 @@ def queryDB(query, args=()):
 
 @app.route('/')
 def hello():
-    return "Hello, World!"
+    return "Roomplanner Flask API!"
 
 @app.route('/get_days')
 @auth.login_required
@@ -102,7 +102,7 @@ def alloc():
 @app.route('/rooms')
 @auth.login_required
 def get_rooms():
-    my_query = queryDB("SELECT * FROM testing_schema_pedro.cms_room_content_v")
+    my_query = queryDB("SELECT * FROM public.room_v")
     return jsonify(my_query)
 
 @app.route('/rooms/pav/<string:pav_initial>')
@@ -110,7 +110,7 @@ def get_rooms():
 def get_rooms_pav(pav_initial):
     if not pav_initial:
         abort(400)
-    my_query = queryDB("""SELECT * FROM testing_schema_pedro.cms_room_content_v WHERE pav_initial=%s ORDER BY room_number""", (pav_initial,))
+    my_query = queryDB("""SELECT * FROM public.room_v WHERE pav_initial=%s ORDER BY room_number""", (pav_initial,))
     return jsonify(my_query)
 
 @app.route('/rooms/<int:room_id>')
@@ -119,7 +119,7 @@ def get_room(room_id):
     if not room_id:
         abort(400)
 
-    my_query = queryDB("SELECT * FROM testing_schema_pedro.cms_room_content_v WHERE id=%s", (room_id,))
+    my_query = queryDB("SELECT * FROM public.room_v WHERE id=%s", (room_id,))
     return jsonify(my_query)
 
 @app.route('/rooms/room_number/<string:room_number>')
@@ -128,7 +128,7 @@ def get_room_with_number(room_number):
     if not room_number:
         abort(400)
 
-    my_query = queryDB("SELECT * FROM testing_schema_pedro.cms_room_content_v WHERE room_number=%s", (room_number,))
+    my_query = queryDB("SELECT * FROM public.room_v WHERE number=%s", (room_number,))
     return jsonify(my_query)
 
 @app.route('/rooms/number_of_computers/<string:room_number>')
@@ -138,7 +138,7 @@ def get_number_of_computers(room_number):
     if not room_number:
         abort(400)
 
-    my_query = queryDB("SELECT number_of_computers FROM testing_schema_pedro.cms_room_content_v WHERE room_number=%s", (room_number,))
+    my_query = queryDB("SELECT number_of_computers FROM public.cms_room_content_v WHERE room_number=%s", (room_number,))
 
     return jsonify(my_query)
 
@@ -166,13 +166,13 @@ def update_room(room_id):
 @app.route('/rooms/<int:room_id>/computers')
 @auth.login_required
 def get_room_computers(room_id):
-    my_query = queryDB("""SELECT * FROM testing_schema_pedro.computers_v WHERE room_id=%s""", (room_id,))
+    my_query = queryDB("""SELECT * FROM public.computer WHERE room_id=%s""", (room_id,))
     return jsonify(my_query)
 
 @app.route('/rooms/<int:room_id>/persons')
 @auth.login_required
 def get_room_persons(room_id):
-    my_query = queryDB("""SELECT * FROM testing_schema_pedro.persons_v WHERE room_id=%s""", (room_id,))
+    my_query = queryDB("""SELECT * FROM public.user_v WHERE room_id=%s""", (room_id,))
     return jsonify(my_query)
 
 @app.route('/rooms/room_number/<string:room_number>/computers')
@@ -181,7 +181,7 @@ def get_room_computers_with_number(room_number):
     if not room_number:
         abort(400)
 
-    my_query = queryDB("""SELECT * FROM testing_schema_pedro.computers_v WHERE room_number=%s""", (room_number,))
+    my_query = queryDB("""SELECT * FROM public.computer_v WHERE room_number=%s""", (room_number,))
     return jsonify(my_query)
 
 @app.route('/rooms/room_number/<string:room_number>/persons')
@@ -190,19 +190,19 @@ def get_room_persons_with_number(room_number):
     if not room_number:
         abort(400)
 
-    my_query = queryDB("""SELECT * FROM testing_schema_pedro.persons_v WHERE room_number=%s""", (room_number,))
+    my_query = queryDB("""SELECT * FROM public.user_v WHERE room_number=%s""", (room_number,))
     return jsonify(my_query)
 
 @app.route('/persons')
 @auth.login_required
 def get_persons():
-    my_query = queryDB("SELECT * FROM testing_schema_pedro.persons_v")
+    my_query = queryDB("SELECT * FROM public.user_v")
     return jsonify(my_query)
 
 @app.route('/persons/<int:person_id>')
 @auth.login_required
 def get_person(person_id):
-    my_query = queryDB("SELECT * FROM testing_schema_pedro.persons_v WHERE id=%s", (person_id,))
+    my_query = queryDB("SELECT * FROM public.user_v WHERE id=%s", (person_id,))
     return jsonify(my_query)
 
 @app.route('/persons/crsid/<string:crsid>')
@@ -211,7 +211,7 @@ def get_person_with_crsid(crsid):
     if not crsid:
         abort(400)
 
-    my_query = queryDB("SELECT * FROM testing_schema_pedro.persons_v WHERE crsid=%s", (crsid,))
+    my_query = queryDB("SELECT * FROM public.persons_v WHERE crsid=%s", (crsid,))
     return jsonify(my_query)
 
 
@@ -223,13 +223,13 @@ def get_persons_pav(pav_initial):
     if not pav_initial:
         abort(400)
     my_query = queryDB("""SELECT *
-FROM testing_schema_pedro.persons_v WHERE room_number LIKE  '%%' || %s || '%%' ORDER BY room_number""", (pav_initial,))
+    FROM public.user_v WHERE room_number LIKE  '%%' || %s || '%%' ORDER BY room_number""", (pav_initial,))
     return jsonify(my_query)
 
 @app.route('/computers')
 @auth.login_required
 def get_computers():
-    my_query = queryDB("SELECT * FROM testing_schema_pedro.computers_v")
+    my_query = queryDB("SELECT * FROM public.computer")
     return jsonify(my_query)
 
 @app.route('/computers/pav/<string:pav_initial>')
@@ -237,19 +237,19 @@ def get_computers():
 def get_computers_pav(pav_initial):
     if not pav_initial:
         abort(400)
-    my_query = queryDB("""SELECT * FROM testing_schema_pedro.computers_v WHERE room_number LIKE  '%%' || %s || '%%' ORDER BY room_number""", (pav_initial,))
+    my_query = queryDB("""SELECT * FROM public.computers_v WHERE room_number LIKE  '%%' || %s || '%%' ORDER BY room_number""", (pav_initial,))
     return jsonify(my_query)
 
 @app.route('/computers/<int:computer_id>')
 @auth.login_required
 def get_computer(computer_id):
-    my_query = queryDB("SELECT * FROM testing_schema_pedro.computers_v WHERE id=%s", (computer_id,))
+    my_query = queryDB("SELECT * FROM public.computers_v WHERE id=%s", (computer_id,))
     return jsonify(my_query)
 
 @app.route('/locations')
 @auth.login_required
 def get_locations():
-    my_query = queryDB("SELECT * FROM testing_schema_pedro.locations")
+    my_query = queryDB("SELECT * FROM public.locations")
     return jsonify(my_query)
 
 
