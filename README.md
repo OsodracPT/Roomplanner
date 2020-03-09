@@ -2,9 +2,9 @@
 
 A single-page, Room Planning web application to improve an institution's productivity.
 
-![Roomplanner screenshot](./docs/img/roomplanner-screenshot.jpg=250x)
-
-<img src="/docs/img/roomplanner-screenshot.jpg" alt="Roomplanner screenshot" width="200"/>
+<div style="text-align:center">
+<img src="/docs/img/roomplanner-screenshot.jpg" alt="Roomplanner screenshot" width="400"/>
+</div>
 
 ## Development server
 
