@@ -1,27 +1,41 @@
-# MyApp
+# Room Planner 🚪🏢
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.1.
+A single-page, Room Planning web application to improve an institution's productivity.
+
+<div style="text-align:center">
+<img src="/docs/img/roomplanner-screenshot.jpg" alt="Roomplanner screenshot" width="400"/>
+</div>
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Requirements 🧱
 
-## Code scaffolding
+- [Docker and Docker Compose](https://www.docker.com/)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `docker-compose up` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files for the frontend.
 
-## Build
+## Build 🚀
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
+## Running unit tests 🎯
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Built With 🛠️
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+- [Angular](https://angular.io/) - The web framework used.
+- [Flask](https://flask.palletsprojects.com/en/1.1.x/) - The backend framework.
+- [Docker](https://www.docker.com/) - Container hosting.
+- [PostgreSQL](https://www.postgresql.org/) - Database.
 
-## Further help
+## Authors 💪
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- **Pedro Cardoso** - [OsodracPT](https://github.com/OsodracPT)
+
+## Acknowledgments
+
+- Peter Benie
+- Debbie Finucane
+- Frank Lee
+- Cristina Luca

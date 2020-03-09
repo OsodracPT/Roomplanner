@@ -1,0 +1,39 @@
+
+      <div class="card mb-4">
+        <div class="card-image-top text-center p-2">
+          <i class="fa fa-desktop fa-3x"></i>
+        </div>
+
+        <div class="card-body p-1 mt-">
+          <h6 class="card-title text-center mb-1">
+            {{computer.name | lowercase}}
+          </h6>
+          <p class="card-text text-muted text-center">
+            {{computer.os}} {{computer.os_version}}
+            <i *ngIf="computer.os=='Windows'" class="fa fa-windows fa"></i>
+            <i *ngIf="computer.os=='Linux'" class="fa fa-linux fa"></i>
+          </p>
+
+          <ul class="list-inline member-icons animate text-center">
+            <li class="list-inline-item">
+              <button class="btn btn-primary" [routerLink]="['/computers', computer.id]">
+                Edit  <i class="fa fa-edit fa"></i>
+              </button>
+            </li>
+
+<!-- 
+            <li class="list-inline-item" *ngIf="computer.os !== 'Unknown'">
+              <button class="btn btn-primary">
+                <i *ngIf="computer.os=='Windows'" class="fa fa-windows fa"></i>
+                <i *ngIf="computer.os=='Linux'" class="fa fa-linux fa"></i>
+              </button>
+            </li> -->
+
+            <li class="list-inline-item mt-1">
+                <button class="btn btn-light">
+                  {{computer.room_number}}
+                </button>
+              </li>
+          </ul>
+        </div>
+      </div>

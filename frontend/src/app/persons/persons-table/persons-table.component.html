@@ -1,0 +1,40 @@
+<p-table [columns]="cols" #dt [value]="persons" (sortFunction)="customSort($event)" [customSort]="true">
+  <ng-template pTemplate="caption">
+    <div class="ui-helper-clearfix">
+      <button type="button" label="All Data" (click)="dt.exportCSV()" style="float:right; margin:4px 4px 10px 4px">
+        Download All
+        <i class="fa fa-file fa" style="margin:4px 4px 0 5px"></i>
+      </button>
+    </div>
+    <div style="text-align: right">
+      <input type="text" pInputText size="50" placeholder="Search table"
+        (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+      <i class="fa fa-search" style="margin:4px 4px 0 5px"></i>
+
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+        {{col.header}}
+        <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
+          ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+        </p-sortIcon>
+      </th>
+      <th style="width:9em"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-person let-columns="columns">
+    <tr>
+      <td *ngFor="let col of columns">
+        {{person[col.field]}}
+      </td>
+      <td>
+        <button class="btn btn-primary" [routerLink]="['/persons', person.crsid]">
+          Details
+          <i class="fa fa-edit fa"></i>
+        </button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

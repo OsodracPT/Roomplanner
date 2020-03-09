@@ -1,0 +1,50 @@
+<div class="container mt-4">
+  <div class="row">
+    <h1>Pavillion C</h1>
+  </div>
+  <div class="row">
+
+    <div class="">
+      <div class="tab-panel">
+        <tabset class="member-tabset">
+          <tab heading="Lower Ground Floor">
+            <div class="row">
+              <div *ngFor="let computer of computers" class="col-lg-2 col-md-3 col-sm-6">
+                <app-computer-details *ngIf="computer.room_number.includes('CL.')" [computer]="computer"></app-computer-details>
+              </div>
+            </div>
+          </tab>
+          <tab heading="Ground Floor">
+            <div class="row">
+              <div *ngFor="let computer of computers" class="col-lg-2 col-md-3 col-sm-6">
+                <app-computer-details *ngIf="computer.room_number.includes('C0.')" [computer]="computer"></app-computer-details>
+              </div>
+            </div>
+            <p></p>
+          </tab>
+
+          <tab heading="First Floor">
+            <div class="row">
+              <div *ngFor="let computer of computers" class="col-lg-2 col-md-3 col-sm-6">
+                <app-computer-details *ngIf="computer.room_number.includes('C1.')" [computer]="computer"></app-computer-details>
+              </div>
+            </div>
+          </tab>
+          <tab heading="Second Floor">
+            <div class="row">
+              <div *ngFor="let computer of computers" class="col-lg-2 col-md-3 col-sm-6">
+                <app-computer-details *ngIf="computer.room_number.includes('C2.')" [computer]="computer"></app-computer-details>
+              </div>
+            </div>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 
+<div class="row">
+    <div *ngFor="let computer of computers" class="col-lg-2 col-md-3 col-sm-6">
+      <app-computer-details [computer]="computer"></app-computer-details>
+    </div>
+  </div> -->
