@@ -1,0 +1,40 @@
+
+<div class="container mt-4" >
+    Pick a time interval in order to see the room allocations:
+    <div class="col-xs-12 col-12 col-md-4 mt-2 form-group">
+      <input type="text"
+             placeholder="DateTime Picker"
+             class="form-control"
+             bsDaterangepicker
+             [bsConfig]="{ rangeInputFormat: 'DD-MM-YYYY' }"
+             (bsValueChange)="onValueChange($event)"
+             >
+    </div>
+  </div>
+  
+   <div class="container" >
+     <div *ngFor="let room of this.data; let i = index" [attr.data-index]="i">
+  
+      <div class="d-inline">
+          <button type="button" class="btn btn-outline-primary" [routerLink]="['/rooms', room.room_number]">
+              {{room.room_number}}:
+              <span class="badge badge-light ml-2 mr-1">{{number_of_computers[room.room_number]}}</span>
+              <i class="fa fa-desktop fa"></i>
+            </button>
+      </div>
+  
+      <ul class="list-inline member-icons animate text-center mt-2">
+        <div class="progress mb-2" style="height: 30px;">
+            <div *ngFor="let segment of room.segments; let seg_index = index" [attr.data-index]="seg_index" [ngClass]="getClass(segment)" 
+            [tooltip]="getTooltipData(segment)" role="progressbar" 
+            [ngStyle]="{'width': ((segment.end * 100)/ number_of_days) - ((segment.start * 100)/ number_of_days) + '%'}"> 
+              {{segment.occupants.length}} occupants
+              {{segment.occupants.forenames}}  
+            </div>
+        </div>
+      </ul>
+  </div>
+  </div>
+  
+  
+  

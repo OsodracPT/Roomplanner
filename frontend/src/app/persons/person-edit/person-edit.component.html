@@ -1,0 +1,91 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-sm-4">
+      <h1 class="mb-4">{{person.forenames}} {{person.surname}}</h1>
+      <!-- {{form.value | json}}
+      {{form.status | json}} -->
+    </div>
+    <div class="col-sm-8">
+      <div class="alert alert-info" *ngIf="form.dirty">
+        <strong>Information: </strong>You have made changes. Any unsaved changes will be lost!
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <i class="fa fa-user fa-5x text-center pt-3"></i>
+        <div class="card-body">
+          <div>
+            <strong>Location: </strong>
+            <p>{{person.room_number}}</p>
+          </div>
+          <div>
+              <strong>Phone Number: </strong>
+              <p>01223 7{{person.phone_number}}</p>
+            </div>
+          <div>
+            <strong>Start and end date: </strong>
+            <p>{{person.start_date}}</p>
+            <p>{{person.end_date}}</p>
+          </div>
+          <div>
+            <strong>Status:</strong>
+            <p>{{person.status_name}}</p>
+          </div>
+          <div *ngIf="person.supervisor_id">
+            <strong>Supervisor:</strong>
+            <p>{{person.supervisor_forenames}} {{person.supervisor_surname}}</p>
+          </div>
+          <div *ngIf="person.manager_id">
+            <strong>Manager:</strong>
+            <p>{{person.manager_forenames}} {{person.manager_surname}}</p>
+          </div>
+          <div *ngIf="person.group_id">
+            <strong>Area:</strong>
+            <p>{{person.group_names}}</p>
+          </div>
+
+
+        </div>
+
+        <div class="card-footer">
+          <button class="btn btn-success btn-block" [disabled]="form.pristine || form.invalid" type="submit">Save
+            Changes</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-8">
+      <div class="tab-panel">
+        <tabset class="member-tabset">
+          <tab heading="Edit Person">
+
+            <form [formGroup]="form" id="editForm" novalidate>
+
+              <h4 class="p-2">Notes</h4>
+              <textarea name="notes" rows="6" class="form-control" formControlName="notes"></textarea>
+
+              <h4 class="p-2">Update location:</h4>
+
+              <div class="form-group">
+                <label for="location"></label>
+                <ng-select id="location" formControlName="roomName" [items]="this.rooms" [virtualScroll]="true"
+                  bindLabel="name" bindValue="id" placeholder="Select room">
+                </ng-select>
+
+                <div *ngIf="form.controls['roomName'].errors && !form.controls['roomName'].pristine" class="error-msg">
+                  <div class="alert alert-danger" role="alert" [hidden]="!form.controls['roomName'].errors.required">Please
+                    select a location.
+                  </div>
+                </div>
+
+              </div>
+            </form>
+
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</div>

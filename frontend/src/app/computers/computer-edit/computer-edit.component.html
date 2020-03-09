@@ -1,0 +1,70 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-sm-4">
+      <h1 class="mb-4">{{computer.name | lowercase}} </h1>
+      <!-- {{form.value | json}}
+      {{form.status | json}} -->
+    </div>
+    <div class="col-sm-8">
+      <div class="alert alert-info" *ngIf="form.dirty">
+        <strong>Information: </strong>You have made changes. Any unsaved changes will be lost!
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <i class="fa fa-desktop fa-5x text-center pt-3"></i>
+        <div class="card-body">
+          <div>
+            <strong>Location: </strong>
+            <p>{{computer.room_number}}</p>
+          </div>
+          <div>
+            <strong>Operating System: </strong>
+            <p>{{computer.os}} {{computer.os_version}}</p>
+          </div>
+          <div>
+            <strong>Last Active:</strong>
+            <p></p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-success btn-block" [disabled]="form.pristine || form.invalid" type="submit" (click)="updateComputer()">Save
+            Changes</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-8">
+      <div class="tab-panel">
+        <tabset class="member-tabset">
+          <tab heading="Edit Computer">
+
+            <form [formGroup]="form" id="editForm" (ngSubmit)="updateComputer()" novalidate>
+
+              <h4 class="p-2">Description</h4>
+              <textarea name="description" rows="6" class="form-control" formControlName="description"></textarea>
+
+              <h4 class="p-2">Update location:</h4>
+
+              <div class="form-group">
+                <label for="location"></label>
+                <ng-select id="location" formControlName="roomName" [items]="this.rooms" [virtualScroll]="true"
+                  bindLabel="name" bindValue="id" placeholder="Select room">
+                </ng-select>
+
+                <div *ngIf="form.controls['roomName'].errors && !form.controls['roomName'].pristine" class="error-msg">
+                  <div class="alert alert-danger" role="alert" [hidden]="!form.controls['roomName'].errors.required">Please
+                    select a location.
+                  </div>
+                </div>
+
+              </div>
+            </form>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</div>

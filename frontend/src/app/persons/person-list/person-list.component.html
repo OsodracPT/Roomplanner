@@ -1,0 +1,9 @@
+<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+
+<div class="container mt-3">
+  <div class="row">
+    <div *ngFor="let person of persons" class="col-lg-2 col-md-3 col-sm-6">
+      <app-person-details [person]="person"></app-person-details>
+    </div>
+  </div>
+</div>

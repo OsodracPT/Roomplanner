@@ -1,0 +1,40 @@
+<div class="card mb-4">
+  <div class="card-image-top text-center p-2">
+    <i class="fas fa-door-closed fa-3x"></i>
+  </div>
+
+  <div class="card-body p-1 mt-">
+    <h6 class="card-title text-center mb-1">
+      {{room.room_number}}
+    </h6>
+    <p class="card-text text-muted text-center">
+      Notes: {{room.notes}}
+    </p>
+    <p class="card-text text-muted text-center">
+        Max Capacity: {{room.max_capacity}}
+        <i *ngIf="room.max_capacity == null">null</i>
+      </p>
+
+    <ul class="list-inline member-icons animate text-center">
+      <li class="list-inline-item mt-1">
+        <button class="btn btn-primary">
+          <i class="fa fa-user fa"></i>
+          {{room.number_of_people}}
+        </button>
+      </li>
+      <li class="list-inline-item mt-1">
+        <button class="btn btn-primary">
+          <i class="fa fa-desktop fa"></i>
+          {{room.number_of_computers}}
+        </button>
+      </li>
+
+      <li class="list-inline-item mt-1">
+        <button class="btn btn-primary" [routerLink]="['/rooms', room.id]">
+          Details
+          <i class="fa fa-edit fa ml-1"></i>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
