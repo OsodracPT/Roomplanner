@@ -6,6 +6,8 @@ A single-page, Room Planning web application to improve an institution's product
 <img src="/docs/img/roomplanner-screenshot.jpg" alt="Roomplanner screenshot" width="400"/>
 </div>
 
+[Poster Presentation](/docs/poster/Poster.jpg)
+
 ## Development server
 
 ### Requirements 🧱
