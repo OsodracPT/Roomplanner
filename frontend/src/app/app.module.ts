@@ -40,7 +40,6 @@ import { PersonEditComponent } from "./persons/person-edit/person-edit.component
 import { PersonDetailResolver } from "./_resolvers/person-detail.resolver";
 import { PersonListComponent } from "./persons/person-list/person-list.component";
 import { AllocationsComponent } from "./allocations/allocations.component";
-import { PavGeneralComponent } from "./pavillions/pav-general/pav-general.component";
 import { PavDGroundfloorComponent } from "./pavillions/pav-d-groundfloor/pav-d-groundfloor.component";
 import { PavDFirstfloorComponent } from "./pavillions/pav-d-firstfloor/pav-d-firstfloor.component";
 import { NotFoundComponentComponent } from "./not-found-component/not-found-component.component";
@@ -75,7 +74,6 @@ import { PavHLowerComponent } from "./pavillions/pav-h-lower/pav-h-lower.compone
     PersonEditComponent,
     PersonListComponent,
     AllocationsComponent,
-    PavGeneralComponent,
     PavDGroundfloorComponent,
     PavDFirstfloorComponent,
     NotFoundComponentComponent,
