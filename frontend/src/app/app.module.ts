@@ -25,10 +25,10 @@ import { NgForm, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DatePipe } from "@angular/common";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { PreventUnsavedChanges } from "./_guards/prevent-unsaved-changes.guard";
-import { PavCComponent } from "./pavillions/pav-c/pav-c.component";
-import { GroundfloorComponent } from "./pavillions/pav-c/groundfloor/groundfloor.component";
-import { FirstfloorComponent } from "./pavillions/pav-c/firstfloor/firstfloor.component";
-import { SecondfloorComponent } from "./pavillions/pav-c/secondfloor/secondfloor.component";
+import { PavGeneralComponent } from "./pavillions/pav-general/pav-general.component";
+import { GroundfloorComponent } from "./pavillions/pav-general/groundfloor/groundfloor.component";
+import { FirstfloorComponent } from "./pavillions/pav-general/firstfloor/firstfloor.component";
+import { SecondfloorComponent } from "./pavillions/pav-general/secondfloor/secondfloor.component";
 
 import { RoomDetailsComponent } from "./rooms/room-details/room-details.component";
 import { RoomEditComponent } from "./rooms/room-edit/room-edit.component";
@@ -39,10 +39,7 @@ import { PersonDetailsComponent } from "./persons/person-details/person-details.
 import { PersonEditComponent } from "./persons/person-edit/person-edit.component";
 import { PersonDetailResolver } from "./_resolvers/person-detail.resolver";
 import { PersonListComponent } from "./persons/person-list/person-list.component";
-import { PavHComponent } from "./pavillions/pav-h/pav-h.component";
-import { SvgComponent } from "./svg/svg.component";
 import { AllocationsComponent } from "./allocations/allocations.component";
-import { PavGeneralComponent } from "./pavillions/pav-general/pav-general.component";
 import { PavDGroundfloorComponent } from "./pavillions/pav-d-groundfloor/pav-d-groundfloor.component";
 import { PavDFirstfloorComponent } from "./pavillions/pav-d-firstfloor/pav-d-firstfloor.component";
 import { NotFoundComponentComponent } from "./not-found-component/not-found-component.component";
@@ -67,7 +64,7 @@ import { PavHLowerComponent } from "./pavillions/pav-h-lower/pav-h-lower.compone
     HomeComponent,
     PavillionDetailComponent,
     ComputerEditComponent,
-    PavCComponent,
+    PavGeneralComponent,
     FirstfloorComponent,
     SecondfloorComponent,
     GroundfloorComponent,
@@ -76,10 +73,7 @@ import { PavHLowerComponent } from "./pavillions/pav-h-lower/pav-h-lower.compone
     PersonDetailsComponent,
     PersonEditComponent,
     PersonListComponent,
-    PavHComponent,
-    SvgComponent,
     AllocationsComponent,
-    PavGeneralComponent,
     PavDGroundfloorComponent,
     PavDFirstfloorComponent,
     NotFoundComponentComponent,

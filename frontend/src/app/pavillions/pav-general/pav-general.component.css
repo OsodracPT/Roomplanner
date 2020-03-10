@@ -1,8 +1,21 @@
-.st0{fill:#FFFFFF;}
-.gf1{fill:none;stroke:#FFFFFF;stroke-width:25;}
-.gf2{fill:none;stroke:#000000;stroke-width:0.2;}
-.gf3{fill:none;stroke:#000000;stroke-width:0.5;}
-.gf4{font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"}
-.gf5{font-size:19.2048px;}
-.gf6{display:none;}
-.gf7{display:inline;stroke:#000000;stroke-miterlimit:1;}
+#centre { stroke: black; stroke-width: 1; fill: none; }
+circle:hover { stroke: white; }
+
+#building_outline { stroke: black; stroke-width: 2; fill: none; }
+.room { stroke: black; stroke-width: 1; fill: none; }
+
+.roomnumber * { font-size: 7px; font-family: sans; text-anchor: middle; pointer-events: none; }
+
+.clickable * { stroke-width: 1; stroke: none; fill: black; opacity: 0; cursor: pointer}
+.clickable *:hover { opacity: 0.5; }
+
+.labels{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"}
+
+.fl1_0{fill:none;stroke:#000000;}
+.fl1_1{fill:none;stroke:#000000;stroke-width:0.5;}
+.fl1_2{fill:none;stroke:#000000;stroke-width:2;}
+.fl1_3{font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"}
+.fl1_04{font-size:19.2048px;}
+
+
+
