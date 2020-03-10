@@ -5,7 +5,7 @@ import { PavillionDetailComponent } from "./pavillions/pavillion-detail/pavillio
 import { ComputerEditComponent } from "./computers/computer-edit/computer-edit.component";
 import { ComputerDetailResolver } from "./_resolvers/computer-detail.resolver";
 import { PreventUnsavedChanges } from "./_guards/prevent-unsaved-changes.guard";
-import { PavCComponent } from "./pavillions/pav-c/pav-c.component";
+import { PavGeneralComponent } from "./pavillions/pav-general/pav-general.component";
 import { RoomEditComponent } from "./rooms/room-edit/room-edit.component";
 import { RoomDetailResolver } from "./_resolvers/room-detail.resolver";
 import { ComputersInRoomResolver } from "./_resolvers/computersInRoom.resolver";
@@ -21,13 +21,13 @@ export const appRoutes: Routes = [
   { path: "computer-list", component: ComputerListComponent },
   { path: "person-list", component: PersonListComponent },
   { path: "pavc-computers", component: PavillionDetailComponent },
-  { path: "pavh", component: PavCComponent },
-  { path: "pavb", component: PavCComponent },
-  { path: "pavd", component: PavCComponent },
-  { path: "pave", component: PavCComponent },
-  { path: "pavf", component: PavCComponent },
-  { path: "pavg", component: PavCComponent },
-  { path: "pavc", component: PavCComponent },
+  { path: "pavh", component: PavGeneralComponent },
+  { path: "pavb", component: PavGeneralComponent },
+  { path: "pavd", component: PavGeneralComponent },
+  { path: "pave", component: PavGeneralComponent },
+  { path: "pavf", component: PavGeneralComponent },
+  { path: "pavg", component: PavGeneralComponent },
+  { path: "pavc", component: PavGeneralComponent },
   { path: "pavc/alloc", component: AllocationsComponent },
   { path: "pavb/alloc", component: AllocationsComponent },
   { path: "pavd/alloc", component: AllocationsComponent },
