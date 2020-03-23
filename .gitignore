@@ -74,3 +74,7 @@ venv/
 ENV/
 
 commands.txt
+
+backend/htmlcov/
+
+backend/.coverage
